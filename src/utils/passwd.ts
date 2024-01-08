@@ -1,6 +1,6 @@
 import { commonPortugueseWords, keyboardPatterns } from "./patterns";
 
-function validateUserInput(words: string[], numbers: number[]) {
+export function validateUserInput(words: string[], numbers: number[]) {
   if (words.length < 3) throw new Error("Insira no mínimo três palavras.");
 
   if (numbers.length < 2) throw new Error("Insira no mínimo dois números.");
@@ -26,7 +26,7 @@ function validateUserInput(words: string[], numbers: number[]) {
   });
 }
 
-function toLeetSpeak(string: string): string {
+export function toLeetSpeak(string: string): string {
   const leet = {
     A: "@",
     B: "8",
@@ -62,7 +62,7 @@ function toLeetSpeak(string: string): string {
   return string;
 }
 
-function validateEntropy(password: string): number {
+export function validateEntropy(password: string): number {
   let chars = 0;
   if (/[a-z]/.test(password)) chars = chars + 26;
   if (/[A-Z]/.test(password)) chars = chars + 26;
