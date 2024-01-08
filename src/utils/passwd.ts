@@ -116,10 +116,9 @@ export function generatePassword(words: string[], numbers: number[]): string {
     }
   });
 
-  const shouldUseLeetSpeak = Math.floor(Math.random() * 2);
-  const password = shouldUseLeetSpeak
-    ? toLeetSpeak(temp.join(""))
-    : temp.join("");
+  const shouldUseLeetSpeak = Math.ceil(Math.random() * 2);
+  const password =
+    shouldUseLeetSpeak === 1 ? toLeetSpeak(temp.join("")) : temp.join("");
 
   validateEntropy(password);
 

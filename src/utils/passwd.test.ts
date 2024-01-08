@@ -1,4 +1,9 @@
-import { toLeetSpeak, validateEntropy, validateUserInput } from "./passwd";
+import {
+  generatePassword,
+  toLeetSpeak,
+  validateEntropy,
+  validateUserInput,
+} from "./passwd";
 import {
   commonPortugueseWords,
   keyboardPatterns,
@@ -86,5 +91,29 @@ describe("validateEntropy()", () => {
     expect(() => validateEntropy("123456")).toThrow(
       "A senha gerada possui entropia menor que 60 bits"
     );
+  });
+});
+
+describe("generatePassword()", () => {
+  it("should thows error when the generated password is smaller than 16 caracters", () => {
+    const words = ["abc", "bca", "cab"];
+    const numbers = [123, 456];
+    expect(() => generatePassword(words, numbers)).toThrow(
+      "A senha gerada é menor que 16 caracteres"
+    );
+  });
+
+  it("should run toLeetSpeak when shouldUseLeetSpeak is true", () => {
+    jest.spyOn(Math, "ceil").mockImplementation(() => 1);
+    const password = generatePassword(["aaaa", "aaaaa", "aaaaaa"], [1, 2]);
+
+    expect(password.includes("@")).toBeTruthy();
+  });
+
+  it("should not run toLeetSpeak when shouldUseLeetSpeak is false", () => {
+    jest.spyOn(Math, "ceil").mockImplementation(() => 2);
+    const password = generatePassword(["aaaa", "aaaaa", "aaaaaa"], [1, 2]);
+
+    expect(password.includes("a")).toBeTruthy();
   });
 });
