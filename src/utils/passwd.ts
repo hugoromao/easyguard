@@ -1,4 +1,8 @@
-import { commonPortugueseWords, keyboardPatterns, leetSpeakLetters } from "./patterns";
+import {
+  commonPortugueseWords,
+  keyboardPatterns,
+  leetSpeakLetters,
+} from "./patterns";
 
 export function validateUserInput(words: string[], numbers: number[]) {
   if (words.length < 3) throw new Error("Insira no mínimo três palavras.");

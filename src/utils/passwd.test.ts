@@ -1,4 +1,4 @@
-import { toLeetSpeak, validateUserInput } from "./passwd";
+import { toLeetSpeak, validateEntropy, validateUserInput } from "./passwd";
 import {
   commonPortugueseWords,
   keyboardPatterns,
@@ -74,5 +74,17 @@ describe("toLeetSpeak()", () => {
   test("should not convert characters not in the Leet dictionary", () => {
     const result = toLeetSpeak("xy123");
     expect(result).toEqual("xy123");
+  });
+});
+
+describe("validateEntropy()", () => {
+  it("should return the correct entropy for a valid password", () => {
+    expect(() => validateEntropy("StrongPassword123!@")).not.toThrow();
+  });
+
+  it("should throw an error for a password with entropy less than 60 bits", () => {
+    expect(() => validateEntropy("123456")).toThrow(
+      "A senha gerada possui entropia menor que 60 bits"
+    );
   });
 });
