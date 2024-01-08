@@ -1,5 +1,9 @@
-import { validateUserInput } from "./passwd";
-import { commonPortugueseWords, keyboardPatterns } from "./patterns";
+import { toLeetSpeak, validateUserInput } from "./passwd";
+import {
+  commonPortugueseWords,
+  keyboardPatterns,
+  leetSpeakLetters,
+} from "./patterns";
 
 describe("validateUserInput()", () => {
   it("should throws error if words length is less than 3", () => {
@@ -56,5 +60,19 @@ describe("validateUserInput()", () => {
     expect(() =>
       validateUserInput(["word1", "word2", "word3"], [1, 2])
     ).not.toThrow();
+  });
+});
+
+describe("toLeetSpeak()", () => {
+  it("should converts string to Leet Speak", () => {
+    for (let letter in leetSpeakLetters) {
+      expect(toLeetSpeak(letter)).toBe(leetSpeakLetters[letter as "A"]);
+    }
+    expect(false).toBeFalsy();
+  });
+
+  test("should not convert characters not in the Leet dictionary", () => {
+    const result = toLeetSpeak("xy123");
+    expect(result).toEqual("xy123");
   });
 });

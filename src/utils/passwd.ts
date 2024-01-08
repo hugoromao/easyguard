@@ -1,4 +1,4 @@
-import { commonPortugueseWords, keyboardPatterns } from "./patterns";
+import { commonPortugueseWords, keyboardPatterns, leetSpeakLetters } from "./patterns";
 
 export function validateUserInput(words: string[], numbers: number[]) {
   if (words.length < 3) throw new Error("Insira no mínimo três palavras.");
@@ -27,36 +27,10 @@ export function validateUserInput(words: string[], numbers: number[]) {
 }
 
 export function toLeetSpeak(string: string): string {
-  const leet = {
-    A: "@",
-    B: "8",
-    C: "(",
-    E: "3",
-    G: "6",
-    H: "#",
-    I: "!",
-    L: "1",
-    O: "0",
-    S: "$",
-    T: "7",
-    Z: "2",
-    a: "@",
-    b: "8",
-    c: "(",
-    e: "3",
-    g: "6",
-    h: "#",
-    i: "!",
-    l: "1",
-    o: "0",
-    s: "$",
-    t: "7",
-    z: "2",
-  };
   const randomString = string[Math.floor(Math.random() * string.length)] as "A";
 
-  if (leet[randomString] !== undefined) {
-    return string.replaceAll(randomString, leet[randomString]);
+  if (leetSpeakLetters[randomString] !== undefined) {
+    return string.replaceAll(randomString, leetSpeakLetters[randomString]);
   }
 
   return string;
