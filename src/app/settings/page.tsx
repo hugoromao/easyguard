@@ -1,9 +1,11 @@
+"use client";
+
 import Base from "@/templates/Base";
 
-export default function Home() {
+export default function Settings() {
   return (
     <Base>
-      <h1>Home</h1>
+      <h1>Settings</h1>
     </Base>
   );
 }
