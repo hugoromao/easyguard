@@ -14,7 +14,7 @@ const Base = ({ children }: BaseProps) => {
   return (
     <body
       style={inter.style}
-      className="h-screen grid grid-rows-[1fr_auto]"
+      className="h-[calc(100dvh)] grid grid-rows-[1fr_auto]"
     >
       {children}
       <Navbar />
