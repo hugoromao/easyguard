@@ -4,6 +4,11 @@ import NewPasswordForm from ".";
 import { SnackbarProvider } from "notistack";
 
 const meta: Meta<typeof NewPasswordForm> = {
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
   component: NewPasswordForm,
   decorators: [
     (Story) => (

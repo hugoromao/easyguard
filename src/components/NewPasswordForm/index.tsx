@@ -12,6 +12,7 @@ import {
 import { generatePassword } from "../../utils/passwd";
 import { commonPortugueseWords, keyboardPatterns } from "../../utils/patterns";
 import { enqueueSnackbar } from "notistack";
+import { useRouter } from "next/navigation";
 
 type NewPasswordFormProps = {
   active: boolean;
@@ -27,6 +28,8 @@ const NewPasswordForm = ({
   active = true,
   setActive,
 }: NewPasswordFormProps) => {
+  const { push } = useRouter();
+
   const [step, setStep] = useState(1);
   const [words, setWords] = useState<Input[]>([
     { value: "", error: undefined },
@@ -122,11 +125,10 @@ const NewPasswordForm = ({
     }
 
     if (!hasErrors) {
-      console.log(
-        generatePassword(
-          words.map((w) => w.value),
-          numbers.map((n) => Number(n.value))
-        )
+      push(
+        `generatePassword?words=${JSON.stringify(
+          words.map((w) => w.value)
+        )}&numbers=${JSON.stringify(numbers.map((n) => n.value))}`
       );
     }
   }

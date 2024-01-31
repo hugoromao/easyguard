@@ -59,7 +59,10 @@ export function validateEntropy(password: string): number {
   return entropy;
 }
 
-export function generatePassword(words: string[], numbers: number[]): string {
+export function generatePassword(iw: string[], inu: number[]): string {
+  const words = [...iw];
+  const numbers = [...inu];
+
   const specialCaracters = [
     "~",
     "!",

@@ -17,7 +17,6 @@ const Base = ({ children }: BaseProps) => {
   const [isNewPasswordFormActive, setIsNewPasswordFormActive] = useState(false);
 
   function openNewPasswordForm() {
-    console.log(1231)
     setIsNewPasswordFormActive(true);
   }
 
