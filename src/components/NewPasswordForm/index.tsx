@@ -1,53 +1,190 @@
 "use client";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { Button, Input, Navbar } from "@nextui-org/react";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
-import { XMarkIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
-import { useRouter } from "next/navigation";
+import {
+  XMarkIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
+  TrashIcon,
+} from "@heroicons/react/20/solid";
+
+import { generatePassword } from "../../utils/passwd";
+import { commonPortugueseWords, keyboardPatterns } from "../../utils/patterns";
+import { enqueueSnackbar } from "notistack";
 
 type NewPasswordFormProps = {
   active: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type Inputs = {
-  word1: string;
-  word2: string;
-  word3: string;
-  word4: string;
-  number1: number;
-  number2: number;
+export type Input = {
+  value: string;
+  error?: string;
 };
 
 const NewPasswordForm = ({
   active = true,
   setActive,
 }: NewPasswordFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
-
-  const { push } = useRouter();
-
   const [step, setStep] = useState(1);
+  const [words, setWords] = useState<Input[]>([
+    { value: "", error: undefined },
+    { value: "", error: undefined },
+    { value: "", error: undefined },
+    { value: "", error: undefined },
+  ]);
+  const [numbers, setNumbers] = useState<Input[]>([
+    { value: "", error: undefined },
+    { value: "", error: undefined },
+  ]);
 
   function nextStep() {
     setStep((s) => s + 1);
   }
 
-  function onSubmit(data: Inputs) {
-    if (step === 1) {
-      nextStep();
-    } else {
-      const words = [data.word1, data.word2, data.word3, data.word4];
-      const numbers = [data.number1, data.number2];
-      const params = new URLSearchParams();
-      params.append("data", JSON.stringify({ words, numbers }));
-      push(`/generatePassword&${params.toString()}`);
+  function clearErrors() {
+    setWords((words) => words.map((w) => ({ ...w, error: undefined })));
+    setNumbers((numbers) => numbers.map((w) => ({ ...w, error: undefined })));
+  }
+
+  function validateWords() {
+    let hasErrors = false;
+
+    words.forEach((word, index) => {
+      if (word.value.length < 3 && word.value !== "") {
+        hasErrors = true;
+        setWords((words) => {
+          const temp = words;
+          temp[
+            index
+          ].error = `A palavra “${word.value}” é menor que três caracteres.`;
+          return [...temp];
+        });
+      }
+
+      if (word.value === "") {
+        hasErrors = true;
+        setWords((words) => {
+          const temp = words;
+          temp[index].error = `Este campo é obrigatório.`;
+          return [...temp];
+        });
+      }
+    });
+
+    words.forEach((word, index) => {
+      if (commonPortugueseWords.includes(word.value)) {
+        hasErrors = true;
+        setWords((words) => {
+          const temp = words;
+          temp[index].error = `${word.value} é uma palavra muito comum`;
+          return [...temp];
+        });
+      }
+      if (keyboardPatterns.includes(word.value)) {
+        hasErrors = true;
+        setWords((words) => {
+          const temp = words;
+          temp[index].error = "Não utilize padrões de teclado";
+          return [...temp];
+        });
+      }
+    });
+
+    const wordsSet = new Set(words.map((w) => w.value));
+    if (!hasErrors && words.length !== wordsSet.size) {
+      hasErrors = true;
+      enqueueSnackbar("Existem palavras repetidas.", { variant: "error" });
     }
+
+    if (!hasErrors) nextStep();
+  }
+
+  function validateNumbers() {
+    let hasErrors = false;
+
+    numbers.forEach((number, index) => {
+      if (number.value === "") {
+        hasErrors = true;
+        setNumbers((numbers) => {
+          const temp = numbers;
+          temp[index].error = `Este campo é obrigatório.`;
+          return [...temp];
+        });
+      }
+    });
+
+    const numbersSet = new Set(numbers.map((w) => w.value));
+    if (!hasErrors && numbers.length !== numbersSet.size) {
+      hasErrors = true;
+      enqueueSnackbar("Existem números repetidos.", { variant: "error" });
+    }
+
+    if (!hasErrors) {
+      console.log(
+        generatePassword(
+          words.map((w) => w.value),
+          numbers.map((n) => Number(n.value))
+        )
+      );
+    }
+  }
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (step === 1) {
+      clearErrors();
+      validateWords();
+    } else {
+      clearErrors();
+      validateNumbers();
+    }
+  }
+
+  function onWordInputChange(value: string, wordIndex: number) {
+    setWords((w) => {
+      const temp = w;
+      temp[wordIndex].value = value;
+      return [...temp];
+    });
+  }
+
+  function onNumberInputChange(value: string, wordIndex: number) {
+    setNumbers((w) => {
+      const temp = w;
+      temp[wordIndex].value = value;
+      return [...temp];
+    });
+  }
+
+  function addWord() {
+    setWords((w) => {
+      return [...w, { value: "", error: undefined }];
+    });
+  }
+
+  function removeWord(index: number) {
+    setWords((w) => {
+      const temp = w;
+      temp.splice(index, 1);
+      return [...temp];
+    });
+  }
+
+  function addNumber() {
+    setNumbers((w) => {
+      return [...w, { value: "", error: undefined }];
+    });
+  }
+
+  function removeNumber(index: number) {
+    setNumbers((n) => {
+      const temp = n;
+      temp.splice(index, 1);
+      return [...temp];
+    });
   }
 
   if (!active) return null;
@@ -59,23 +196,32 @@ const NewPasswordForm = ({
         className="flex flex-col bg-white z-10 h-[90vh] radius rounded-t-3xl relative overflow-auto"
       >
         <Navbar className="flex justify-between">
-          <Button isIconOnly variant="light">
-            <QuestionMarkCircleIcon color="#A1A1AA" height={24} />
-          </Button>
-
-          <Button isIconOnly variant="light">
-            <XMarkIcon
-              color="#A1A1AA"
-              onClick={() => setActive(false)}
-              height={24}
-            />
-          </Button>
+          {step > 1 ? (
+            <Button
+              isIconOnly
+              variant="light"
+              onClick={() => setStep((s) => s - 1)}
+            >
+              <ArrowLeftIcon color="#A1A1AA" height={24} />
+            </Button>
+          ) : (
+            <span />
+          )}
+          <span>
+            <Button isIconOnly variant="light">
+              <QuestionMarkCircleIcon color="#A1A1AA" height={24} />
+            </Button>
+            <Button isIconOnly variant="light">
+              <XMarkIcon
+                color="#A1A1AA"
+                onClick={() => setActive(false)}
+                height={24}
+              />
+            </Button>
+          </span>
         </Navbar>
 
-        <form
-          className="flex flex-col px-6 gap-2"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="flex flex-col px-6 gap-2" onSubmit={onSubmit}>
           {step === 1 ? (
             <>
               <h1 className="text-[24px] font-semibold">
@@ -88,38 +234,39 @@ const NewPasswordForm = ({
                 vestibular”.
               </p>
 
-              <Input
-                label={`Palavra 1`}
-                size="sm"
-                required
-                isInvalid={!!errors.word1?.message}
-                errorMessage={errors.word1?.message}
-                {...register("word1", { required: "Este campo é obrigatório" })}
-              />
-              <Input
-                label={`Palavra 2`}
-                size="sm"
-                required
-                isInvalid={!!errors.word2?.message}
-                errorMessage={errors.word2?.message}
-                {...register("word2", { required: "Este campo é obrigatório" })}
-              />
-              <Input
-                label={`Palavra 3`}
-                size="sm"
-                required
-                isInvalid={!!errors.word3?.message}
-                errorMessage={errors.word3?.message}
-                {...register("word3", { required: "Este campo é obrigatório" })}
-              />
-              <Input
-                label={`Palavra 4`}
-                size="sm"
-                required
-                isInvalid={!!errors.word4?.message}
-                errorMessage={errors.word4?.message}
-                {...register("word4", { required: "Este campo é obrigatório" })}
-              />
+              {words.map(({ value, error }, index) => (
+                <span key={index} className="flex gap-2">
+                  <Input
+                    type="text"
+                    label={`Palavra ${index + 1}`}
+                    size="sm"
+                    required
+                    value={value}
+                    onChange={(e) => onWordInputChange(e.target.value, index)}
+                    isInvalid={!!error}
+                    errorMessage={error}
+                  />
+                  {index >= 4 ? (
+                    <Button
+                      variant="bordered"
+                      isIconOnly
+                      size="lg"
+                      onClick={() => removeWord(index)}
+                    >
+                      <TrashIcon color="#EF5350" height={24} />
+                    </Button>
+                  ) : null}
+                </span>
+              ))}
+
+              <Button
+                variant="light"
+                className="w-fit"
+                color="primary"
+                onClick={addWord}
+              >
+                Adicionar palavra
+              </Button>
             </>
           ) : null}
 
@@ -131,27 +278,39 @@ const NewPasswordForm = ({
                 Não vale usar datas de nascimento, idade ou qualquer informação
                 muito óbvia sobre você.
               </p>
-              <Input
-                label={`Número 1`}
-                size="sm"
-                required
-                isInvalid={!!errors.number1?.message}
-                errorMessage={errors.number1?.message}
-                {...register("number1", {
-                  required: "Este campo é obrigatório",
-                })}
-              />
 
-              <Input
-                label={`Número 2`}
-                size="sm"
-                required
-                isInvalid={!!errors.number2?.message}
-                errorMessage={errors.number2?.message}
-                {...register("number2", {
-                  required: "Este campo é obrigatório",
-                })}
-              />
+              {numbers.map(({ value, error }, index) => (
+                <span key={index} className="flex gap-2">
+                  <Input
+                    key={index}
+                    label={`Número ${index + 1}`}
+                    size="sm"
+                    required
+                    value={value}
+                    onChange={(e) => onNumberInputChange(e.target.value, index)}
+                    isInvalid={!!error}
+                    errorMessage={error}
+                  />
+                  {index >= 2 ? (
+                    <Button
+                      variant="bordered"
+                      isIconOnly
+                      size="lg"
+                      onClick={() => removeNumber(index)}
+                    >
+                      <TrashIcon color="#EF5350" height={24} />
+                    </Button>
+                  ) : null}
+                </span>
+              ))}
+              <Button
+                variant="light"
+                className="w-fit"
+                color="primary"
+                onClick={addNumber}
+              >
+                Adicionar número
+              </Button>
             </>
           ) : null}
 

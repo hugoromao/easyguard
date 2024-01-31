@@ -1,8 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import { Inter } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
+import NewPasswordForm from "@/components/NewPasswordForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,14 +14,28 @@ type BaseProps = {
 };
 
 const Base = ({ children }: BaseProps) => {
+  const [isNewPasswordFormActive, setIsNewPasswordFormActive] = useState(false);
+
+  function openNewPasswordForm() {
+    console.log(1231)
+    setIsNewPasswordFormActive(true);
+  }
+
   return (
-    <main
-      style={inter.style}
-      className="h-[calc(100dvh)] grid grid-rows-[1fr_auto]"
-    >
-      {children}
-      <Navbar />
-    </main>
+    <>
+      <main
+        style={inter.style}
+        className="h-[calc(100dvh)] grid grid-rows-[1fr_auto]"
+      >
+        {children}
+        <Navbar openNewPasswordForm={openNewPasswordForm} />
+      </main>
+
+      <NewPasswordForm
+        active={isNewPasswordFormActive}
+        setActive={setIsNewPasswordFormActive}
+      />
+    </>
   );
 };
 
