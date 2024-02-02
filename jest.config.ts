@@ -10,7 +10,9 @@ const config: Config = {
   testEnvironment: "jsdom",
   collectCoverage: true,
   collectCoverageFrom: [
-    "src/**/*.{ts,tsx}",
+    "src/components/**/*.{ts,tsx}",
+    "src/templates/**/*.{ts,tsx}",
+    "src/utils/**/*.{ts,tsx}",
     "!src/stories/**",
     "!src/**/*.stories.{js,jsx,ts,tsx}",
     "!**/node_modules/**",
