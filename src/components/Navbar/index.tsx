@@ -24,8 +24,8 @@ const Navbar = ({ openNewPasswordForm }: NavbarProps) => {
   return (
     <nav className="flex bg-white p-1 justify-center border-t-2 border-default-200">
       {pathname === "/" ? (
-        <Link href="/" className="p-4 rounded-xl bg-green-50">
-          <SolidHomeIcon className="h-8 text-green-icon" />
+        <Link href="/" className="p-4 rounded-xl bg-blue-50">
+          <SolidHomeIcon className="h-8 text-blue-icon fill-blue-600" />
         </Link>
       ) : (
         <Link href="/" className="p-4 rounded-xl ">
@@ -34,8 +34,8 @@ const Navbar = ({ openNewPasswordForm }: NavbarProps) => {
       )}
 
       {pathname === "/badges" ? (
-        <Link href="/badges" className="p-4 rounded-xl bg-green-50">
-          <SolidGiftIcon className="h-8 text-green-icon" />
+        <Link href="/badges" className="p-4 rounded-xl bg-blue-50">
+          <SolidGiftIcon className="h-8 text-blue-icon fill-blue-600" />
         </Link>
       ) : (
         <Link href="/badges" className="p-4 rounded-xl hover:bg-default-100">
@@ -44,8 +44,8 @@ const Navbar = ({ openNewPasswordForm }: NavbarProps) => {
       )}
 
       {pathname === "/settings" ? (
-        <Link href="/settings" className="p-4 rounded-xl bg-green-50">
-          <SolidCog6ToothIcon className="h-8 text-green-icon" />
+        <Link href="/settings" className="p-4 rounded-xl bg-blue-50">
+          <SolidCog6ToothIcon className="h-8 text-blue-icon fill-blue-600" />
         </Link>
       ) : (
         <Link href="/settings" className="p-4 rounded-xl hover:bg-default-100">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
 import { Inter } from "next/font/google";
 
@@ -18,8 +18,6 @@ type BaseProps = {
 const Base = ({ children }: BaseProps) => {
   const { push } = useRouter();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-
-  const [isNewPasswordFormActive, setIsNewPasswordFormActive] = useState(false);
 
   function openNewPasswordForm() {
     onOpen();
