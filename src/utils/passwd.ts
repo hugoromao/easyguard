@@ -59,7 +59,10 @@ export function validateEntropy(password: string): number {
   return entropy;
 }
 
-export function generatePassword(iw: string[], inu: number[]): string {
+export function generatePassword(
+  iw: string[],
+  inu: number[]
+): { password: string; entropy: number } {
   const words = [...iw];
   const numbers = [...inu];
 
@@ -123,11 +126,12 @@ export function generatePassword(iw: string[], inu: number[]): string {
   const password =
     shouldUseLeetSpeak === 1 ? toLeetSpeak(temp.join("")) : temp.join("");
 
-  validateEntropy(password);
+  const entropy = validateEntropy(password);
 
-  if (password.length < 16)
+  if (password.length < 16) {
     throw new Error("A senha gerada é menor que 16 caracteres");
+  }
 
   // TODO: Validate against the following password meters: Passfault, The password meter and How secure is my password.
-  return password;
+  return { password, entropy };
 }

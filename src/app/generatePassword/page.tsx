@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Card, CardBody, Input } from "@nextui-org/react";
 
-import { generatePassword } from "@/utils/passwd";
+import { generatePassword, validateEntropy } from "@/utils/passwd";
 import {
   DocumentDuplicateIcon,
   InformationCircleIcon,
@@ -10,6 +10,11 @@ import {
 import { enqueueSnackbar } from "notistack";
 import Link from "next/link";
 import Dice from "./dice";
+
+type Password = {
+  password: string;
+  entropy: number;
+};
 
 const GeneratePassword = ({
   searchParams: { numbers, words },
@@ -19,31 +24,32 @@ const GeneratePassword = ({
   const receivedWords: string[] = JSON.parse(words);
   const receivedNumbers: number[] = JSON.parse(numbers);
 
-  const [password, setPassword] = useState<undefined | string>(
+  const [data, setData] = useState<undefined | Password>(
     generatePassword(receivedWords, receivedNumbers)
   );
 
   function regeneratePassword() {
-    setPassword(generatePassword(receivedWords, receivedNumbers));
+    setData(generatePassword(receivedWords, receivedNumbers));
   }
 
   function onPasswordFieldChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setPassword(e.target.value);
+    const entropy = validateEntropy(e.target.value);
+    setData(() => ({ password: e.target.value, entropy }));
   }
 
   function copyToClipboard() {
-    navigator.clipboard.writeText(password || "");
+    navigator.clipboard.writeText(data?.password || "");
     enqueueSnackbar("Copiado p/ área de transferência", { variant: "success" });
   }
 
   return (
-    <main className="h-screen flex flex-col justify-center gap-2 p-4">
+    <main className="h-screen flex flex-col justify-center gap-4 p-4">
       <p className="text-center font-semibold">Sua senha é:</p>
 
       <Input
         variant="bordered"
         className="font-mono"
-        value={password}
+        value={data?.password}
         onChange={onPasswordFieldChange}
         style={{ textAlign: "center", fontSize: 16 }}
       />
@@ -73,6 +79,17 @@ const GeneratePassword = ({
           Copiar senha
         </Button>
       </span>
+
+      {data ? (
+        <Card>
+          <CardBody>
+            <p>
+              Sua senha possui <strong>{data.entropy} bits</strong> de entropia.
+              Use o botão de copiar senha para contabilizar suas conquistas.
+            </p>
+          </CardBody>
+        </Card>
+      ) : null}
 
       <Link href="/" className="mt-14">
         <Button fullWidth variant="bordered">
