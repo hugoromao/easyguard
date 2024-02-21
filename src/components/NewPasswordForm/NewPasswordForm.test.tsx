@@ -6,9 +6,10 @@ describe("<NewPasswordForm", () => {
   it("should not render is not active", () => {
     const { container } = render(
       <NewPasswordForm
-        active={false}
-        setActive={() => ({})}
+        isOpen={false}
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -18,9 +19,10 @@ describe("<NewPasswordForm", () => {
   it("should render correctly", () => {
     const form = render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -33,9 +35,10 @@ describe("<NewPasswordForm", () => {
   it("should throw an error if the 'words' fields are empty.", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -46,9 +49,10 @@ describe("<NewPasswordForm", () => {
   it("should throw an error if the 'words' have small words.", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -71,9 +75,10 @@ describe("<NewPasswordForm", () => {
   it("should throw an error if the 'words' have common words.", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -96,9 +101,10 @@ describe("<NewPasswordForm", () => {
   it("should throw an error if the 'words' have keyboard patterns.", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -121,9 +127,10 @@ describe("<NewPasswordForm", () => {
   it('should add a textbox field when the "Adicionar palavra" button is clicked', () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -135,9 +142,10 @@ describe("<NewPasswordForm", () => {
   it("should remove a textbox field when the trash button is clicked", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -151,27 +159,13 @@ describe("<NewPasswordForm", () => {
     expect(screen.getAllByRole("textbox").length).toBe(4);
   });
 
-  it("should call setActive function when close button is clicked", () => {
-    const setActiveMock = jest.fn();
-    render(
-      <NewPasswordForm
-        active
-        setActive={setActiveMock}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
-
-    fireEvent.click(screen.getByRole("button", { name: "close" }));
-
-    expect(setActiveMock).toHaveBeenCalledWith(false);
-  });
-
   it("should render the next step correctly", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -204,9 +198,10 @@ describe("<NewPasswordForm", () => {
   it('should go back to the previous step when "Go Back" button is clicked', () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -232,9 +227,10 @@ describe("<NewPasswordForm", () => {
   it("should throw an error if the 'numbers' fields are empty.", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -260,9 +256,10 @@ describe("<NewPasswordForm", () => {
   it('should add a textbox field when the "Adicionar número" button is clicked', () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -288,9 +285,10 @@ describe("<NewPasswordForm", () => {
   it("should remove a textbox field when the trash button is clicked", () => {
     render(
       <NewPasswordForm
-        active
-        setActive={() => ({})}
+        isOpen
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
+        onClose={() => ({})}
       />
     );
 
@@ -315,13 +313,13 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should call onSubmitPasswordForm", () => {
-    const setActiveMock = jest.fn();
     const onSubmitPasswordForm = jest.fn();
 
     render(
       <NewPasswordForm
-        active
-        setActive={setActiveMock}
+        isOpen
+        onClose={() => ({})}
+        onOpenChange={() => ({})}
         onSubmitPasswordForm={onSubmitPasswordForm}
       />
     );

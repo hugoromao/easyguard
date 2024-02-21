@@ -7,6 +7,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import NewPasswordForm from "@/components/NewPasswordForm";
 import { useRouter } from "next/navigation";
+import { useDisclosure } from "@nextui-org/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +17,16 @@ type BaseProps = {
 
 const Base = ({ children }: BaseProps) => {
   const { push } = useRouter();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const [isNewPasswordFormActive, setIsNewPasswordFormActive] = useState(false);
 
   function openNewPasswordForm() {
-    setIsNewPasswordFormActive(true);
+    onOpen();
   }
 
   function onSubmitPasswordForm(pathname: string) {
-
+    push(pathname);
   }
 
   return (
@@ -38,8 +40,9 @@ const Base = ({ children }: BaseProps) => {
       </main>
 
       <NewPasswordForm
-        active={isNewPasswordFormActive}
-        setActive={setIsNewPasswordFormActive}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        onClose={onClose}
         onSubmitPasswordForm={onSubmitPasswordForm}
       />
     </>
