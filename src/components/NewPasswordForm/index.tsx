@@ -9,14 +9,13 @@ import {
   TrashIcon,
 } from "@heroicons/react/20/solid";
 
-import { generatePassword } from "../../utils/passwd";
 import { commonPortugueseWords, keyboardPatterns } from "../../utils/patterns";
 import { enqueueSnackbar } from "notistack";
-import { useRouter } from "next/navigation";
 
 type NewPasswordFormProps = {
   active: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  onSubmitPasswordForm(pathname: string): void;
 };
 
 export type Input = {
@@ -27,9 +26,8 @@ export type Input = {
 const NewPasswordForm = ({
   active = true,
   setActive,
+  onSubmitPasswordForm,
 }: NewPasswordFormProps) => {
-  const { push } = useRouter();
-
   const [step, setStep] = useState(1);
   const [words, setWords] = useState<Input[]>([
     { value: "", error: undefined },
@@ -125,7 +123,7 @@ const NewPasswordForm = ({
     }
 
     if (!hasErrors) {
-      push(
+      onSubmitPasswordForm(
         `generatePassword?words=${JSON.stringify(
           words.map((w) => w.value)
         )}&numbers=${JSON.stringify(numbers.map((n) => n.value))}`
@@ -203,6 +201,7 @@ const NewPasswordForm = ({
               isIconOnly
               variant="light"
               onClick={() => setStep((s) => s - 1)}
+              aria-label="goBack"
             >
               <ArrowLeftIcon color="#A1A1AA" height={24} />
             </Button>
@@ -213,12 +212,13 @@ const NewPasswordForm = ({
             <Button isIconOnly variant="light">
               <QuestionMarkCircleIcon color="#A1A1AA" height={24} />
             </Button>
-            <Button isIconOnly variant="light">
-              <XMarkIcon
-                color="#A1A1AA"
-                onClick={() => setActive(false)}
-                height={24}
-              />
+            <Button
+              isIconOnly
+              variant="light"
+              aria-label="close"
+              onClick={() => setActive(false)}
+            >
+              <XMarkIcon color="#A1A1AA" height={24} />
             </Button>
           </span>
         </Navbar>
@@ -254,6 +254,7 @@ const NewPasswordForm = ({
                       isIconOnly
                       size="lg"
                       onClick={() => removeWord(index)}
+                      aria-label="remove"
                     >
                       <TrashIcon color="#EF5350" height={24} />
                     </Button>
@@ -299,6 +300,7 @@ const NewPasswordForm = ({
                       isIconOnly
                       size="lg"
                       onClick={() => removeNumber(index)}
+                      aria-label="remove"
                     >
                       <TrashIcon color="#EF5350" height={24} />
                     </Button>
@@ -322,6 +324,7 @@ const NewPasswordForm = ({
             variant="shadow"
             color="primary"
             size="lg"
+            aria-label="next"
             className="sticky mt-6 ml-auto bottom-4 z-10"
           >
             <ArrowRightIcon height={24} />

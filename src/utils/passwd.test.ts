@@ -96,7 +96,7 @@ describe("validateEntropy()", () => {
 
 describe("generatePassword()", () => {
   it("should thows error when the generated password is smaller than 16 caracters", () => {
-    const words = ["abc", "bca", "cab"];
+    const words = ["a2c", "!ca", ".ab"];
     const numbers = [123, 456];
     expect(() => generatePassword(words, numbers)).toThrow(
       "A senha gerada é menor que 16 caracteres"
@@ -105,7 +105,10 @@ describe("generatePassword()", () => {
 
   it("should run toLeetSpeak when shouldUseLeetSpeak is true", () => {
     jest.spyOn(Math, "ceil").mockImplementation(() => 1);
-    const password = generatePassword(["aaaa", "aaaaa", "aaaaaa"], [1, 2]);
+    const password = generatePassword(
+      ["aaaaaa", "aaaaaaa", "aaaaaaaa"],
+      [1, 2]
+    );
 
     expect(password.includes("@")).toBeTruthy();
   });

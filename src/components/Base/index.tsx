@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
 import NewPasswordForm from "@/components/NewPasswordForm";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +15,16 @@ type BaseProps = {
 };
 
 const Base = ({ children }: BaseProps) => {
+  const { push } = useRouter();
+
   const [isNewPasswordFormActive, setIsNewPasswordFormActive] = useState(false);
 
   function openNewPasswordForm() {
     setIsNewPasswordFormActive(true);
+  }
+
+  function onSubmitPasswordForm(pathname: string) {
+
   }
 
   return (
@@ -33,6 +40,7 @@ const Base = ({ children }: BaseProps) => {
       <NewPasswordForm
         active={isNewPasswordFormActive}
         setActive={setIsNewPasswordFormActive}
+        onSubmitPasswordForm={onSubmitPasswordForm}
       />
     </>
   );
