@@ -110,7 +110,7 @@ type CustomError = {
   message: string;
 };
 
-type Data = {
+export type Data = {
   success: boolean;
   password: string | null;
   entropy: number;

@@ -1,20 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import { Button, Card, CardBody, Input } from "@nextui-org/react";
-
-import { generatePassword, validateEntropy } from "@/utils/passwd";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { enqueueSnackbar } from "notistack";
+import { Button, Card, CardBody, Input, Spinner } from "@nextui-org/react";
 import {
   DocumentDuplicateIcon,
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
-import { enqueueSnackbar } from "notistack";
-import Link from "next/link";
-import Dice from "./dice";
 
-type Password = {
-  password: string;
-  entropy: number;
-};
+import { Data, generatePassword, validateEntropy } from "@/utils/passwd";
+
+import Dice from "./dice";
 
 const GeneratePassword = ({
   searchParams: { numbers, words },
@@ -24,9 +20,7 @@ const GeneratePassword = ({
   const receivedWords: string[] = JSON.parse(words);
   const receivedNumbers: number[] = JSON.parse(numbers);
 
-  const [data, setData] = useState<Password>(
-    generatePassword(receivedWords, receivedNumbers)
-  );
+  const [data, setData] = useState<Data | undefined>();
 
   function regeneratePassword() {
     setData(generatePassword(receivedWords, receivedNumbers));
@@ -34,12 +28,32 @@ const GeneratePassword = ({
 
   function onPasswordFieldChange(e: React.ChangeEvent<HTMLInputElement>) {
     const entropy = validateEntropy(e.target.value);
-    setData(() => ({ password: e.target.value, entropy }));
+    setData((d) => {
+      if (d === undefined) return d;
+      return {
+        ...d,
+        password: e.target.value,
+        entropy,
+      };
+    });
   }
 
   function copyToClipboard() {
     navigator.clipboard.writeText(data?.password || "");
     enqueueSnackbar("Copiado p/ área de transferência", { variant: "success" });
+  }
+
+  useEffect(() => {
+    setData(generatePassword(receivedWords, receivedNumbers));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (data === undefined) {
+    return (
+      <main className="flex h-screen justify-center">
+        <Spinner label="Gerando senha..." />
+      </main>
+    );
   }
 
   return (
@@ -49,7 +63,7 @@ const GeneratePassword = ({
       <Input
         variant="bordered"
         className="font-mono"
-        value={data?.password}
+        value={data.password || ""}
         onChange={onPasswordFieldChange}
         style={{ textAlign: "center", fontSize: 16 }}
       />
@@ -71,6 +85,7 @@ const GeneratePassword = ({
         </Button>
         <Button
           fullWidth
+          isDisabled={data.entropy < 60}
           color="primary"
           variant="shadow"
           startContent={<DocumentDuplicateIcon height={20} />}
@@ -83,9 +98,10 @@ const GeneratePassword = ({
       {data ? (
         <Card>
           <CardBody>
+            <p>{data.entropy} bits</p>
             <p>
-              Sua senha possui <strong>{data.entropy} bits</strong> de entropia.
-              Use o botão de copiar senha para contabilizar suas conquistas.
+              Sua senha possui de entropia. Use o botão de copiar senha para
+              contabilizar suas conquistas.
             </p>
           </CardBody>
         </Card>
