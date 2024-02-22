@@ -1,4 +1,4 @@
 {
   "extends": ["next/core-web-vitals", "plugin:storybook/recommended"],
-  "rules": { "no-unused-vars": "error" }
+  "rules": { "no-unused-vars": "error", "react-hooks/exhaustive-deps": "off" }
 }

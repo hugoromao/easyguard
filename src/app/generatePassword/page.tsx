@@ -45,7 +45,6 @@ const GeneratePassword = ({
 
   useEffect(() => {
     setData(generatePassword(receivedWords, receivedNumbers));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (data === undefined) {
