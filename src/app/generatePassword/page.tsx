@@ -61,8 +61,8 @@ const GeneratePassword = ({
       enqueueSnackbar("Copiado p/ área de transferência", {
         variant: "success",
       });
-    } catch {
-      enqueueSnackbar("Falha ao copiar senha", {
+    } catch (err) {
+      enqueueSnackbar(`Falha ao copiar senha: ${err}`, {
         variant: "error",
       });
     }
@@ -113,6 +113,7 @@ const GeneratePassword = ({
             color="primary"
             onClick={regeneratePassword}
             startContent={<Dice />}
+            className="shadow-lg"
           >
             Regerar
           </Button>

@@ -22,10 +22,12 @@ export default function Home() {
           </span>
 
           <Button
-            color="primary"
-            variant="shadow"
+            color="secondary"
+            variant="solid"
             size="lg"
             startContent={<KeyIcon height={24} className="font-bold" />}
+            onClick={onOpen}
+            className="bg-green-50 text-green-800 shadow-lg font-medium"
             style={{
               position: "absolute",
               top: "100%",
@@ -33,7 +35,6 @@ export default function Home() {
               right: 24,
               transform: "translateY(-50%)",
             }}
-            onClick={onOpen}
           >
             Nova Senha
           </Button>

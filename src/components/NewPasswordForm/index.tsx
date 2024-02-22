@@ -12,7 +12,6 @@ import {
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 import { enqueueSnackbar } from "notistack";
-
 import { validateUserNumbers, validateUserWords } from "../../utils/passwd";
 
 type NewPasswordFormProps = {
@@ -285,8 +284,7 @@ const NewPasswordForm = ({
           {step === 1 ? (
             <Button
               variant="light"
-              className="w-fit"
-              color="primary"
+              className="w-fit text-emerald-600"
               onClick={addWord}
             >
               Adicionar palavra
@@ -318,13 +316,12 @@ const NewPasswordForm = ({
           <Button
             type="button"
             isIconOnly
-            variant="shadow"
-            color="primary"
             size="lg"
             aria-label="next"
             onClick={onSubmit}
+            className="bg-emerald-500"
           >
-            <ArrowRightIcon height={24} />
+            <ArrowRightIcon height={24} className="fill-white" />
           </Button>
         </ModalFooter>
       </ModalContent>
