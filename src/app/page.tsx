@@ -8,6 +8,7 @@ import { KeyIcon } from "@heroicons/react/24/outline";
 import { GlobalContext } from "@/context/global";
 
 import Base from "@/components/Base";
+import Tips from "@/components/Tips";
 
 export default function Home() {
   const { onOpen } = React.useContext(GlobalContext);
@@ -42,7 +43,9 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="p-6 pt-12">Home</div>
+        <div className="p-6 pt-12">
+          <Tips />
+        </div>
       </div>
     </Base>
   );

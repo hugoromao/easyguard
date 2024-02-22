@@ -10,9 +10,7 @@ const Tips = () => {
     "3 - Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais ou significativas para o usuário.",
   ];
 
-  const [tipIndex, setTipIndex] = useState(
-    Math.floor(Math.random() * tips.length)
-  );
+  const [tipIndex, setTipIndex] = useState(-1);
 
   function getNewTip() {
     const newIndex = Math.floor(Math.random() * tips.length);
@@ -20,6 +18,7 @@ const Tips = () => {
   }
 
   useEffect(() => {
+    getNewTip();
     setInterval(getNewTip, 10000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -41,17 +40,21 @@ const Tips = () => {
           />
         </svg>
 
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={tipIndex}
-            initial={{ x: -5, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 5, opacity: 0 }}
-            className="text-gray-700"
-          >
-            {tips[tipIndex]}
-          </motion.p>
-        </AnimatePresence>
+        {tipIndex !== -1 ? (
+          <AnimatePresence mode="wait">
+            {
+              <motion.p
+                key={tipIndex}
+                initial={{ x: -5, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 5, opacity: 0 }}
+                className="text-gray-700"
+              >
+                {tips[tipIndex]}
+              </motion.p>
+            }
+          </AnimatePresence>
+        ) : null}
       </Card>
     </div>
   );
