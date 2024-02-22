@@ -2,7 +2,7 @@
 import React from "react";
 
 import Image from "next/image";
-import { Button } from "@nextui-org/react";
+import { Button, Accordion } from "@nextui-org/react";
 import { KeyIcon } from "@heroicons/react/24/outline";
 
 import { GlobalContext } from "@/context/global";
