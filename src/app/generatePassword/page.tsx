@@ -8,7 +8,7 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import { Data, generatePassword, validateEntropy } from "@/utils/passwd";
+import { Data, generatePassword, validateEntropy } from "../../utils/passwd";
 
 import Dice from "./dice";
 

@@ -12,7 +12,8 @@ import {
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 import { enqueueSnackbar } from "notistack";
-import { validateUserNumbers, validateUserWords } from "@/utils/passwd";
+
+import { validateUserNumbers, validateUserWords } from "../../utils/passwd";
 
 type NewPasswordFormProps = {
   isOpen: boolean;
