@@ -129,6 +129,7 @@ const NewPasswordForm = ({
     });
 
     if (!hasErrors) {
+      // TODO: Hash queryparams with bcrypt
       onSubmitPasswordForm(
         `generatePassword?words=${JSON.stringify(
           words.map((w) => w.value)
