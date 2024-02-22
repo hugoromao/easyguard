@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Tips = () => {
   const tips = [
-    "1 - Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente.",
-    "2 - Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres).",
-    "3 - Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais ou significativas para o usuário.",
+    "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente.",
+    "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres).",
+    "Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais ou significativas para o usuário.",
   ];
 
   const [tipIndex, setTipIndex] = useState(-1);
