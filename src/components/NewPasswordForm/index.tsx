@@ -18,6 +18,7 @@ type NewPasswordFormProps = {
   isOpen: boolean;
   onOpenChange: () => void;
   onClose: () => void;
+  // eslint-disable-next-line no-unused-vars
   onSubmitPasswordForm(pathname: string): void;
 };
 

@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 import { useDisclosure } from "@nextui-org/react";
 
 export type GlobalContextType = {
