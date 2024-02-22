@@ -24,7 +24,7 @@ const GeneratePassword = ({
   const receivedWords: string[] = JSON.parse(words);
   const receivedNumbers: number[] = JSON.parse(numbers);
 
-  const [data, setData] = useState<undefined | Password>(
+  const [data, setData] = useState<Password>(
     generatePassword(receivedWords, receivedNumbers)
   );
 

@@ -2,32 +2,80 @@ import {
   commonPortugueseWords,
   keyboardPatterns,
   leetSpeakLetters,
+  specialCaracters,
 } from "./patterns";
 
-export function validateUserInput(words: string[], numbers: number[]) {
-  if (words.length < 3) throw new Error("Insira no mínimo três palavras.");
+export function validateUserWords(words: string[]): CustomError[] {
+  const errors: CustomError[] = [];
 
-  if (numbers.length < 2) throw new Error("Insira no mínimo dois números.");
+  if (words.length < 3) {
+    errors.push({
+      type: "wordError",
+      message: "Insira no mínimo três palavras.",
+      index: undefined,
+    });
+  }
 
-  words.forEach((word) => {
-    if (word.length < 3)
-      throw new Error(`A palavra “${word}” é menor que três caracteres.`);
+  words.forEach((word, index) => {
+    if (word.length < 3) {
+      errors.push({
+        type: "wordError",
+        message: `A palavra “${word}” é menor que três caracteres.`,
+        index,
+      });
+    }
   });
 
   const wordsSet = new Set(words);
-  if (words.length !== wordsSet.size)
-    throw new Error("Existem palavras repetidas.");
+  if (words.length !== wordsSet.size) {
+    errors.push({
+      type: "wordError",
+      message: "Existem palavras repetidas.",
+      index: undefined,
+    });
+  }
+
+  words.forEach((word, index) => {
+    if (commonPortugueseWords.includes(word)) {
+      errors.push({
+        type: "wordError",
+        message: `${word} é uma palavra muito comum`,
+        index,
+      });
+    }
+    if (keyboardPatterns.includes(word)) {
+      errors.push({
+        type: "wordError",
+        message: "Não utilize padrões de teclado",
+        index,
+      });
+    }
+  });
+
+  return errors;
+}
+
+export function validateUserNumbers(numbers: number[]) {
+  const errors: CustomError[] = [];
+
+  if (numbers.length < 2) {
+    errors.push({
+      type: "numberError",
+      message: "Insira no mínimo dois números.",
+      index: undefined,
+    });
+  }
 
   const numbersSet = new Set(numbers);
-  if (numbers.length !== numbersSet.size)
-    throw new Error("Existem números repetidos.");
+  if (numbers.length !== numbersSet.size) {
+    errors.push({
+      type: "numberError",
+      message: "Existem números repetidos.",
+      index: undefined,
+    });
+  }
 
-  words.forEach((word) => {
-    if (commonPortugueseWords.includes(word))
-      throw new Error(`${word} é uma palavra muito comum`);
-    if (keyboardPatterns.includes(word))
-      throw new Error("Não utilize padrões de teclado");
-  });
+  return errors;
 }
 
 export function toLeetSpeak(string: string): string {
@@ -53,53 +101,34 @@ export function validateEntropy(password: string): number {
     10
   );
 
-  if (entropy < 60)
-    throw new Error("A senha gerada possui entropia menor que 60 bits");
-
   return entropy;
 }
 
-export function generatePassword(
-  iw: string[],
-  inu: number[]
-): { password: string; entropy: number } {
+type CustomError = {
+  type: "wordError" | "numberError" | "generatedPasswordError";
+  index: number | undefined;
+  message: string;
+};
+
+type Data = {
+  success: boolean;
+  password: string | null;
+  entropy: number;
+  errors: CustomError[];
+};
+
+export function generatePassword(iw: string[], inu: number[]): Data {
   const words = [...iw];
   const numbers = [...inu];
 
-  const specialCaracters = [
-    "~",
-    "!",
-    "@",
-    "#",
-    "$",
-    "%",
-    "^",
-    "&",
-    "*",
-    "(",
-    ")",
-    "-",
-    "_",
-    "+",
-    "=",
-    "{",
-    "}",
-    "]",
-    "[",
-    "`",
-    ",",
-    ".",
-    "/",
-    "?",
-    ";",
-    ":",
-    "'",
-    '"',
-    "<",
-    ">",
-  ];
+  let generatedPasswordErrors: CustomError[] = [];
+  let wordErrors = validateUserWords(words);
+  let numberErrors = validateUserNumbers(numbers);
 
-  validateUserInput(words, numbers);
+  let password = null;
+  let entropy = 0;
+
+  let hasErrors = !wordErrors.length && !numberErrors.length;
 
   let temp: string[] = [];
 
@@ -123,15 +152,35 @@ export function generatePassword(
   });
 
   const shouldUseLeetSpeak = Math.ceil(Math.random() * 2);
-  const password =
+  password =
     shouldUseLeetSpeak === 1 ? toLeetSpeak(temp.join("")) : temp.join("");
 
-  const entropy = validateEntropy(password);
+  entropy = validateEntropy(password);
 
-  if (password.length < 16) {
-    throw new Error("A senha gerada é menor que 16 caracteres");
+  if (entropy < 60) {
+    generatedPasswordErrors.push({
+      type: "generatedPasswordError",
+      message: "A senha gerada possui entropia menor que 60 bits",
+      index: undefined,
+    });
   }
 
+  if (password.length < 16) {
+    generatedPasswordErrors.push({
+      type: "generatedPasswordError",
+      message: "A senha gerada é menor que 16 caracteres",
+      index: undefined,
+    });
+  }
+
+  hasErrors =
+    !wordErrors.length && !numberErrors.length && !generatePassword.length;
+
   // TODO: Validate against the following password meters: Passfault, The password meter and How secure is my password.
-  return { password, entropy };
+  return {
+    success: !hasErrors,
+    password: password,
+    entropy,
+    errors: [...wordErrors, ...numberErrors, ...generatedPasswordErrors],
+  };
 }
