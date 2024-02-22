@@ -18,7 +18,6 @@ const preview: Preview = {
     layout: "fullscreen",
     viewport: {
       viewports: { ...INITIAL_VIEWPORTS, ...customViewports },
-      defaultViewport: "Android Small",
     },
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
