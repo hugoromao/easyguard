@@ -8,6 +8,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Spinner,
 } from "@nextui-org/react";
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
@@ -43,6 +44,8 @@ const NewPasswordForm = ({
     { value: "", error: undefined },
     { value: "", error: undefined },
   ]);
+
+  const [loading, setLoading] = useState(false);
 
   function nextStep() {
     setStep((s) => s + 1);
@@ -131,6 +134,7 @@ const NewPasswordForm = ({
 
     if (!hasErrors) {
       // TODO: Hash queryparams with bcrypt
+      setLoading(true);
       onSubmitPasswordForm(
         `generatePassword?words=${JSON.stringify(
           words.map((w) => w.value)
@@ -321,7 +325,11 @@ const NewPasswordForm = ({
             onClick={onSubmit}
             className="bg-emerald-500"
           >
-            <ArrowRightIcon height={24} className="fill-white" />
+            {loading ? (
+              <Spinner color="white" size="sm" />
+            ) : (
+              <ArrowRightIcon height={24} className="fill-white" />
+            )}
           </Button>
         </ModalFooter>
       </ModalContent>
