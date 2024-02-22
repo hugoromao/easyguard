@@ -14,33 +14,36 @@ export default function Home() {
 
   return (
     <Base>
-      <div className="w-full h-2/5 relative">
-        <Image
-          src={"/green.jpg"}
-          alt="hero"
-          priority
-          fill
-          className="object-cover"
-        />
+      <div>
+        <div className="w-full h-2/5 relative">
+          <Image
+            src={"/green.jpg"}
+            alt="hero"
+            priority
+            fill
+            className="object-cover"
+          />
 
-        <Button
-          color="primary"
-          variant="shadow"
-          className="w-4/5"
-          size="lg"
-          startContent={<KeyIcon height={24} className="font-bold" />}
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-          onClick={onOpen}
-        >
-          Nova Senha
-        </Button>
+          <Button
+            color="primary"
+            variant="shadow"
+            className="w-4/5"
+            size="lg"
+            startContent={<KeyIcon height={24} className="font-bold" />}
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={onOpen}
+          >
+            Nova Senha
+          </Button>
+        </div>
+
+        <div className="p-6 pt-12">Home</div>
       </div>
-      <h1>Home</h1>
     </Base>
   );
 }
