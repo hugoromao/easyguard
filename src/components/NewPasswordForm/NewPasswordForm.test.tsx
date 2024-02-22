@@ -184,13 +184,13 @@ describe("<NewPasswordForm", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "next" }));
 
-    expect(screen.getByText("Ultima etapa"));
+    expect(screen.getByText("Última etapa"));
     expect(
       screen.getByText(
         "Agora vamos precisar de dois números significativos para você. Não vale usar datas de nascimento, idade ou qualquer informação muito óbvia sobre você."
       )
     );
-    expect(screen.getAllByRole("textbox").length).toBe(2);
+    expect(screen.getAllByRole("spinbutton").length).toBe(2);
     expect(screen.getByRole("button", { name: "Adicionar número" }));
     expect(screen.getByRole("button", { name: "next" }));
   });
@@ -279,7 +279,7 @@ describe("<NewPasswordForm", () => {
     fireEvent.click(screen.getByRole("button", { name: "next" }));
     fireEvent.click(screen.getByRole("button", { name: "Adicionar número" }));
 
-    expect(screen.getAllByRole("textbox").length).toBe(3);
+    expect(screen.getAllByRole("spinbutton").length).toBe(3);
   });
 
   it("should remove a textbox field when the trash button is clicked", () => {
@@ -309,7 +309,7 @@ describe("<NewPasswordForm", () => {
     fireEvent.click(screen.getByRole("button", { name: "Adicionar número" }));
     fireEvent.click(screen.getByRole("button", { name: "remove" }));
 
-    expect(screen.getAllByRole("textbox").length).toBe(2);
+    expect(screen.getAllByRole("spinbutton").length).toBe(2);
   });
 
   it("should call onSubmitPasswordForm", () => {

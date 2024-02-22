@@ -8,19 +8,11 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Navbar,
-  useDisclosure,
 } from "@nextui-org/react";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
-import {
-  XMarkIcon,
-  ArrowRightIcon,
-  ArrowLeftIcon,
-  TrashIcon,
-} from "@heroicons/react/20/solid";
+import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
-import { commonPortugueseWords, keyboardPatterns } from "../../utils/patterns";
 import { enqueueSnackbar } from "notistack";
+import { validateUserNumbers, validateUserWords } from "@/utils/passwd";
 
 type NewPasswordFormProps = {
   isOpen: boolean;
@@ -64,51 +56,32 @@ const NewPasswordForm = ({
     let hasErrors = false;
 
     words.forEach((word, index) => {
-      if (word.value.length < 3 && word.value !== "") {
-        hasErrors = true;
-        setWords((words) => {
-          const temp = words;
-          temp[
-            index
-          ].error = `A palavra “${word.value}” é menor que três caracteres.`;
-          return [...temp];
-        });
-      }
-
       if (word.value === "") {
         hasErrors = true;
-        setWords((words) => {
-          const temp = words;
+        setWords((w) => {
+          const temp = w;
           temp[index].error = `Este campo é obrigatório.`;
           return [...temp];
         });
       }
     });
+    if (words.findIndex((w) => w.value === "") !== -1) return;
 
-    words.forEach((word, index) => {
-      if (commonPortugueseWords.includes(word.value)) {
-        hasErrors = true;
+    const errors = validateUserWords(words.map((w) => w.value));
+    errors.forEach((err) => {
+      hasErrors = true;
+      const hasIndex = err.index !== undefined;
+
+      if (hasIndex) {
         setWords((words) => {
           const temp = words;
-          temp[index].error = `${word.value} é uma palavra muito comum`;
+          temp[err.index!].error = err.message;
           return [...temp];
         });
-      }
-      if (keyboardPatterns.includes(word.value)) {
-        hasErrors = true;
-        setWords((words) => {
-          const temp = words;
-          temp[index].error = "Não utilize padrões de teclado";
-          return [...temp];
-        });
+      } else {
+        enqueueSnackbar(err.message, { variant: "error" });
       }
     });
-
-    const wordsSet = new Set(words.map((w) => w.value));
-    if (!hasErrors && words.length !== wordsSet.size) {
-      hasErrors = true;
-      enqueueSnackbar("Existem palavras repetidas.", { variant: "error" });
-    }
 
     if (!hasErrors) nextStep();
   }
@@ -119,19 +92,41 @@ const NewPasswordForm = ({
     numbers.forEach((number, index) => {
       if (number.value === "") {
         hasErrors = true;
-        setNumbers((numbers) => {
-          const temp = numbers;
+        setNumbers((w) => {
+          const temp = w;
           temp[index].error = `Este campo é obrigatório.`;
+          return [...temp];
+        });
+      }
+
+      if (isNaN(Number(number.value))) {
+        hasErrors = true;
+        setNumbers((w) => {
+          const temp = w;
+          temp[index].error = `Número inválido.`;
           return [...temp];
         });
       }
     });
 
-    const numbersSet = new Set(numbers.map((w) => w.value));
-    if (!hasErrors && numbers.length !== numbersSet.size) {
+    if (numbers.findIndex((n) => n.value === "") !== -1) return;
+    if (numbers.findIndex((n) => isNaN(Number(n.value))) !== -1) return;
+
+    const errors = validateUserNumbers(numbers.map((n) => Number(n.value)));
+    errors.forEach((err) => {
       hasErrors = true;
-      enqueueSnackbar("Existem números repetidos.", { variant: "error" });
-    }
+      const hasIndex = err.index !== undefined;
+
+      if (hasIndex) {
+        setNumbers((numbers) => {
+          const temp = numbers;
+          temp[err.index!].error = err.message;
+          return [...temp];
+        });
+      } else {
+        enqueueSnackbar(err.message, { variant: "error" });
+      }
+    });
 
     if (!hasErrors) {
       onSubmitPasswordForm(
@@ -206,7 +201,7 @@ const NewPasswordForm = ({
       <ModalContent>
         <ModalHeader className="text-[24px] font-semibold">
           {step === 1 ? "Vamos criar uma nova senha!" : null}
-          {step === 2 ? "Ultima etapa" : null}
+          {step === 2 ? "Última etapa" : null}
         </ModalHeader>
 
         <ModalBody>
@@ -225,7 +220,6 @@ const NewPasswordForm = ({
                       type="text"
                       label={`Palavra ${index + 1}`}
                       size="sm"
-                      required
                       value={value}
                       onChange={(e) => onWordInputChange(e.target.value, index)}
                       isInvalid={!!error}
@@ -258,6 +252,7 @@ const NewPasswordForm = ({
                 <span key={index} className="flex gap-2">
                   <Input
                     key={index}
+                    type="number"
                     label={`Número ${index + 1}`}
                     size="sm"
                     required

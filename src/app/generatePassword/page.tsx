@@ -98,10 +98,9 @@ const GeneratePassword = ({
       {data ? (
         <Card>
           <CardBody>
-            <p>{data.entropy} bits</p>
             <p>
-              Sua senha possui de entropia. Use o botão de copiar senha para
-              contabilizar suas conquistas.
+              Sua senha possui <strong>{data.entropy} bits</strong> de entropia.
+              Use o botão de copiar senha para contabilizar suas conquistas.
             </p>
           </CardBody>
         </Card>
