@@ -24,5 +24,5 @@ export default meta;
 type Story = StoryObj<typeof NewPasswordForm>;
 
 export const Primary: Story = {
-  args: { isOpen: true, onClose: () => ({}), onOpenChange() {} },
+  args: { isOpen: true, onOpenChange() {} },
 };
