@@ -18,7 +18,7 @@ type BaseProps = {
 
 const Base = ({ children }: BaseProps) => {
   const { push } = useRouter();
-  const { isOpen, onOpen, onClose, onOpenChange } = useContext(GlobalContext);
+  const { isOpen, onOpen, onOpenChange } = useContext(GlobalContext);
 
   function openNewPasswordForm() {
     onOpen();
@@ -41,7 +41,6 @@ const Base = ({ children }: BaseProps) => {
       <NewPasswordForm
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        onClose={onClose}
         onSubmitPasswordForm={onSubmitPasswordForm}
       />
     </>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import {
   Button,
@@ -23,6 +23,13 @@ import { Data, generatePassword, validateEntropy } from "../../utils/passwd";
 
 import Dice from "./dice";
 import { useRouter } from "next/navigation";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { GlobalContext } from "@/context/global";
+
+type HistoryItem = {
+  type: "password";
+  createdAt: Date;
+};
 
 const GeneratePassword = ({
   searchParams: { numbers, words },
@@ -33,7 +40,11 @@ const GeneratePassword = ({
   const receivedNumbers: number[] = JSON.parse(numbers);
 
   const { push } = useRouter();
+  const { onClose } = useContext(GlobalContext);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  // eslint-disable-next-line no-unused-vars
+  const [_, setHistory] = useLocalStorage<HistoryItem[]>("history", []);
 
   const [data, setData] = useState<Data | undefined>();
   const [wasUsed, setWasUsed] = useState(false);
@@ -58,6 +69,13 @@ const GeneratePassword = ({
     try {
       await navigator.clipboard.writeText(data?.password || "");
       setWasUsed(true);
+      setHistory((h) => [
+        ...h,
+        {
+          type: "password",
+          createdAt: new Date(),
+        },
+      ]);
       enqueueSnackbar("Copiado p/ área de transferência", {
         variant: "success",
       });
@@ -77,6 +95,7 @@ const GeneratePassword = ({
   }
 
   useEffect(() => {
+    onClose();
     setData(generatePassword(receivedWords, receivedNumbers));
   }, []);
 
