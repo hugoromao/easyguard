@@ -25,14 +25,41 @@ import Dice from "./dice";
 import { useRouter } from "next/navigation";
 import { GlobalContext } from "@/context/global";
 
-const GeneratePassword = ({
-  searchParams: { numbers, words },
-}: {
-  searchParams: { words: string; numbers: string };
-}) => {
-  const receivedWords: string[] = JSON.parse(words);
-  const receivedNumbers: number[] = JSON.parse(numbers);
+import { useSearchParams } from "next/navigation";
 
+const Page = () => {
+  const params = useSearchParams();
+
+  if (!params) {
+    return <code>Parâmetros não informados.</code>;
+  }
+
+  const receivedWords = params.get("words");
+  const receivedNumbers = params.get("numbers");
+
+  if (!receivedWords || !receivedNumbers) {
+    return <code>Parâmetros não informados.</code>;
+  }
+
+  return (
+    <GeneratePassword
+      receivedWords={JSON.parse(receivedWords)}
+      receivedNumbers={Array(JSON.parse(receivedNumbers)).map((n) => Number(n))}
+    />
+  );
+};
+
+export default Page;
+
+type GeneratePasswordProps = {
+  receivedWords: string[];
+  receivedNumbers: number[];
+};
+
+const GeneratePassword = ({
+  receivedWords,
+  receivedNumbers,
+}: GeneratePasswordProps) => {
   const { push } = useRouter();
   const { onClose, setHistory } = useContext(GlobalContext);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -41,7 +68,13 @@ const GeneratePassword = ({
   const [wasUsed, setWasUsed] = useState(false);
 
   function regeneratePassword() {
-    setData(generatePassword(receivedWords, receivedNumbers));
+    setData(
+      generatePassword(
+        receivedWords,
+        receivedNumbers.map((n) => Number(n))
+      )
+    );
+    setWasUsed(false);
   }
 
   function onPasswordFieldChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -87,7 +120,12 @@ const GeneratePassword = ({
 
   useEffect(() => {
     onClose();
-    setData(generatePassword(receivedWords, receivedNumbers));
+    setData(
+      generatePassword(
+        receivedWords,
+        receivedNumbers.map((n) => Number(n))
+      )
+    );
   }, []);
 
   if (data === undefined) {
@@ -138,12 +176,6 @@ const GeneratePassword = ({
             Copiar senha
           </Button>
         </span>
-
-        <a href="bitwarden://">
-          <Button variant="solid" color="secondary">
-            Abrir Bitwarden
-          </Button>
-        </a>
 
         {data ? (
           <Card>
@@ -207,5 +239,3 @@ const GeneratePassword = ({
     </>
   );
 };
-
-export default GeneratePassword;

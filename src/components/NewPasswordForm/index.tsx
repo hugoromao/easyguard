@@ -134,11 +134,16 @@ const NewPasswordForm = ({
     if (!hasErrors) {
       // TODO: Hash queryparams with bcrypt
       setLoading(true);
-      onSubmitPasswordForm(
-        `generatePassword?words=${JSON.stringify(
-          words.map((w) => w.value)
-        )}&numbers=${JSON.stringify(numbers.map((n) => n.value))}`
-      );
+
+      const wordsQueryParam = JSON.stringify(words.map((w) => w.value));
+      const numbersQueryParam = JSON.stringify(numbers.map((n) => n.value));
+
+      const queryParams = new URLSearchParams({
+        words: wordsQueryParam,
+        numbers: numbersQueryParam,
+      }).toString();
+
+      onSubmitPasswordForm(`generatePassword?${queryParams}`);
     }
   }
 

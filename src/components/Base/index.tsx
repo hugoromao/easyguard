@@ -3,12 +3,12 @@
 import React, { useContext } from "react";
 
 import { Inter } from "next/font/google";
-import { useRouter } from "next/navigation";
 
 import { GlobalContext } from "@/context/global";
 
 import Navbar from "@/components/Navbar";
 import NewPasswordForm from "@/components/NewPasswordForm";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 

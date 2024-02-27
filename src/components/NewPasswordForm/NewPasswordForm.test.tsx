@@ -9,7 +9,6 @@ describe("<NewPasswordForm", () => {
         isOpen={false}
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -22,7 +21,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -38,7 +36,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -52,7 +49,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -78,7 +74,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -104,7 +99,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -130,7 +124,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -145,7 +138,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -165,7 +157,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -201,7 +192,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -230,7 +220,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -259,7 +248,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -288,7 +276,6 @@ describe("<NewPasswordForm", () => {
         isOpen
         onOpenChange={() => ({})}
         onSubmitPasswordForm={() => ({})}
-        onClose={() => ({})}
       />
     );
 
@@ -318,7 +305,6 @@ describe("<NewPasswordForm", () => {
     render(
       <NewPasswordForm
         isOpen
-        onClose={() => ({})}
         onOpenChange={() => ({})}
         onSubmitPasswordForm={onSubmitPasswordForm}
       />
@@ -350,7 +336,7 @@ describe("<NewPasswordForm", () => {
 
     expect(onSubmitPasswordForm).toHaveBeenCalledTimes(1);
     expect(onSubmitPasswordForm).toHaveBeenCalledWith(
-      'generatePassword?words=["Palavra 1","Palavra 2","Palavra 3","Palavra 4"]&numbers=["123","456"]'
+      "generatePassword?words=%5B%22Palavra+1%22%2C%22Palavra+2%22%2C%22Palavra+3%22%2C%22Palavra+4%22%5D&numbers=%5B%22123%22%2C%22456%22%5D"
     );
   });
 });
