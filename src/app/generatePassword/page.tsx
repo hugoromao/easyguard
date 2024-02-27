@@ -139,6 +139,12 @@ const GeneratePassword = ({
           </Button>
         </span>
 
+        <a href="bitwarden://">
+          <Button variant="solid" color="secondary">
+            Abrir Bitwarden
+          </Button>
+        </a>
+
         {data ? (
           <Card>
             <CardBody>
