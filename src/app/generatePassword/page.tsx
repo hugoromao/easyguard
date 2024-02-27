@@ -23,13 +23,7 @@ import { Data, generatePassword, validateEntropy } from "../../utils/passwd";
 
 import Dice from "./dice";
 import { useRouter } from "next/navigation";
-import { useLocalStorage } from "@uidotdev/usehooks";
 import { GlobalContext } from "@/context/global";
-
-type HistoryItem = {
-  type: "password";
-  createdAt: Date;
-};
 
 const GeneratePassword = ({
   searchParams: { numbers, words },
@@ -40,11 +34,8 @@ const GeneratePassword = ({
   const receivedNumbers: number[] = JSON.parse(numbers);
 
   const { push } = useRouter();
-  const { onClose } = useContext(GlobalContext);
+  const { onClose, setHistory } = useContext(GlobalContext);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  // eslint-disable-next-line no-unused-vars
-  const [_, setHistory] = useLocalStorage<HistoryItem[]>("history", []);
 
   const [data, setData] = useState<Data | undefined>();
   const [wasUsed, setWasUsed] = useState(false);
