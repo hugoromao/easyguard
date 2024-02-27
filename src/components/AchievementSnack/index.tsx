@@ -18,7 +18,7 @@ const ReportComplete = React.forwardRef<HTMLDivElement, ReportCompleteProps>(
 
     return (
       <SnackbarContent ref={ref} role="alert">
-        <div className="flex items-center gap-4 bg-white flex-1 px-6 py-4 rounded-lg shadow-2xl mb-[70px]">
+        <div className="flex items-center gap-4 bg-white flex-1 px-6 py-4 rounded-lg shadow-2xl">
           <Image
             src="/profile.png"
             width={60}

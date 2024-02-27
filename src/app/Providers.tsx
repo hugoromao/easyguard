@@ -22,6 +22,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <Contexts>
         <SnackbarProvider
           preventDuplicate
+          classes={{ containerRoot: "mb-[64px]" }}
           anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
           Components={{ info: ReportComplete }}
         />
