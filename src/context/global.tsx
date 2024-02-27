@@ -1,8 +1,15 @@
 "use client";
-import { Dispatch, SetStateAction, createContext, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
 import { enqueueSnackbar } from "notistack";
 import { useDisclosure } from "@nextui-org/react";
 import { useLocalStorage } from "@uidotdev/usehooks";
+import Confetti from "react-confetti";
 
 import { achievements } from "./achievements";
 
@@ -18,6 +25,7 @@ export type GlobalContextType = {
   onOpenChange: () => void;
   history: HistoryItem[];
   setHistory: Dispatch<SetStateAction<HistoryItem[]>>;
+  goParty(): void;
 };
 
 export type Achievement = {
@@ -35,6 +43,7 @@ const defaultValues: GlobalContextType = {
   onOpenChange: () => ({}),
   history: [],
   setHistory: () => ({}),
+  goParty: () => ({}),
 };
 
 export const GlobalContext = createContext<GlobalContextType>(defaultValues);
@@ -49,13 +58,19 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
+  const [party, setParty] = useState(false);
+
   function onLocalStorageChange(history: HistoryItem[]) {
     achievements.forEach(({ id, title, activationFunction }) => {
       if (activationFunction(history) && !completedAchievements.includes(id)) {
-        enqueueSnackbar(title, { variant: "success" });
+        enqueueSnackbar(title, { variant: "info" });
         setCompletedAchievements((c) => [...c, id]);
       }
     });
+  }
+
+  function goParty() {
+    setParty(true);
   }
 
   useEffect(() => {
@@ -63,10 +78,30 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [history]);
 
   return (
-    <GlobalContext.Provider
-      value={{ isOpen, onOpen, onClose, onOpenChange, history, setHistory }}
-    >
-      {children}
-    </GlobalContext.Provider>
+    <>
+      <GlobalContext.Provider
+        value={{
+          isOpen,
+          onOpen,
+          onClose,
+          onOpenChange,
+          history,
+          setHistory,
+          goParty,
+        }}
+      >
+        {children}
+      </GlobalContext.Provider>
+
+      <Confetti
+        style={{ pointerEvents: "none" }}
+        numberOfPieces={party ? 300 : 0}
+        recycle={false}
+        onConfettiComplete={(confetti) => {
+          setParty(false);
+          confetti?.reset();
+        }}
+      />
+    </>
   );
 };
