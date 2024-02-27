@@ -10,9 +10,9 @@ import {
   ModalHeader,
   Spinner,
 } from "@nextui-org/react";
+import { enqueueSnackbar } from "notistack";
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
-import { enqueueSnackbar } from "notistack";
 import { validateUserNumbers, validateUserWords } from "../../utils/passwd";
 
 type NewPasswordFormProps = {
@@ -147,7 +147,9 @@ const NewPasswordForm = ({
     }
   }
 
-  function onSubmit() {
+  function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
+    e?.preventDefault();
+    console.log("submit", step);
     if (step === 1) {
       clearErrors();
       validateWords();
@@ -214,33 +216,74 @@ const NewPasswordForm = ({
           {step === 2 ? "Última etapa" : null}
         </ModalHeader>
 
-        <ModalBody>
-          {step === 1 ? (
-            <>
+        <ModalBody className="pb-0">
+          <form onSubmit={onSubmit}>
+            {step === 1 ? (
+              <>
+                <div className="flex flex-col gap-2">
+                  <p className="mb-2">
+                    Para começar, vamos precisar de quatro palavras(ou mais).
+                    Quanto mais sem sentido, melhor! Você pode tentar criar uma
+                    história bizarra com as palavras, como: “corajoso, buriti,
+                    do mato, fez vestibular”.
+                  </p>
+                  {words.map(({ value, error }, index) => (
+                    <span key={index} className="flex gap-2">
+                      <Input
+                        type="text"
+                        label={`Palavra ${index + 1}`}
+                        size="sm"
+                        value={value}
+                        onChange={(e) =>
+                          onWordInputChange(e.target.value, index)
+                        }
+                        isInvalid={!!error}
+                        errorMessage={error}
+                      />
+                      {index >= 4 ? (
+                        <Button
+                          variant="bordered"
+                          isIconOnly
+                          size="lg"
+                          onClick={() => removeWord(index)}
+                          aria-label="remove"
+                        >
+                          <TrashIcon color="#EF5350" height={24} />
+                        </Button>
+                      ) : null}
+                    </span>
+                  ))}
+                </div>
+              </>
+            ) : null}
+            {step === 2 ? (
               <div className="flex flex-col gap-2">
                 <p className="mb-2">
-                  Para começar, vamos precisar de quatro palavras(ou mais).
-                  Quanto mais sem sentido, melhor! Você pode tentar criar uma
-                  história bizarra com as palavras, como: “corajoso, buriti, do
-                  mato, fez vestibular”.
+                  Agora vamos precisar de dois números significativos para você.
+                  Não vale usar datas de nascimento, idade ou qualquer
+                  informação muito óbvia sobre você.
                 </p>
-                {words.map(({ value, error }, index) => (
+                {numbers.map(({ value, error }, index) => (
                   <span key={index} className="flex gap-2">
                     <Input
-                      type="text"
-                      label={`Palavra ${index + 1}`}
+                      key={index}
+                      type="number"
+                      label={`Número ${index + 1}`}
                       size="sm"
+                      required
                       value={value}
-                      onChange={(e) => onWordInputChange(e.target.value, index)}
+                      onChange={(e) =>
+                        onNumberInputChange(e.target.value, index)
+                      }
                       isInvalid={!!error}
                       errorMessage={error}
                     />
-                    {index >= 4 ? (
+                    {index >= 2 ? (
                       <Button
                         variant="bordered"
                         isIconOnly
                         size="lg"
-                        onClick={() => removeWord(index)}
+                        onClick={() => removeNumber(index)}
                         aria-label="remove"
                       >
                         <TrashIcon color="#EF5350" height={24} />
@@ -249,93 +292,54 @@ const NewPasswordForm = ({
                   </span>
                 ))}
               </div>
-            </>
-          ) : null}
-          {step === 2 ? (
-            <>
-              <p className="mb-2">
-                Agora vamos precisar de dois números significativos para você.
-                Não vale usar datas de nascimento, idade ou qualquer informação
-                muito óbvia sobre você.
-              </p>
-              {numbers.map(({ value, error }, index) => (
-                <span key={index} className="flex gap-2">
-                  <Input
-                    key={index}
-                    type="number"
-                    label={`Número ${index + 1}`}
-                    size="sm"
-                    required
-                    value={value}
-                    onChange={(e) => onNumberInputChange(e.target.value, index)}
-                    isInvalid={!!error}
-                    errorMessage={error}
-                  />
-                  {index >= 2 ? (
-                    <Button
-                      variant="bordered"
-                      isIconOnly
-                      size="lg"
-                      onClick={() => removeNumber(index)}
-                      aria-label="remove"
-                    >
-                      <TrashIcon color="#EF5350" height={24} />
-                    </Button>
-                  ) : null}
-                </span>
-              ))}
-            </>
-          ) : null}
+            ) : null}
+
+            <ModalFooter className="flex items-center sticky bottom-0 px-0 bg-white z-10 mt-4">
+              {step === 1 ? (
+                <Button
+                  variant="light"
+                  className="w-fit text-emerald-600"
+                  onClick={addWord}
+                >
+                  Adicionar palavra
+                </Button>
+              ) : null}
+              {step === 2 ? (
+                <>
+                  <Button
+                    variant="light"
+                    className="mr-auto text-[#A1A1AA]"
+                    onClick={() => setStep((s) => s - 1)}
+                    aria-label="goBack"
+                  >
+                    Voltar
+                  </Button>
+                  <Button
+                    variant="light"
+                    className="w-fit"
+                    color="primary"
+                    onClick={addNumber}
+                  >
+                    Adicionar número
+                  </Button>
+                </>
+              ) : null}
+              <Button
+                type="submit"
+                isIconOnly
+                size="lg"
+                aria-label="next"
+                className="bg-emerald-500"
+              >
+                {loading ? (
+                  <Spinner color="white" size="sm" />
+                ) : (
+                  <ArrowRightIcon height={24} className="fill-white" />
+                )}
+              </Button>
+            </ModalFooter>
+          </form>
         </ModalBody>
-
-        <ModalFooter className="flex items-center">
-          {step === 1 ? (
-            <Button
-              variant="light"
-              className="w-fit text-emerald-600"
-              onClick={addWord}
-            >
-              Adicionar palavra
-            </Button>
-          ) : null}
-
-          {step === 2 ? (
-            <>
-              <Button
-                variant="light"
-                className="mr-auto text-[#A1A1AA]"
-                onClick={() => setStep((s) => s - 1)}
-                aria-label="goBack"
-              >
-                Voltar
-              </Button>
-
-              <Button
-                variant="light"
-                className="w-fit"
-                color="primary"
-                onClick={addNumber}
-              >
-                Adicionar número
-              </Button>
-            </>
-          ) : null}
-
-          <Button
-            type="button"
-            isIconOnly
-            size="lg"
-            aria-label="next"
-            onClick={onSubmit}
-            className="bg-emerald-500"
-          >
-            {loading ? (
-              <Spinner color="white" size="sm" />
-            ) : (
-              <ArrowRightIcon height={24} className="fill-white" />
-            )}
-          </Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
