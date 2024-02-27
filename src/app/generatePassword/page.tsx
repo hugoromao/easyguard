@@ -44,7 +44,9 @@ const Page = () => {
   return (
     <GeneratePassword
       receivedWords={JSON.parse(receivedWords)}
-      receivedNumbers={Array(JSON.parse(receivedNumbers)).map((n) => Number(n))}
+      receivedNumbers={JSON.parse(receivedNumbers).map((n: string) =>
+        Number(n)
+      )}
     />
   );
 };
@@ -64,7 +66,12 @@ const GeneratePassword = ({
   const { onClose, setHistory } = useContext(GlobalContext);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const [data, setData] = useState<Data | undefined>();
+  const [data, setData] = useState<Data>(
+    generatePassword(
+      receivedWords,
+      receivedNumbers.map((n) => Number(n))
+    )
+  );
   const [wasUsed, setWasUsed] = useState(false);
 
   function regeneratePassword() {
@@ -120,12 +127,6 @@ const GeneratePassword = ({
 
   useEffect(() => {
     onClose();
-    setData(
-      generatePassword(
-        receivedWords,
-        receivedNumbers.map((n) => Number(n))
-      )
-    );
   }, []);
 
   if (data === undefined) {
