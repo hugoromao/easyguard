@@ -50,7 +50,7 @@ const Tips = () => {
                 initial={{ x: -5, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 5, opacity: 0 }}
-                className="text-gray-700"
+                className="text-foreground-700"
               >
                 {tips[tipIndex]}
               </motion.p>

@@ -26,6 +26,21 @@ export default function Settings() {
     ]);
   }
 
+  function mockAdd3PasswordToLocalStorage(date: "day" | "week") {
+    const day1 = dayjs().subtract(1, date);
+    const day2 = dayjs().subtract(2, date);
+    const day3 = dayjs().subtract(3, date);
+    const day4 = dayjs().subtract(4, date);
+
+    setHistory((h) => [
+      ...h,
+      { type: "password", createdAt: day4.toDate() },
+      { type: "password", createdAt: day3.toDate() },
+      { type: "password", createdAt: day2.toDate() },
+      { type: "password", createdAt: day1.toDate() },
+    ]);
+  }
+
   return (
     <>
       <Base>
@@ -34,9 +49,17 @@ export default function Settings() {
             Criar senha no LocalStorage
           </Button>
 
+          <Button onClick={() => mockAdd3PasswordToLocalStorage("day")}>
+            Criar senha com 3 dias consecutivos
+          </Button>
+
+          <Button onClick={() => mockAdd3PasswordToLocalStorage("week")}>
+            Criar senha com 3 semanas consecutivos
+          </Button>
+
           <Button
             onClick={() =>
-              enqueueSnackbar("Adventure Time", { variant: "info" })
+              enqueueSnackbar("Uma conquista teste!", { variant: "info" })
             }
           >
             Enviar notificação de conquista

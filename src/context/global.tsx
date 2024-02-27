@@ -26,6 +26,8 @@ export type GlobalContextType = {
   history: HistoryItem[];
   setHistory: Dispatch<SetStateAction<HistoryItem[]>>;
   goParty(): void;
+  completedAchievements: number[];
+  setCompletedAchievements: Dispatch<SetStateAction<number[]>>;
 };
 
 export type Achievement = {
@@ -44,6 +46,8 @@ const defaultValues: GlobalContextType = {
   history: [],
   setHistory: () => ({}),
   goParty: () => ({}),
+  completedAchievements: [],
+  setCompletedAchievements: () => ({}),
 };
 
 export const GlobalContext = createContext<GlobalContextType>(defaultValues);
@@ -88,6 +92,8 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
           history,
           setHistory,
           goParty,
+          completedAchievements,
+          setCompletedAchievements,
         }}
       >
         {children}
