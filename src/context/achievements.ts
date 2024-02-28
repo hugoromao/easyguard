@@ -43,7 +43,7 @@ export type Achivement = {
 export const achievements: Achivement[] = [
   {
     id: 1,
-    title: "Vamos começar!",
+    title: "O início da jornada!",
     description: "Crie sua primeira senha.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) > 0;
@@ -54,7 +54,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 2,
-    title: "Um pouquinho de cada vez I",
+    title: "Pegando o jeito",
     description: "Crie 10 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 10;
@@ -65,7 +65,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 3,
-    title: "Um pouquinho de cada vez II",
+    title: "Mestre da criptografia",
     description: "Crie 20 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 20;
@@ -76,7 +76,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 4,
-    title: "Um pouquinho de cada vez III",
+    title: "Arquiteto de senhas",
     description: "Crie 30 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 30;
@@ -87,7 +87,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 5,
-    title: "Um pouquinho de cada vez IV",
+    title: "Tchau! hackers😉",
     description: "Crie 50 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 50;
@@ -98,7 +98,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 6,
-    title: "Perseverante I",
+    title: "Hábitos seguros",
     description: "Use a plataforma por 3 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 3;
@@ -108,7 +108,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 7,
-    title: "Perseverante II",
+    title: "Persistente que chama?",
     description: "Use a plataforma por 5 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 5;
@@ -118,7 +118,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 8,
-    title: "Perseverante III",
+    title: "Uma semana mais segura",
     description: "Use a plataforma por 7 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 7;
@@ -128,7 +128,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 9,
-    title: "Perseverante IV",
+    title: "Dedicação inabalável",
     description: "Use a plataforma por 10 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 10;
@@ -138,7 +138,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 10,
-    title: "Segurança nunca é demais I",
+    title: "Segurança nunca é demais",
     description: "Use a plataforma por 3 semanas consecutivas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 3;
@@ -148,7 +148,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 11,
-    title: "Segurança nunca é demais II",
+    title: "Tu já é de casa",
     description: "Use a plataforma por 5 semanas consecutivas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 5;
@@ -158,7 +158,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 12,
-    title: "Segurança nunca é demais III",
+    title: "Aficionado em segurança",
     description: "Use a plataforma por 10 semanas consecutivas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 10;
@@ -168,12 +168,19 @@ export const achievements: Achivement[] = [
   },
   {
     id: 13,
-    title: "Segurança nunca é demais IV",
+    title: "Tu trabalha na NASA?",
     description: "Use a plataforma por 20 semanas consecutivas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 20;
     },
     getProgress: (history: HistoryItem[]) =>
       getTotalConsecutiveDiff(history, "week") / 20,
+  },
+  {
+    id: 14,
+    title: "",
+    description: "Crie uma senha no período da manhã",
+    activationFunction: () => true,
+    getProgress: () => 10,
   },
 ];
