@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, Progress } from "@nextui-org/react";
-import Image from "next/image";
 
 import Base from "@/components/Base";
 
@@ -9,18 +8,14 @@ import { achievements, Achivement } from "@/context/achievements";
 import { useContext } from "react";
 import { GlobalContext } from "@/context/global";
 
-function Achivement({ title, description, getProgress }: Achivement) {
+function Achivement({ id, title, description, getProgress }: Achivement) {
   const { history } = useContext(GlobalContext);
 
   return (
     <Card className="flex flex-col p-4">
-      <Image
-        src="/profile.png"
-        width={70}
-        height={70}
-        alt={title}
-        className="rounded-full mb-4"
-      />
+      <span className="flex items-center justify-center w-20 h-20 rounded-full bg-foreground-200">
+        <p className="font-bold text-foreground-500 text-xl">{id}</p>
+      </span>
 
       <span className="flex flex-col gap-2 mt-auto">
         <strong className="mt-auto text-foreground-600">{title}</strong>
