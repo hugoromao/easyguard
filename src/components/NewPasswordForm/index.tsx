@@ -270,6 +270,7 @@ const NewPasswordForm = ({
                       type="number"
                       label={`Número ${index + 1}`}
                       size="sm"
+                      pattern="[0-9]*"
                       required
                       value={value}
                       onChange={(e) =>
