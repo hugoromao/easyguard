@@ -19,7 +19,7 @@ const Contexts = ({ children }: { children: React.ReactNode }) => {
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  console.log();
+
   return (
     <NextUIProvider>
       <Contexts>
