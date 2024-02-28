@@ -7,6 +7,7 @@ import { GlobalProvider } from "@/context/global";
 
 import { ClientOnly } from "@/components/ClientOnly";
 import ReportComplete from "@/components/AchievementSnack";
+import { usePathname } from "next/navigation";
 
 const Contexts = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -17,12 +18,18 @@ const Contexts = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+  console.log();
   return (
     <NextUIProvider>
       <Contexts>
         <SnackbarProvider
           preventDuplicate
-          classes={{ containerRoot: "mb-[64px]" }}
+          classes={
+            pathname?.includes("generatePassword")
+              ? {}
+              : { containerRoot: "mb-[64px]" }
+          }
           anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
           Components={{ info: ReportComplete }}
         />
