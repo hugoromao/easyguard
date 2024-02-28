@@ -33,12 +33,15 @@ const Navbar = ({ openNewPasswordForm }: NavbarProps) => {
         </Link>
       )}
 
-      {pathname === "/badges" ? (
-        <Link href="/badges" className="p-4 rounded-xl bg-green-50">
+      {pathname === "/achivements" ? (
+        <Link href="/achivements" className="p-4 rounded-xl bg-green-50">
           <SolidGiftIcon className="h-8 text-blue-icon fill-[#2B403C]" />
         </Link>
       ) : (
-        <Link href="/badges" className="p-4 rounded-xl hover:bg-default-100">
+        <Link
+          href="/achivements"
+          className="p-4 rounded-xl hover:bg-default-100"
+        >
           <OutlineGiftIcon className="h-8 text-default-400" />
         </Link>
       )}

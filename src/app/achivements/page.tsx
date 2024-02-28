@@ -29,11 +29,13 @@ function Achivement({ id, title, description, getProgress }: Achivement) {
   );
 }
 
-export default function Badges() {
+export default function Achivements() {
   return (
     <Base>
       <div className="flex flex-col p-6 gap-2 overflow-auto">
-        <h1 className="text-xl font-bold text-foreground-700">Conquistas</h1>
+        <h1 className="text-[28px] font-bold text-foreground-700">
+          Conquistas
+        </h1>
         <p className="font-medium text-foreground-400 mb-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.

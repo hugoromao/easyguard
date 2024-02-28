@@ -45,6 +45,10 @@ export default function Settings() {
     <>
       <Base>
         <div className="flex flex-col p-6 gap-2">
+          <h1 className="text-[28px] font-bold text-foreground-700">
+            Configurações
+          </h1>
+
           <Button onClick={mockAddPasswordToLocalStorage}>
             Criar senha no LocalStorage
           </Button>
