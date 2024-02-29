@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import dayjs from "dayjs";
 
 import { HistoryItem } from "./global";
@@ -30,14 +31,50 @@ function getTotalConsecutiveDiff(history: HistoryItem[], date: "day" | "week") {
   return Math.max(totalConsecutives, currentConsecutives);
 }
 
+function getTotalDayByPartOfTheDay(history: HistoryItem[]) {
+  let morningCounter = 0;
+  let nightCounter = 0;
+
+  if (history.length === 0) return { morningCounter, nightCounter };
+
+  history.forEach(({ createdAt }) => {
+    const hour = dayjs(createdAt).hour();
+    if (hour >= 18 || hour < 6) {
+      nightCounter += 1;
+    }
+
+    if (hour >= 6 && hour < 12) {
+      morningCounter += 1;
+    }
+  });
+
+  return { morningCounter, nightCounter };
+}
+
+function getTotalAtFriday(history: HistoryItem[]) {
+  let counter = 0;
+  if (history.length === 0) return 0;
+
+  history.forEach(({ createdAt }) => {
+    if (dayjs(createdAt).day() === 5) {
+      counter += 1;
+    }
+  });
+  return counter;
+}
+
 export type Achivement = {
   id: number;
   title: string;
   description: string;
-  // eslint-disable-next-line no-unused-vars
-  activationFunction: (history: HistoryItem[]) => boolean;
-  // eslint-disable-next-line no-unused-vars
-  getProgress: (history: HistoryItem[]) => number;
+  activationFunction: (
+    history: HistoryItem[],
+    completedAchievements: number[]
+  ) => boolean;
+  getProgress: (
+    history: HistoryItem[],
+    completedAchievements: number[]
+  ) => number;
 };
 
 export const achievements: Achivement[] = [
@@ -65,7 +102,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 3,
-    title: "Mestre da criptografia",
+    title: "Só mais algumas senhas",
     description: "Crie 20 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 20;
@@ -76,7 +113,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 4,
-    title: "Arquiteto de senhas",
+    title: "Produção em massa",
     description: "Crie 30 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 30;
@@ -87,7 +124,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 5,
-    title: "Tchau! hackers😉",
+    title: "Tchau! hackers",
     description: "Crie 50 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 50;
@@ -118,7 +155,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 8,
-    title: "Uma semana mais segura",
+    title: "Dedicação inabalável",
     description: "Use a plataforma por 7 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 7;
@@ -128,7 +165,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 9,
-    title: "Dedicação inabalável",
+    title: "Já virou rotina!",
     description: "Use a plataforma por 10 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 10;
@@ -148,7 +185,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 11,
-    title: "Tu já é de casa",
+    title: "Consistência é a chave",
     description: "Use a plataforma por 5 semanas consecutivas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 5;
@@ -158,7 +195,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 12,
-    title: "Aficionado em segurança",
+    title: "Sem parar!",
     description: "Use a plataforma por 10 semanas consecutivas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 10;
@@ -168,19 +205,37 @@ export const achievements: Achivement[] = [
   },
   {
     id: 13,
-    title: "Tu trabalha na NASA?",
-    description: "Use a plataforma por 20 semanas consecutivas.",
-    activationFunction: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "week") >= 20;
-    },
+    title: "Acordando com os pássaros",
+    description: "Crie três senhas no período da manhã",
+    activationFunction: (history: HistoryItem[]) =>
+      getTotalDayByPartOfTheDay(history).morningCounter >= 3,
     getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "week") / 20,
+      getTotalDayByPartOfTheDay(history).morningCounter / 3,
   },
   {
     id: 14,
-    title: "",
-    description: "Crie uma senha no período da manhã",
-    activationFunction: () => true,
-    getProgress: () => 10,
+    title: "Coruja noturna",
+    description: "Crie três senhas no período da noite",
+    activationFunction: (history: HistoryItem[]) =>
+      getTotalDayByPartOfTheDay(history).nightCounter >= 3,
+    getProgress: (history: HistoryItem[]) =>
+      getTotalDayByPartOfTheDay(history).nightCounter / 3,
+  },
+  {
+    id: 15,
+    title: "Sextou!",
+    description: "Crie uma senha na sexta-feira",
+    activationFunction: (history: HistoryItem[]) => !!getTotalAtFriday(history),
+    getProgress: (history: HistoryItem[]) =>
+      getTotalAtFriday(history) > 1 ? 100 : 0,
+  },
+  {
+    id: 16,
+    title: "Topo do mundo",
+    description: "Complete todas as conquistas",
+    activationFunction: (_, completedAchievements: number[]) =>
+      completedAchievements.length === achievements.length,
+    getProgress: (_, completedAchievements: number[]) =>
+      completedAchievements.length / achievements.length,
   },
 ];

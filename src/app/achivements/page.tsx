@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { GlobalContext } from "@/context/global";
 
 function Achivement({ id, title, description, getProgress }: Achivement) {
-  const { history } = useContext(GlobalContext);
+  const { history, completedAchievements } = useContext(GlobalContext);
 
   return (
     <Card className="flex flex-col p-4">
@@ -22,7 +22,7 @@ function Achivement({ id, title, description, getProgress }: Achivement) {
         <p className="text-sm text-foreground-600">{description}</p>
         <Progress
           aria-label={`${title}-progress`}
-          value={getProgress(history) * 100}
+          value={getProgress(history, completedAchievements) * 100}
         />
       </span>
     </Card>

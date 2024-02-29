@@ -66,7 +66,10 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
 
   function onLocalStorageChange(history: HistoryItem[]) {
     achievements.forEach(({ id, title, activationFunction }) => {
-      if (activationFunction(history) && !completedAchievements.includes(id)) {
+      if (
+        activationFunction(history, completedAchievements) &&
+        !completedAchievements.includes(id)
+      ) {
         enqueueSnackbar(title, { variant: "info" });
         setCompletedAchievements((c) => [...c, id]);
       }

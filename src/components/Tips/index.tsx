@@ -19,7 +19,7 @@ const Tips = () => {
 
   useEffect(() => {
     getNewTip();
-    setInterval(getNewTip, 15000);
+    setInterval(getNewTip, 12000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -50,6 +50,7 @@ const Tips = () => {
                 initial={{ x: -5, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 5, opacity: 0 }}
+                transition={{ duration: 0.5 }}
                 className="text-foreground-700"
               >
                 {tips[tipIndex]}

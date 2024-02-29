@@ -2,14 +2,14 @@
 
 import { useContext } from "react";
 
+import dayjs from "dayjs";
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 
 import Base from "@/components/Base";
 
 import { GlobalContext } from "@/context/global";
-import { useRouter } from "next/navigation";
-import dayjs from "dayjs";
 
 export default function Settings() {
   const { refresh } = useRouter();
