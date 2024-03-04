@@ -45,12 +45,12 @@ export const AchivementsProvider: React.FC<{ children: React.ReactNode }> = ({
   >("completedAchievements", []);
 
   function onLocalStorageChange(history: HistoryItem[]) {
-    achievements.forEach(({ id, title, activationFunction }) => {
+    achievements.forEach(({ id, description, title, activationFunction }) => {
       if (
         activationFunction(history, completedAchievements) &&
         !completedAchievements.includes(id)
       ) {
-        enqueueSnackbar(title, { variant: "info" });
+        enqueueSnackbar(`${title}:${description}`, { variant: "info" });
         setCompletedAchievements((c) => [...c, id]);
       }
     });

@@ -6,10 +6,10 @@ import Base from "@/components/Base";
 
 import { achievements, Achivement } from "@/utils/achievements";
 import { useContext } from "react";
-import { GlobalContext } from "@/context/global";
+import { AchivementsContext } from "@/context/achivements";
 
 function Achivement({ id, title, description, getProgress }: Achivement) {
-  const { history, completedAchievements } = useContext(GlobalContext);
+  const { history, completedAchievements } = useContext(AchivementsContext);
 
   return (
     <Card className="flex flex-col p-4">

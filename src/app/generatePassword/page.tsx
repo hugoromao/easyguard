@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 import { GlobalContext } from "@/context/global";
 
 import { useSearchParams } from "next/navigation";
+import { AchivementsContext } from "@/context/achivements";
 
 const Page = () => {
   const params = useSearchParams();
@@ -63,7 +64,8 @@ const GeneratePassword = ({
   receivedNumbers,
 }: GeneratePasswordProps) => {
   const { push } = useRouter();
-  const { onClose, setHistory } = useContext(GlobalContext);
+  const { onClose } = useContext(GlobalContext);
+  const { setHistory } = useContext(AchivementsContext);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [data, setData] = useState<Data>(

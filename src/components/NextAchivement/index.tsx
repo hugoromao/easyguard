@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Card, CircularProgress } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { GlobalContext } from "@/context/global";
 import { Achivement, achievements } from "@/utils/achievements";
 
+import { AchivementsContext } from "@/context/achivements";
+
 const NextAchivement = () => {
-  const { completedAchievements, history } = useContext(GlobalContext);
+  const { completedAchievements, history } = useContext(AchivementsContext);
 
   const [nextAchivement, setNextAchivement] = useState<Achivement | undefined>(
     achievements.find((a) => !completedAchievements.includes(a.id))

@@ -4,12 +4,12 @@ import { CustomContentProps, SnackbarContent } from "notistack";
 import Image from "next/image";
 import { GlobalContext } from "@/context/global";
 
-interface ReportCompleteProps extends CustomContentProps {}
+interface AchivementSnackProps extends CustomContentProps {}
 
 // eslint-disable-next-line react/display-name
-const ReportComplete = React.forwardRef<HTMLDivElement, ReportCompleteProps>(
+const AchivementSnack = React.forwardRef<HTMLDivElement, AchivementSnackProps>(
   (props, ref) => {
-    const { message } = props;
+    const [title, message] = String(props.message).split(":");
     const { goParty } = useContext(GlobalContext);
 
     useEffect(() => {
@@ -28,9 +28,7 @@ const ReportComplete = React.forwardRef<HTMLDivElement, ReportCompleteProps>(
           />
 
           <span>
-            <strong className="text-medium text-neutral-700">
-              Conquista alcançada!
-            </strong>
+            <strong className="text-medium text-neutral-700">{title}</strong>
             <p className="text-medium text-neutral-400">{message}</p>
           </span>
         </div>
@@ -39,4 +37,4 @@ const ReportComplete = React.forwardRef<HTMLDivElement, ReportCompleteProps>(
   }
 );
 
-export default ReportComplete;
+export default AchivementSnack;

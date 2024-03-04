@@ -9,11 +9,11 @@ import { enqueueSnackbar } from "notistack";
 
 import Base from "@/components/Base";
 
-import { GlobalContext } from "@/context/global";
+import { AchivementsContext } from "@/context/achivements";
 
 export default function Settings() {
   const { refresh } = useRouter();
-  const { setHistory } = useContext(GlobalContext);
+  const { setHistory } = useContext(AchivementsContext);
 
   function mockAddPasswordToLocalStorage() {
     const randomDate = dayjs().subtract(
