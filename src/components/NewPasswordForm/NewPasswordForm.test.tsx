@@ -1,28 +1,16 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-
+import { render, screen, fireEvent } from "@/utils/test-utils";
 import NewPasswordForm from ".";
 
 describe("<NewPasswordForm", () => {
   it("should not render is not active", () => {
     const { container } = render(
-      <NewPasswordForm
-        isOpen={false}
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
+      <NewPasswordForm isOpen={false} onOpenChange={() => ({})} />
     );
-
-    expect(container.firstChild).toBeNull();
+    expect(container.firstChild?.firstChild).toBeNull();
   });
 
   it("should render correctly", () => {
-    const form = render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    const form = render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     expect(screen.getAllByRole("textbox").length).toBe(4);
     expect(screen.getByRole("button", { name: "next" }));
@@ -31,26 +19,14 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should throw an error if the 'words' fields are empty.", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.click(screen.getByRole("button", { name: /next/i }));
     expect(screen.getAllByText(/Este campo é obrigatório/u).length).toEqual(4);
   });
 
   it("should throw an error if the 'words' have small words.", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "ab" },
@@ -69,13 +45,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should throw an error if the 'words' have common words.", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "comum" },
@@ -94,13 +64,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should throw an error if the 'words' have keyboard patterns.", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "qwerty" },
@@ -119,13 +83,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it('should add a textbox field when the "Adicionar palavra" button is clicked', () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.click(screen.getByRole("button", { name: /Adicionar palavra/i }));
 
@@ -133,13 +91,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should remove a textbox field when the trash button is clicked", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     const addTextboxButton = screen.getByRole("button", {
       name: /Adicionar palavra/i,
@@ -152,13 +104,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should render the next step correctly", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "Palavra 1" },
@@ -187,13 +133,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it('should go back to the previous step when "Go Back" button is clicked', () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "Palavra 1" },
@@ -215,13 +155,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should throw an error if the 'numbers' fields are empty.", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "Palavra 1" },
@@ -243,13 +177,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it('should add a textbox field when the "Adicionar número" button is clicked', () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "Palavra 1" },
@@ -271,13 +199,7 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should remove a textbox field when the trash button is clicked", () => {
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={() => ({})}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />);
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "Palavra 1" },
@@ -300,15 +222,9 @@ describe("<NewPasswordForm", () => {
   });
 
   it("should call onSubmitPasswordForm", () => {
-    const onSubmitPasswordForm = jest.fn();
+    const push = jest.fn();
 
-    render(
-      <NewPasswordForm
-        isOpen
-        onOpenChange={() => ({})}
-        onSubmitPasswordForm={onSubmitPasswordForm}
-      />
-    );
+    render(<NewPasswordForm isOpen onOpenChange={() => ({})} />, {}, { push });
 
     fireEvent.change(screen.getByLabelText("Palavra 1"), {
       target: { value: "Palavra 1" },
@@ -334,8 +250,8 @@ describe("<NewPasswordForm", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "next" }));
 
-    expect(onSubmitPasswordForm).toHaveBeenCalledTimes(1);
-    expect(onSubmitPasswordForm).toHaveBeenCalledWith(
+    expect(push).toHaveBeenCalledTimes(1);
+    expect(push).toHaveBeenCalledWith(
       "generatePassword?words=%5B%22Palavra+1%22%2C%22Palavra+2%22%2C%22Palavra+3%22%2C%22Palavra+4%22%5D&numbers=%5B%22123%22%2C%22456%22%5D"
     );
   });

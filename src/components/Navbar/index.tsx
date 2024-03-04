@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,12 +13,11 @@ import {
   GiftIcon as OutlineGiftIcon,
   Cog6ToothIcon as OutlineCog6ToothIcon,
 } from "@heroicons/react/24/outline";
+import { GlobalContext } from "@/context/global";
 
-type NavbarProps = {
-  openNewPasswordForm(): void;
-};
+const Navbar = () => {
+  const { onOpenChange } = useContext(GlobalContext);
 
-const Navbar = ({ openNewPasswordForm }: NavbarProps) => {
   const pathname = usePathname();
 
   return (
@@ -57,8 +56,9 @@ const Navbar = ({ openNewPasswordForm }: NavbarProps) => {
       )}
 
       <button
+        aria-label="Nova Senha"
         className="p-4 rounded-xl hover:bg-default-100"
-        onClick={openNewPasswordForm}
+        onClick={() => onOpenChange}
       >
         <svg
           width="32"

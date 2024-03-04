@@ -2,17 +2,21 @@
 import React from "react";
 
 import { SnackbarProvider } from "notistack";
+import { usePathname } from "next/navigation";
 import { NextUIProvider } from "@nextui-org/react";
-import { GlobalProvider } from "@/context/global";
 
 import { ClientOnly } from "@/components/ClientOnly";
 import ReportComplete from "@/components/AchievementSnack";
-import { usePathname } from "next/navigation";
+
+import { GlobalProvider } from "@/context/global";
+import { AchivementsProvider } from "@/context/achivements";
 
 const Contexts = ({ children }: { children: React.ReactNode }) => {
   return (
     <ClientOnly>
-      <GlobalProvider>{children}</GlobalProvider>
+      <GlobalProvider>
+        <AchivementsProvider>{children}</AchivementsProvider>
+      </GlobalProvider>
     </ClientOnly>
   );
 };

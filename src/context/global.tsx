@@ -1,17 +1,7 @@
 "use client";
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useEffect,
-  useState,
-} from "react";
-import { enqueueSnackbar } from "notistack";
+import { createContext, useState } from "react";
 import { useDisclosure } from "@nextui-org/react";
-import { useLocalStorage } from "@uidotdev/usehooks";
 import Confetti from "react-confetti";
-
-import { achievements } from "./achievements";
 
 export type HistoryItem = {
   type: "password";
@@ -23,11 +13,7 @@ export type GlobalContextType = {
   onOpen: () => void;
   onClose: () => void;
   onOpenChange: () => void;
-  history: HistoryItem[];
-  setHistory: Dispatch<SetStateAction<HistoryItem[]>>;
   goParty(): void;
-  completedAchievements: number[];
-  setCompletedAchievements: Dispatch<SetStateAction<number[]>>;
 };
 
 export type Achievement = {
@@ -38,51 +24,28 @@ export type Achievement = {
   completed: boolean;
 };
 
-const defaultValues: GlobalContextType = {
+export const GlobalContextDefaultValues: GlobalContextType = {
   isOpen: false,
   onOpen: () => ({}),
   onClose: () => ({}),
   onOpenChange: () => ({}),
-  history: [],
-  setHistory: () => ({}),
   goParty: () => ({}),
-  completedAchievements: [],
-  setCompletedAchievements: () => ({}),
 };
 
-export const GlobalContext = createContext<GlobalContextType>(defaultValues);
+export const GlobalContext = createContext<GlobalContextType>(
+  GlobalContextDefaultValues
+);
 
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [history, setHistory] = useLocalStorage<HistoryItem[]>("history", []);
-  const [completedAchievements, setCompletedAchievements] = useLocalStorage<
-    number[]
-  >("completedAchievements", []);
-
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const [party, setParty] = useState(false);
 
-  function onLocalStorageChange(history: HistoryItem[]) {
-    achievements.forEach(({ id, title, activationFunction }) => {
-      if (
-        activationFunction(history, completedAchievements) &&
-        !completedAchievements.includes(id)
-      ) {
-        enqueueSnackbar(title, { variant: "info" });
-        setCompletedAchievements((c) => [...c, id]);
-      }
-    });
-  }
-
   function goParty() {
     setParty(true);
   }
-
-  useEffect(() => {
-    onLocalStorageChange(history);
-  }, [history]);
 
   return (
     <>
@@ -92,11 +55,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
           onOpen,
           onClose,
           onOpenChange,
-          history,
-          setHistory,
           goParty,
-          completedAchievements,
-          setCompletedAchievements,
         }}
       >
         {children}

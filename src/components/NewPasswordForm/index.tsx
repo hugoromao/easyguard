@@ -14,12 +14,11 @@ import { enqueueSnackbar } from "notistack";
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 import { validateUserNumbers, validateUserWords } from "../../utils/passwd";
+import { useRouter } from "next/navigation";
 
 type NewPasswordFormProps = {
   isOpen: boolean;
   onOpenChange: () => void;
-  // eslint-disable-next-line no-unused-vars
-  onSubmitPasswordForm(pathname: string): void;
 };
 
 export type Input = {
@@ -27,11 +26,9 @@ export type Input = {
   error?: string;
 };
 
-const NewPasswordForm = ({
-  isOpen,
-  onOpenChange,
-  onSubmitPasswordForm,
-}: NewPasswordFormProps) => {
+const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
+  const { push } = useRouter();
+
   const [step, setStep] = useState(1);
   const [words, setWords] = useState<Input[]>([
     { value: "", error: undefined },
@@ -143,13 +140,12 @@ const NewPasswordForm = ({
         numbers: numbersQueryParam,
       }).toString();
 
-      onSubmitPasswordForm(`generatePassword?${queryParams}`);
+      push(`generatePassword?${queryParams}`);
     }
   }
 
   function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e?.preventDefault();
-    console.log("submit", step);
     if (step === 1) {
       clearErrors();
       validateWords();
