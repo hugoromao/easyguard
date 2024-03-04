@@ -23,7 +23,10 @@ const Tips = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (tipIndex === -1) return <Skeleton className="h-40 rounded-medium" />;
+  if (tipIndex === -1)
+    return (
+      <Skeleton aria-label="loading-tips" className="h-40 rounded-medium" />
+    );
 
   return (
     <div className="flex flex-col gap-2">
@@ -42,22 +45,21 @@ const Tips = () => {
           />
         </svg>
 
-        {tipIndex !== -1 ? (
-          <AnimatePresence mode="wait">
-            {
-              <motion.p
-                key={tipIndex}
-                initial={{ x: -5, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: 5, opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-foreground-700"
-              >
-                {tips[tipIndex]}
-              </motion.p>
-            }
-          </AnimatePresence>
-        ) : null}
+        <AnimatePresence mode="wait">
+          {
+            <motion.p
+              key={tipIndex}
+              initial={{ x: -5, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 5, opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              aria-label="tip"
+              className="text-foreground-700"
+            >
+              {tips[tipIndex]}
+            </motion.p>
+          }
+        </AnimatePresence>
       </Card>
     </div>
   );
