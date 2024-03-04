@@ -3,7 +3,7 @@ import { Card, CircularProgress } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { GlobalContext } from "@/context/global";
-import { Achivement, achievements } from "@/context/achievements";
+import { Achivement, achievements } from "@/utils/achievements";
 
 const NextAchivement = () => {
   const { completedAchievements, history } = useContext(GlobalContext);

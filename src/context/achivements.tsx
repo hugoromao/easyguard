@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, createContext, useEffect } from "react";
 import { enqueueSnackbar } from "notistack";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
-import { achievements } from "./achievements";
+import { achievements } from "../utils/achievements";
 
 export type HistoryItem = {
   type: "password";

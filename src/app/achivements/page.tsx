@@ -4,7 +4,7 @@ import { Card, Progress } from "@nextui-org/react";
 
 import Base from "@/components/Base";
 
-import { achievements, Achivement } from "@/context/achievements";
+import { achievements, Achivement } from "@/utils/achievements";
 import { useContext } from "react";
 import { GlobalContext } from "@/context/global";
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import dayjs from "dayjs";
 
-import { HistoryItem } from "./global";
+import { HistoryItem } from "../context/global";
 
 function getTotalPasswordsCreated(history: HistoryItem[]) {
   return history.reduce(
