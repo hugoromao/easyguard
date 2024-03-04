@@ -34,13 +34,13 @@ const customRender = (
   };
 
   return render(
-    <AppRouterContext.Provider value={mockedRouter}>
-      <NextUIProvider>
+    <NextUIProvider>
+      <AppRouterContext.Provider value={mockedRouter}>
         <GlobalContext.Provider value={globalProviderProps}>
           {ui}
         </GlobalContext.Provider>
-      </NextUIProvider>
-    </AppRouterContext.Provider>,
+      </AppRouterContext.Provider>
+    </NextUIProvider>,
     renderOptions
   );
 };

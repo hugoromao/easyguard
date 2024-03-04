@@ -16,7 +16,7 @@ import {
 import { GlobalContext } from "@/context/global";
 
 const Navbar = () => {
-  const { onOpenChange } = useContext(GlobalContext);
+  const { onOpen } = useContext(GlobalContext);
 
   const pathname = usePathname();
 
@@ -24,41 +24,59 @@ const Navbar = () => {
     <nav className="flex bg-white p-1 justify-center border-t-2 border-default-200">
       {pathname === "/" ? (
         <Link href="/" className="p-4 rounded-xl bg-green-50">
-          <SolidHomeIcon className="h-8 text-blue-icon fill-[#2B403C]" />
+          <SolidHomeIcon
+            aria-label="home-icon-solid"
+            className="h-8 text-blue-icon fill-[#2B403C]"
+          />
         </Link>
       ) : (
         <Link href="/" className="p-4 rounded-xl ">
-          <OutlineHomeIcon className="h-8 text-default-400" />
+          <OutlineHomeIcon
+            aria-label="home-icon-outline"
+            className="h-8 text-default-400"
+          />
         </Link>
       )}
 
       {pathname === "/achivements" ? (
         <Link href="/achivements" className="p-4 rounded-xl bg-green-50">
-          <SolidGiftIcon className="h-8 text-blue-icon fill-[#2B403C]" />
+          <SolidGiftIcon
+            aria-label="gift-icon-solid"
+            className="h-8 text-blue-icon fill-[#2B403C]"
+          />
         </Link>
       ) : (
         <Link
           href="/achivements"
           className="p-4 rounded-xl hover:bg-default-100"
         >
-          <OutlineGiftIcon className="h-8 text-default-400" />
+          <OutlineGiftIcon
+            aria-label="gift-icon-outline"
+            className="h-8 text-default-400"
+          />
         </Link>
       )}
 
       {pathname === "/settings" ? (
         <Link href="/settings" className="p-4 rounded-xl bg-green-50">
-          <SolidCog6ToothIcon className="h-8 text-blue-icon fill-[#2B403C]" />
+          <SolidCog6ToothIcon
+            aria-label="cog-icon-solid"
+            className="h-8 text-blue-icon fill-[#2B403C]"
+          />
         </Link>
       ) : (
         <Link href="/settings" className="p-4 rounded-xl hover:bg-default-100">
-          <OutlineCog6ToothIcon className="h-8 text-default-400" />
+          <OutlineCog6ToothIcon
+            aria-label="cog-icon-outline"
+            className="h-8 text-default-400"
+          />
         </Link>
       )}
 
       <button
-        aria-label="Nova Senha"
+        aria-label="nova-senha"
         className="p-4 rounded-xl hover:bg-default-100"
-        onClick={() => onOpenChange}
+        onClick={onOpen}
       >
         <svg
           width="32"
