@@ -10,6 +10,8 @@ const config: Config = {
   testEnvironment: "jsdom",
   collectCoverage: true,
   collectCoverageFrom: [
+    "src/app/**/layout.{ts,tsx}",
+    "src/app/**/page.{ts,tsx}",
     "src/context/**/*.{ts,tsx}",
     "src/components/**/*.{ts,tsx}",
     "src/templates/**/*.{ts,tsx}",
