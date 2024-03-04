@@ -102,7 +102,7 @@ export const achievements: Achivement[] = [
   },
   {
     id: 3,
-    title: "Só mais algumas senhas",
+    title: "Só mais um pouquinho",
     description: "Crie 20 senhas.",
     activationFunction: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) >= 20;
