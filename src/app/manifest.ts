@@ -3,6 +3,7 @@ import { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Gerador de Senhas Gamificado",
+    short_name: "GSG",
     icons: [
       {
         src: "/icons/android-chrome-192x192.png",
