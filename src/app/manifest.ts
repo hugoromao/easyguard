@@ -3,6 +3,8 @@ import { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Gerador de Senhas Gamificado",
+    description:
+      "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
     short_name: "GSG",
     icons: [
       {
