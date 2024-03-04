@@ -18,7 +18,7 @@ export default function Home() {
       <div className="overflow-auto">
         <div className="w-full h-1/3 relative p-6 bg-[#185449]">
           <span className="text-[28px] text-white font-semibold">
-            <h1 className="text-[#84E1A1]">Gerenciador de Senhas</h1>
+            <h1 className="text-[#84E1A1]">Gerador de Senhas</h1>
             <h1>Gamificado</h1>
           </span>
 

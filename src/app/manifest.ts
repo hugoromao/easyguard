@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Gerador de Senhas Gamificado",
     description:
       "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
-    short_name: "GSG",
+    short_name: "Gerador de Senhas Gamificado",
     icons: [
       {
         src: "/icons/android-chrome-192x192.png",
