@@ -11451,6 +11451,7 @@ __metadata:
     react-confetti: "npm:^6.1.0"
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.49.3"
+    react-hotjar: "npm:^6.2.0"
     storybook: "npm:^7.6.8"
     tailwindcss: "npm:^3.3.0"
     ts-node: "npm:^10.9.2"
@@ -15866,6 +15867,13 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17 || ^18
   checksum: 10c0/f8e5b2dcc3d97c820b4fbac262d7e914d74f385f26f34da31b8efc6c0f32ba995f2a2330bdfd3d8b7c8b56a52349a0cbc0c0dbe9053b3971e5e0c78003dfb7f0
+  languageName: node
+  linkType: hard
+
+"react-hotjar@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "react-hotjar@npm:6.2.0"
+  checksum: 10c0/4def7e8a2598062dca8e2ac28f51002c9d77b642defd46e5c7ad14b5d0745d9d11385eb9aab8826b9c74ba9744ef80eabe9432df016dcd723c489a56a25c9fb7
   languageName: node
   linkType: hard
 

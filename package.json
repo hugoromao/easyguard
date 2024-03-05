@@ -27,7 +27,8 @@
     "react": "^18",
     "react-confetti": "^6.1.0",
     "react-dom": "^18",
-    "react-hook-form": "^7.49.3"
+    "react-hook-form": "^7.49.3",
+    "react-hotjar": "^6.2.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.8",
