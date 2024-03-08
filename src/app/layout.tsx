@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   openGraph: {
     images: ["https://gamified-password-generator.vercel.app/meta-tags.jpg"],
   },
+  icons: {
+    icon: "/icons/icon-512x512.png",
+  },
 };
 
 export const viewport: Viewport = {
