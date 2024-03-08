@@ -44,6 +44,8 @@ export default function Achivement({
           className={`rounded-full bg-foreground-200 mb-4 ${
             wasCompleted ? "" : "grayscale"
           }`}
+          placeholder="blur"
+          blurDataURL={badge.image.blurredUrl}
           quality={40}
         />
 
