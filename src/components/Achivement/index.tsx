@@ -37,7 +37,7 @@ export default function Achivement({
     <>
       <Card isPressable onClick={onOpen} className="flex flex-col p-4">
         <Image
-          src={badge.image.smallUrl}
+          src={wasCompleted ? badge.image.smallUrl : badge.image.pixelated}
           width={80}
           height={80}
           alt={badge.image.alt}
@@ -70,7 +70,7 @@ export default function Achivement({
             <>
               <ModalBody className="flex flex-col items-center my-8">
                 <Image
-                  src={badge.image.url}
+                  src={wasCompleted ? badge.image.url : badge.image.pixelated}
                   width={400}
                   height={400}
                   placeholder="blur"
