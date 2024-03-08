@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   Card,
   Modal,
@@ -68,20 +67,18 @@ export default function Achivement({
           {() => (
             <>
               <ModalBody className="flex flex-col items-center my-8">
-                <motion.span layoutId={String(id)}>
-                  <Image
-                    src={badge.image.url}
-                    width={400}
-                    height={400}
-                    placeholder="blur"
-                    blurDataURL={badge.image.blurredUrl}
-                    alt={badge.image.alt}
-                    className={`rounded-md shadow-xl transition-all mt-2 ${
-                      wasCompleted ? "" : "grayscale"
-                    }`}
-                    quality={100}
-                  />
-                </motion.span>
+                <Image
+                  src={badge.image.url}
+                  width={400}
+                  height={400}
+                  placeholder="blur"
+                  blurDataURL={badge.image.blurredUrl}
+                  alt={badge.image.alt}
+                  quality={100}
+                  className={`rounded-md shadow-xl transition-all mt-2 ${
+                    wasCompleted ? "" : "grayscale"
+                  }`}
+                />
 
                 <span className="flex flex-col justify-center text-center mt-4">
                   <strong className="text-center text-3xl text-foreground-700">
