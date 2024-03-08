@@ -9,12 +9,17 @@ import { GlobalContext } from "@/context/global";
 import Base from "@/components/Base";
 import Tips from "@/components/Tips";
 import NextAchivement from "@/components/NextAchivement";
+import Head from "next/head";
 
 export default function Home() {
   const { onOpen } = React.useContext(GlobalContext);
 
   return (
     <Base>
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
+
       <div className="overflow-auto">
         <div className="w-full h-1/3 relative p-6 bg-[#185449]">
           <span className="text-[28px] text-white font-semibold">
