@@ -67,6 +67,7 @@ export type Badge = {
   image: {
     url: string;
     smallUrl: string;
+    blurredUrl: string;
     alt: string;
   };
 };
@@ -101,6 +102,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/1.jpg",
         smallUrl: "/badges/small-1.jpg",
+        blurredUrl: "/badges/blurred-1.jpg",
         alt: "Um sapo montado em uma capivara em um campo de flores.",
       },
     },
@@ -119,6 +121,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/2.jpg",
         smallUrl: "/badges/small-2.jpg",
+        blurredUrl: "/badges/blurred-2.jpg",
         alt: "Um sapo caminhando fantasiado de vaqueiro em uma floresta.",
       },
     },
@@ -137,6 +140,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -155,6 +159,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -173,6 +178,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -191,6 +197,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -209,6 +216,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -227,6 +235,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -245,6 +254,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -263,6 +273,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -281,6 +292,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -299,6 +311,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -316,6 +329,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -333,6 +347,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -349,6 +364,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },
@@ -366,6 +382,7 @@ export const achievements: Achivement[] = [
       image: {
         url: "/badges/default.png",
         smallUrl: "/badges/default.png",
+        blurredUrl: "/badges/blurred-0.jpg",
         alt: "default badge image",
       },
     },

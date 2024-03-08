@@ -73,12 +73,13 @@ export default function Achivement({
                     src={badge.image.url}
                     width={400}
                     height={400}
+                    placeholder="blur"
+                    blurDataURL={badge.image.blurredUrl}
                     alt={badge.image.alt}
                     className={`rounded-md shadow-xl transition-all mt-2 ${
                       wasCompleted ? "" : "grayscale"
                     }`}
                     quality={100}
-                    priority
                   />
                 </motion.span>
 
