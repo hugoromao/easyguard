@@ -1,8 +1,8 @@
-import { render } from "@/utils/test-utils";
+import { render, screen } from "@/utils/test-utils";
 import AchivementSnack from ".";
 
 test("renders the AchivementSnack component", () => {
-  const { getByText } = render(
+  render(
     <AchivementSnack
       id={1}
       variant="info"
@@ -11,10 +11,10 @@ test("renders the AchivementSnack component", () => {
       anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
       style={{}}
       persist={false}
-      message="Title:Description"
+      message="O início da jornada!:Crie sua primeira senha."
     />
   );
 
-  expect(getByText("Title"));
-  expect(getByText("Description"));
+  expect(screen.getByText("O início da jornada!"));
+  expect(screen.getByText("Crie sua primeira senha."));
 });

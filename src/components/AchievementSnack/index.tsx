@@ -1,8 +1,11 @@
 "use client";
-import React, { useContext, useEffect } from "react";
-import { CustomContentProps, SnackbarContent } from "notistack";
+import React, { useContext, useEffect, useState } from "react";
+
 import Image from "next/image";
+import { CustomContentProps, SnackbarContent } from "notistack";
+
 import { GlobalContext } from "@/context/global";
+import { achievements } from "@/utils/achievements";
 
 interface AchivementSnackProps extends CustomContentProps {}
 
@@ -10,17 +13,20 @@ interface AchivementSnackProps extends CustomContentProps {}
 const AchivementSnack = React.forwardRef<HTMLDivElement, AchivementSnackProps>(
   (props, ref) => {
     const [title, message] = String(props.message).split(":");
+    const [achivement] = useState(achievements.find((a) => a.title === title));
     const { goParty } = useContext(GlobalContext);
 
     useEffect(() => {
       goParty();
     }, []);
 
+    if (achivement === undefined) return null;
+
     return (
       <SnackbarContent ref={ref} role="alert">
         <div className="flex items-center gap-4 bg-white flex-1 px-6 py-4 rounded-lg shadow-2xl">
           <Image
-            src="/profile.png"
+            src={achivement.badge.image.smallUrl}
             width={60}
             height={60}
             alt="achievement"

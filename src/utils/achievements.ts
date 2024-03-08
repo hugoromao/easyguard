@@ -63,10 +63,19 @@ function getTotalAtFriday(history: HistoryItem[]) {
   return counter;
 }
 
+export type Badge = {
+  image: {
+    url: string;
+    smallUrl: string;
+    alt: string;
+  };
+};
+
 export type Achivement = {
   id: number;
   title: string;
   description: string;
+  badge: Badge;
   activationFunction: (
     history: HistoryItem[],
     completedAchievements: number[]
@@ -88,6 +97,13 @@ export const achievements: Achivement[] = [
     getProgress: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) / 1;
     },
+    badge: {
+      image: {
+        url: "/badges/1.jpg",
+        smallUrl: "/badges/small-1.jpg",
+        alt: "Um sapo montado em uma capivara em um campo",
+      },
+    },
   },
   {
     id: 2,
@@ -98,6 +114,13 @@ export const achievements: Achivement[] = [
     },
     getProgress: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) / 10;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
     },
   },
   {
@@ -110,6 +133,13 @@ export const achievements: Achivement[] = [
     getProgress: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) / 20;
     },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 4,
@@ -120,6 +150,13 @@ export const achievements: Achivement[] = [
     },
     getProgress: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) / 30;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
     },
   },
   {
@@ -132,6 +169,13 @@ export const achievements: Achivement[] = [
     getProgress: (history: HistoryItem[]) => {
       return getTotalPasswordsCreated(history) / 50;
     },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 6,
@@ -140,8 +184,16 @@ export const achievements: Achivement[] = [
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 3;
     },
-    getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "day") / 3,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalConsecutiveDiff(history, "day") / 3;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 7,
@@ -150,8 +202,16 @@ export const achievements: Achivement[] = [
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 5;
     },
-    getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "day") / 5,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalConsecutiveDiff(history, "day") / 5;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 8,
@@ -160,8 +220,16 @@ export const achievements: Achivement[] = [
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 7;
     },
-    getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "day") / 7,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalConsecutiveDiff(history, "day") / 7;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 9,
@@ -170,8 +238,16 @@ export const achievements: Achivement[] = [
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "day") >= 10;
     },
-    getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "day") / 10,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalConsecutiveDiff(history, "day") / 10;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 10,
@@ -180,8 +256,16 @@ export const achievements: Achivement[] = [
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 3;
     },
-    getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "week") / 3,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalConsecutiveDiff(history, "week") / 3;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 11,
@@ -190,8 +274,16 @@ export const achievements: Achivement[] = [
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 5;
     },
-    getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "week") / 5,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalConsecutiveDiff(history, "week") / 5;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 12,
@@ -200,8 +292,16 @@ export const achievements: Achivement[] = [
     activationFunction: (history: HistoryItem[]) => {
       return getTotalConsecutiveDiff(history, "week") >= 10;
     },
-    getProgress: (history: HistoryItem[]) =>
-      getTotalConsecutiveDiff(history, "week") / 10,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalConsecutiveDiff(history, "week") / 10;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 13,
@@ -209,8 +309,16 @@ export const achievements: Achivement[] = [
     description: "Crie três senhas no período da manhã",
     activationFunction: (history: HistoryItem[]) =>
       getTotalDayByPartOfTheDay(history).morningCounter >= 3,
-    getProgress: (history: HistoryItem[]) =>
-      getTotalDayByPartOfTheDay(history).morningCounter / 3,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalDayByPartOfTheDay(history).morningCounter / 3;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 14,
@@ -218,16 +326,32 @@ export const achievements: Achivement[] = [
     description: "Crie três senhas no período da noite",
     activationFunction: (history: HistoryItem[]) =>
       getTotalDayByPartOfTheDay(history).nightCounter >= 3,
-    getProgress: (history: HistoryItem[]) =>
-      getTotalDayByPartOfTheDay(history).nightCounter / 3,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalDayByPartOfTheDay(history).nightCounter / 3;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 15,
     title: "Sextou!",
     description: "Crie uma senha na sexta-feira",
     activationFunction: (history: HistoryItem[]) => !!getTotalAtFriday(history),
-    getProgress: (history: HistoryItem[]) =>
-      getTotalAtFriday(history) > 1 ? 100 : 0,
+    getProgress: (history: HistoryItem[]) => {
+      return getTotalAtFriday(history) > 1 ? 100 : 0;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
   {
     id: 16,
@@ -235,7 +359,15 @@ export const achievements: Achivement[] = [
     description: "Complete todas as conquistas",
     activationFunction: (_, completedAchievements: number[]) =>
       completedAchievements.length === achievements.length,
-    getProgress: (_, completedAchievements: number[]) =>
-      completedAchievements.length / achievements.length,
+    getProgress: (_, completedAchievements: number[]) => {
+      return completedAchievements.length / achievements.length;
+    },
+    badge: {
+      image: {
+        url: "/badges/default.png",
+        smallUrl: "/badges/default.png",
+        alt: "default badge image",
+      },
+    },
   },
 ];
