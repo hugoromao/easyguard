@@ -1,11 +1,12 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import dayjs from "dayjs";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
+import { motion } from "framer-motion";
 
 import Base from "@/components/Base";
 
@@ -14,6 +15,8 @@ import { AchivementsContext } from "@/context/achivements";
 export default function Settings() {
   const { refresh } = useRouter();
   const { setHistory } = useContext(AchivementsContext);
+
+  const [enableDebug, setEnableDebug] = useState(false);
 
   function mockAddPasswordToLocalStorage() {
     const randomDate = dayjs().subtract(
@@ -26,20 +29,20 @@ export default function Settings() {
     ]);
   }
 
-  function mockAdd3PasswordToLocalStorage(date: "day" | "week") {
-    const day1 = dayjs().subtract(1, date);
-    const day2 = dayjs().subtract(2, date);
-    const day3 = dayjs().subtract(3, date);
-    const day4 = dayjs().subtract(4, date);
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
 
-    setHistory((h) => [
-      ...h,
-      { type: "password", createdAt: day4.toDate() },
-      { type: "password", createdAt: day3.toDate() },
-      { type: "password", createdAt: day2.toDate() },
-      { type: "password", createdAt: day1.toDate() },
-    ]);
-  }
+  const item = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
 
   return (
     <>
@@ -49,34 +52,57 @@ export default function Settings() {
             Configurações
           </h1>
 
-          <Button onClick={mockAddPasswordToLocalStorage}>
-            Criar senha no LocalStorage
-          </Button>
-
-          <Button onClick={() => mockAdd3PasswordToLocalStorage("day")}>
-            Criar senha com 3 dias consecutivos
-          </Button>
-
-          <Button onClick={() => mockAdd3PasswordToLocalStorage("week")}>
-            Criar senha com 3 semanas consecutivos
-          </Button>
-
           <Button
-            onClick={() =>
-              enqueueSnackbar("Uma conquista teste!", { variant: "info" })
-            }
+            variant={enableDebug ? "solid" : "bordered"}
+            color="primary"
+            onClick={() => setEnableDebug((e) => !e)}
           >
-            Enviar notificação de conquista
+            Habilitar funções de DEBUG
           </Button>
 
-          <Button
-            onClick={() => {
-              window.localStorage.clear();
-              refresh();
-            }}
-          >
-            Limpar banco local
-          </Button>
+          {enableDebug ? (
+            <motion.ul
+              className="flex flex-col gap-2"
+              variants={container}
+              initial="hidden"
+              animate="show"
+            >
+              <motion.li variants={item}>
+                <Button
+                  variant="flat"
+                  fullWidth
+                  onClick={mockAddPasswordToLocalStorage}
+                >
+                  Criar senha no LocalStorage
+                </Button>
+              </motion.li>
+
+              <motion.li variants={item}>
+                <Button
+                  variant="flat"
+                  fullWidth
+                  onClick={() =>
+                    enqueueSnackbar("Uma conquista teste!", { variant: "info" })
+                  }
+                >
+                  Enviar notificação de conquista
+                </Button>
+              </motion.li>
+
+              <motion.li variants={item}>
+                <Button
+                  variant="flat"
+                  fullWidth
+                  onClick={() => {
+                    window.localStorage.clear();
+                    refresh();
+                  }}
+                >
+                  Limpar banco local
+                </Button>
+              </motion.li>
+            </motion.ul>
+          ) : null}
         </div>
       </Base>
     </>
