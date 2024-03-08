@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
   openGraph: {
-    images: ["/https://gamified-password-generator.vercel.app/meta-tags.jpg"],
+    images: ["https://gamified-password-generator.vercel.app/meta-tags.jpg"],
   },
 };
 
