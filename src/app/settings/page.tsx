@@ -82,7 +82,10 @@ export default function Settings() {
                   variant="flat"
                   fullWidth
                   onClick={() =>
-                    enqueueSnackbar("Uma conquista teste!", { variant: "info" })
+                    enqueueSnackbar(
+                      "O início da jornada!:Crie sua primeira senha.",
+                      { variant: "info" }
+                    )
                   }
                 >
                   Enviar notificação de conquista

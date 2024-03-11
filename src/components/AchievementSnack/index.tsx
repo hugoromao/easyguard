@@ -6,6 +6,7 @@ import { CustomContentProps, SnackbarContent } from "notistack";
 
 import { GlobalContext } from "@/context/global";
 import { achievements } from "@/utils/achievements";
+import Link from "next/link";
 
 interface AchivementSnackProps extends CustomContentProps {}
 
@@ -24,20 +25,21 @@ const AchivementSnack = React.forwardRef<HTMLDivElement, AchivementSnackProps>(
 
     return (
       <SnackbarContent ref={ref} role="alert">
-        <div className="flex items-center gap-4 bg-white flex-1 px-6 py-4 rounded-lg shadow-2xl">
-          <Image
-            src={achivement.badge.image.smallUrl}
-            width={60}
-            height={60}
-            alt="achievement"
-            className="rounded-full"
-          />
-
-          <span>
-            <strong className="text-medium text-neutral-700">{title}</strong>
-            <p className="text-medium text-neutral-400">{message}</p>
-          </span>
-        </div>
+        <Link href='/achivements' className="mx-auto">
+          <div className="flex items-center gap-4 bg-white flex-1 px-6 py-4 rounded-lg shadow-2xl">
+            <Image
+              src={achivement.badge.image.smallUrl}
+              width={60}
+              height={60}
+              alt="achievement"
+              className="rounded-full"
+            />
+            <span>
+              <strong className="text-medium text-neutral-700">{title}</strong>
+              <p className="text-medium text-neutral-400">{message}</p>
+            </span>
+          </div>
+        </Link>
       </SnackbarContent>
     );
   }
