@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { isLeakedPassword, isInvalidPassword } from "./route";
+import { isInvalidPassword, isLeakedPassword } from "@/utils/webscraping";
 
 describe("Password Validation Functions", () => {
   describe("isLeakedPassword", () => {
