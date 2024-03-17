@@ -46,7 +46,13 @@ const Onboarding = () => {
         )}
 
         {!isLastStep ? (
-          <Button variant="light" color="primary" className="p-0" size="sm">
+          <Button
+            variant="light"
+            color="primary"
+            className="p-0"
+            size="sm"
+            onPress={finishOnboarding}
+          >
             Pular
           </Button>
         ) : null}
