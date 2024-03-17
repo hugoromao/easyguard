@@ -8,6 +8,8 @@ import { GlobalContext } from "@/context/global";
 
 import Navbar from "@/components/Navbar";
 import NewPasswordForm from "@/components/NewPasswordForm";
+import { useLocalStorage } from "@uidotdev/usehooks";
+import Onboarding from "../Onboarding";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +19,10 @@ type BaseProps = {
 
 const Base = ({ children }: BaseProps) => {
   const { isOpen, onOpenChange } = useContext(GlobalContext);
+
+  const [showOnboarding] = useLocalStorage("showOnboarding", true);
+
+  if (showOnboarding) return <Onboarding />;
 
   return (
     <>

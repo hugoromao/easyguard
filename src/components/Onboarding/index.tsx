@@ -8,14 +8,15 @@ import { Suez_One } from "next/font/google";
 import Icon from "./icon.png";
 import IconLarge from "./icon-512x512.png";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { steps } from "./steps";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 const suezOne = Suez_One({ weight: ["400"], subsets: ["latin"] });
 
-type OnboardingProps = {
-  steps: { title: string; description: string }[];
-};
+const Onboarding = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [_, setShowOnboarding] = useLocalStorage("showOnboarding", true);
 
-const Onboarding = ({ steps }: OnboardingProps) => {
   const [activeStep, setActiveStep] = useState(0);
 
   const pageTransitionDuraiton = 0.3;
@@ -23,7 +24,9 @@ const Onboarding = ({ steps }: OnboardingProps) => {
   const isPenultimateStep = activeStep === steps.length - 2;
   const isLastStep = activeStep === steps.length - 1;
 
-  function finishOnboarding() {}
+  function finishOnboarding() {
+    setShowOnboarding(false);
+  }
 
   return (
     <main className="flex flex-col p-6 h-screen bg-[#185449]">
@@ -152,10 +155,14 @@ const Onboarding = ({ steps }: OnboardingProps) => {
         ) : null}
 
         {isLastStep ? (
-          <p className="text-sm text-center text-[#FFFFFF] opacity-30">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            className="text-sm text-center text-[#FFFFFF]"
+          >
             Você pode ver este tutorial novemente a partir da tela de
             configurações
-          </p>
+          </motion.p>
         ) : null}
       </footer>
     </main>

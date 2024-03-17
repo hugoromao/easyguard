@@ -11,8 +11,12 @@ import { motion } from "framer-motion";
 import Base from "@/components/Base";
 
 import { AchivementsContext } from "@/context/achivements";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 export default function Settings() {
+  // eslint-disable-next-line no-unused-vars
+  const [_, setShowOnboarding] = useLocalStorage("showOnboarding", true);
+
   const { refresh } = useRouter();
   const { setHistory } = useContext(AchivementsContext);
 
@@ -106,6 +110,14 @@ export default function Settings() {
               </motion.li>
             </motion.ul>
           ) : null}
+
+          <Button
+            variant="flat"
+            fullWidth
+            onClick={() => setShowOnboarding(true)}
+          >
+            Refazer Tutorial
+          </Button>
         </div>
       </Base>
     </>
