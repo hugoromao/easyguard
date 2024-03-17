@@ -13,7 +13,7 @@ import {
   GiftIcon as OutlineGiftIcon,
   Cog6ToothIcon as OutlineCog6ToothIcon,
 } from "@heroicons/react/24/outline";
-import { GlobalContext } from "@/context/global";
+import { GlobalContext } from "../../context/global";
 
 const Navbar = () => {
   const { onOpen } = useContext(GlobalContext);
