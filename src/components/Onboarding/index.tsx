@@ -64,7 +64,10 @@ const Onboarding = () => {
         }`}
       >
         {activeStep === 0 ? (
-          <motion.div layoutId="logo" className="self-center mb-6 shadow-lg">
+          <motion.div
+            layoutId="logo"
+            className="self-center mb-6 shadow-lg m-auto"
+          >
             <Image
               priority
               src={IconLarge}
