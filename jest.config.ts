@@ -9,6 +9,7 @@ const config: Config = {
   coverageProvider: "v8",
   testEnvironment: "jsdom",
   collectCoverage: true,
+  coverageDirectory: "./public/coverage",
   collectCoverageFrom: [
     "src/app/**/route.{ts,tsx}",
     "src/app/**/layout.{ts,tsx}",

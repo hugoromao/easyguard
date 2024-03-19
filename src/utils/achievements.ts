@@ -3,14 +3,17 @@ import dayjs from "dayjs";
 
 import { HistoryItem } from "../context/global";
 
-function getTotalPasswordsCreated(history: HistoryItem[]) {
+export function getTotalPasswordsCreated(history: HistoryItem[]) {
   return history.reduce(
     (acc, cur) => (cur.type === "password" ? acc + 1 : acc),
     0
   );
 }
 
-function getTotalConsecutiveDiff(history: HistoryItem[], date: "day" | "week") {
+export function getTotalConsecutiveDiff(
+  history: HistoryItem[],
+  date: "day" | "week"
+) {
   if (history.length === 0) return 0;
 
   let totalConsecutives = 0;
@@ -154,48 +157,6 @@ export const achievements: Achivement[] = [
   },
   {
     id: 4,
-    title: "Produção em massa",
-    description: "Crie 30 senhas.",
-    activationFunction: (history: HistoryItem[]) => {
-      return getTotalPasswordsCreated(history) >= 30;
-    },
-    getProgress: (history: HistoryItem[]) => {
-      return getTotalPasswordsCreated(history) / 30;
-    },
-    badge: {
-      image: {
-        url: "/badges/default.jpg",
-        smallUrl: "/badges/default.jpg",
-        pixelated: "/badges/pixel-0.jpg",
-        blurredUrl:
-          "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAKAAoDAREAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDQSWy8sfuY/wDx71/3vr/9evr9fXuf5IKVO3wrX1f6/wCRnGWyyf3MXU9m9f8Afp/10MXOnd+6jCVm8n7zdT3PvT6r+uxim7bvb/Molmz95vzNI5m3d6v72P/Z",
-        alt: "default badge image",
-      },
-    },
-  },
-  {
-    id: 5,
-    title: "Tchau! hackers",
-    description: "Crie 50 senhas.",
-    activationFunction: (history: HistoryItem[]) => {
-      return getTotalPasswordsCreated(history) >= 50;
-    },
-    getProgress: (history: HistoryItem[]) => {
-      return getTotalPasswordsCreated(history) / 50;
-    },
-    badge: {
-      image: {
-        url: "/badges/default.jpg",
-        smallUrl: "/badges/default.jpg",
-        pixelated: "/badges/pixel-0.jpg",
-        blurredUrl:
-          "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAKAAoDAREAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDQSWy8sfuY/wDx71/3vr/9evr9fXuf5IKVO3wrX1f6/wCRnGWyyf3MXU9m9f8Afp/10MXOnd+6jCVm8n7zdT3PvT6r+uxim7bvb/Molmz95vzNI5m3d6v72P/Z",
-        alt: "default badge image",
-      },
-    },
-  },
-  {
-    id: 6,
     title: "Hábitos seguros",
     description: "Use a plataforma por 3 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
@@ -216,7 +177,7 @@ export const achievements: Achivement[] = [
     },
   },
   {
-    id: 7,
+    id: 5,
     title: "Persistente que chama?",
     description: "Use a plataforma por 5 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
@@ -237,7 +198,7 @@ export const achievements: Achivement[] = [
     },
   },
   {
-    id: 8,
+    id: 6,
     title: "Dedicação inabalável",
     description: "Use a plataforma por 7 dias consecutivos",
     activationFunction: (history: HistoryItem[]) => {
@@ -258,91 +219,7 @@ export const achievements: Achivement[] = [
     },
   },
   {
-    id: 9,
-    title: "Já virou rotina!",
-    description: "Use a plataforma por 10 dias consecutivos",
-    activationFunction: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "day") >= 10;
-    },
-    getProgress: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "day") / 10;
-    },
-    badge: {
-      image: {
-        url: "/badges/default.jpg",
-        smallUrl: "/badges/default.jpg",
-        pixelated: "/badges/pixel-0.jpg",
-        blurredUrl:
-          "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAKAAoDAREAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDQSWy8sfuY/wDx71/3vr/9evr9fXuf5IKVO3wrX1f6/wCRnGWyyf3MXU9m9f8Afp/10MXOnd+6jCVm8n7zdT3PvT6r+uxim7bvb/Molmz95vzNI5m3d6v72P/Z",
-        alt: "default badge image",
-      },
-    },
-  },
-  {
-    id: 10,
-    title: "Segurança nunca é demais",
-    description: "Use a plataforma por 3 semanas consecutivas.",
-    activationFunction: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "week") >= 3;
-    },
-    getProgress: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "week") / 3;
-    },
-    badge: {
-      image: {
-        url: "/badges/default.jpg",
-        smallUrl: "/badges/default.jpg",
-        pixelated: "/badges/pixel-0.jpg",
-        blurredUrl:
-          "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAKAAoDAREAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDQSWy8sfuY/wDx71/3vr/9evr9fXuf5IKVO3wrX1f6/wCRnGWyyf3MXU9m9f8Afp/10MXOnd+6jCVm8n7zdT3PvT6r+uxim7bvb/Molmz95vzNI5m3d6v72P/Z",
-        alt: "default badge image",
-      },
-    },
-  },
-  {
-    id: 11,
-    title: "Consistência é a chave",
-    description: "Use a plataforma por 5 semanas consecutivas.",
-    activationFunction: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "week") >= 5;
-    },
-    getProgress: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "week") / 5;
-    },
-    badge: {
-      image: {
-        url: "/badges/default.jpg",
-        smallUrl: "/badges/default.jpg",
-        pixelated: "/badges/pixel-0.jpg",
-        blurredUrl:
-          "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAKAAoDAREAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDQSWy8sfuY/wDx71/3vr/9evr9fXuf5IKVO3wrX1f6/wCRnGWyyf3MXU9m9f8Afp/10MXOnd+6jCVm8n7zdT3PvT6r+uxim7bvb/Molmz95vzNI5m3d6v72P/Z",
-        alt: "default badge image",
-      },
-    },
-  },
-  {
-    id: 12,
-    title: "Sem parar!",
-    description: "Use a plataforma por 10 semanas consecutivas.",
-    activationFunction: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "week") >= 10;
-    },
-    getProgress: (history: HistoryItem[]) => {
-      return getTotalConsecutiveDiff(history, "week") / 10;
-    },
-    badge: {
-      image: {
-        url: "/badges/default.jpg",
-        smallUrl: "/badges/default.jpg",
-        pixelated: "/badges/pixel-0.jpg",
-        blurredUrl:
-          "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAKAAoDAREAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDQSWy8sfuY/wDx71/3vr/9evr9fXuf5IKVO3wrX1f6/wCRnGWyyf3MXU9m9f8Afp/10MXOnd+6jCVm8n7zdT3PvT6r+uxim7bvb/Molmz95vzNI5m3d6v72P/Z",
-        alt: "default badge image",
-      },
-    },
-  },
-  {
-    id: 13,
+    id: 7,
     title: "Acordando com os pássaros",
     description: "Crie três senhas no período da manhã",
     activationFunction: (history: HistoryItem[]) =>
@@ -362,7 +239,7 @@ export const achievements: Achivement[] = [
     },
   },
   {
-    id: 14,
+    id: 8,
     title: "Coruja noturna",
     description: "Crie três senhas no período da noite",
     activationFunction: (history: HistoryItem[]) =>
@@ -382,12 +259,12 @@ export const achievements: Achivement[] = [
     },
   },
   {
-    id: 15,
+    id: 9,
     title: "Sextou!",
     description: "Crie uma senha na sexta-feira",
     activationFunction: (history: HistoryItem[]) => !!getTotalAtFriday(history),
     getProgress: (history: HistoryItem[]) => {
-      return getTotalAtFriday(history) > 1 ? 100 : 0;
+      return getTotalAtFriday(history) >= 1 ? 1 : 0;
     },
     badge: {
       image: {
@@ -401,7 +278,7 @@ export const achievements: Achivement[] = [
     },
   },
   {
-    id: 16,
+    id: 10,
     title: "Topo do mundo",
     description: "Complete todas as conquistas",
     activationFunction: (_, completedAchievements: number[]) =>

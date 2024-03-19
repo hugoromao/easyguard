@@ -12,6 +12,7 @@ import Base from "@/components/Base";
 
 import { AchivementsContext } from "@/context/achivements";
 import { useLocalStorage } from "@uidotdev/usehooks";
+import Link from "next/link";
 
 export default function Settings() {
   // eslint-disable-next-line no-unused-vars
@@ -94,6 +95,14 @@ export default function Settings() {
                 >
                   Enviar notificação de conquista
                 </Button>
+              </motion.li>
+
+              <motion.li>
+                <Link href="/coverage/lcov-report/index.html">
+                  <Button variant="flat" fullWidth>
+                    Cobertura de teste
+                  </Button>
+                </Link>
               </motion.li>
 
               <motion.li variants={item}>

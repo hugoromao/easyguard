@@ -9,7 +9,7 @@
 .yarnrc.yml
 
 # testing
-/coverage
+/public/coverage
 
 # next.js
 /.next/
