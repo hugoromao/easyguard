@@ -52,7 +52,7 @@ export default function Settings() {
   return (
     <>
       <Base>
-        <div className="flex flex-col p-6 gap-2">
+        <div className="flex flex-col p-6 gap-2 w-full max-w-2xl mx-auto">
           <h1 className="text-[28px] font-bold text-foreground-700">
             Configurações
           </h1>
@@ -97,7 +97,7 @@ export default function Settings() {
                 </Button>
               </motion.li>
 
-              <motion.li>
+              <motion.li variants={item}>
                 <Link href="/coverage/lcov-report/index.html">
                   <Button variant="flat" fullWidth>
                     Cobertura de teste

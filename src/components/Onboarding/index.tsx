@@ -59,7 +59,7 @@ const Onboarding = () => {
       </header>
 
       <section
-        className={`h-full flex flex-col gap-2 mb-10 justify-end ${
+        className={`h-full flex flex-col gap-2 mb-10 justify-end w-full max-w-2xl self-center ${
           isLastStep ? "text-center items-center justify-center" : ""
         }`}
       >
@@ -111,7 +111,7 @@ const Onboarding = () => {
             animate={!isLastStep ? { x: 0, opacity: 1 } : { opacity: 1 }}
             exit={!isPenultimateStep ? { x: -5, opacity: 0 } : { opacity: 0 }}
             transition={{ duration: pageTransitionDuraiton }}
-            className="text-white text-lg"
+            className="text-white text-lg max-w-96"
           >
             {steps[activeStep].description}
           </motion.p>
@@ -135,7 +135,7 @@ const Onboarding = () => {
         </AnimatePresence>
       </section>
 
-      <footer className="flex justify-between items-center">
+      <footer className="flex justify-between items-center w-full max-w-2xl self-center">
         {!isLastStep ? (
           <span className="flex gap-[6px]">
             {steps.map((s, index) => (
@@ -167,7 +167,7 @@ const Onboarding = () => {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
-            className="text-sm text-center text-[#FFFFFF]"
+            className="text-sm text-center text-[#FFFFFF] mx-auto"
           >
             Você pode ver este tutorial novemente a partir da tela de
             configurações

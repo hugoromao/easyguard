@@ -21,7 +21,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex bg-white p-1 justify-center border-t-2 border-default-200">
+    <nav className="flex bg-white p-1 justify-center border-t-2 border-default-200 w-full max-w-2xl mx-auto md:rounded-md md:w-fit md:border-none md:shadow-2xl">
       {pathname === "/" ? (
         <Link href="/" className="p-4 rounded-xl bg-green-50">
           <SolidHomeIcon

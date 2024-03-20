@@ -21,8 +21,8 @@ export default function Home() {
       </Head>
 
       <div className="overflow-auto">
-        <div className="w-full h-1/3 relative p-6 bg-[#185449]">
-          <span className="text-[28px] text-white font-semibold">
+        <div className="flex w-full h-1/3 relative p-6 bg-[#185449]">
+          <span className="text-[28px] text-white font-semibold w-full max-w-2xl mx-auto">
             <h1 className="text-[#84E1A1]">Gerador de Senhas</h1>
             <h1>Gamificado</h1>
           </span>
@@ -33,7 +33,7 @@ export default function Home() {
             size="lg"
             startContent={<KeyIcon height={24} className="font-bold" />}
             onClick={onOpen}
-            className="bg-green-50 text-green-800 shadow-lg font-medium"
+            className="bg-green-50 text-green-800 shadow-lg font-medium max-w-2xl mx-auto"
             style={{
               position: "absolute",
               top: "100%",
@@ -46,7 +46,7 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="p-6 pt-12 flex flex-col gap-2">
+        <div className="p-6 pt-12 flex flex-col gap-2 w-full max-w-2xl mx-auto">
           <NextAchivement />
 
           <Tips />

@@ -141,7 +141,7 @@ const GeneratePassword = ({
 
   return (
     <>
-      <main className="h-screen flex flex-col justify-center gap-4 p-4">
+      <main className="h-screen flex flex-col justify-center gap-4 p-4 w-full max-w-2xl mx-auto">
         <p className="text-center font-semibold">Sua senha é:</p>
 
         <Input

@@ -9,11 +9,11 @@ export default function Achivements() {
   return (
     <Base>
       <div className="flex flex-col p-6 gap-2 overflow-auto">
-        <h1 className="text-[28px] font-bold text-foreground-700">
+        <h1 className="text-[28px] font-bold text-foreground-700 w-full max-w-2xl mx-auto">
           Conquistas
         </h1>
 
-        <section className="grid grid-cols-2 gap-2">
+        <section className="grid grid-cols-2 gap-2 w-full max-w-2xl mx-auto">
           {achievements.map((achivement) => (
             <Achivement key={achivement.id} {...achivement} />
           ))}
