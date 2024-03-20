@@ -170,7 +170,7 @@ const GeneratePassword = ({
           <Button
             fullWidth
             isDisabled={data.entropy < 60}
-            color="primary"
+            color={data.entropy < 60 ? "danger" : "primary"}
             variant="shadow"
             startContent={<DocumentDuplicateIcon height={20} />}
             onClick={copyToClipboard}
