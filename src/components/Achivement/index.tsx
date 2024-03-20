@@ -49,7 +49,7 @@ export default function Achivement({
           quality={40}
         />
 
-        <span className="flex flex-col gap-2 text-start">
+        <span className="flex flex-col gap-2 text-start w-full">
           <strong className="mt-auto text-foreground-600">{title}</strong>
           <p className="text-sm text-foreground-600">{description}</p>
           <Progress
