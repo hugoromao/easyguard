@@ -3,8 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 import {
   Button,
-  Card,
-  CardBody,
   Input,
   Modal,
   ModalBody,
@@ -27,6 +25,7 @@ import { GlobalContext } from "@/context/global";
 
 import { useSearchParams } from "next/navigation";
 import { AchivementsContext } from "@/context/achivements";
+import PasswordStrength from "@/components/PasswordStrength";
 
 const Page = () => {
   const params = useSearchParams();
@@ -180,17 +179,7 @@ const GeneratePassword = ({
           </Button>
         </span>
 
-        {data ? (
-          <Card>
-            <CardBody>
-              <p>
-                Sua senha possui <strong>{data.entropy} bits</strong> de
-                entropia. Use o botão de copiar senha para contabilizar suas
-                conquistas.
-              </p>
-            </CardBody>
-          </Card>
-        ) : null}
+        {data ? <PasswordStrength entropy={data.entropy} /> : null}
 
         <Button
           fullWidth
