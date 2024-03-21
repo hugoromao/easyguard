@@ -16,10 +16,27 @@ export async function generateMetadata({
 
   if (achv_id && achivement) {
     return {
-      title: achivement.title,
-      description: achivement.description,
+      title: "Gerador de Senhas Gamificado",
+      description:
+        "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
       openGraph: {
-        images: [achivement.badge.image.url],
+        title: achivement.title,
+        description: achivement.description,
+        images: [
+          {
+            url: achivement.badge.image.smallUrl,
+            width: 800,
+            height: 800,
+            alt: achivement.title,
+          },
+          {
+            url: achivement.badge.image.url,
+            width: 1800,
+            height: 1600,
+            alt: achivement.title,
+          },
+        ],
+        type: "website",
       },
       icons: {
         icon: achivement.badge.image.url,
