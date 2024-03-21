@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import Image from "next/image";
 import {
+  Button,
   Card,
   Modal,
   ModalBody,
@@ -12,7 +13,12 @@ import {
 
 import { AchivementsContext } from "@/context/achivements";
 
-import { Achivement as AchivementType } from "@/utils/achievements";
+import {
+  Achivement as AchivementType,
+  achievements,
+} from "@/utils/achievements";
+import { ShareIcon } from "@heroicons/react/20/solid";
+import { enqueueSnackbar } from "notistack";
 
 export default function Achivement({
   id,
@@ -28,6 +34,26 @@ export default function Achivement({
   const [wasCompleted, setWasCompleted] = useState(
     completedAchievements.includes(id)
   );
+
+  async function copyToClipboard() {
+    try {
+      const progress = Array(10)
+        .fill("⬜")
+        .map((_, index) =>
+          completedAchievements.includes(index + 1) ? "🟩" : "⬜"
+        )
+        .join("");
+
+      await navigator.clipboard.writeText(
+        `Atingi a conquista “${title}”!🏆\n\n${completedAchievements.length}/${achievements.length} ${progress}\n\nCrie senhas seguras e mais fáceis de lembrar🔑🔒.\nhttps://gamified-password-generator.vercel.app?achv_id=${id}`
+      );
+      enqueueSnackbar("Copiado p/ área de transferência", {
+        variant: "success",
+      });
+    } catch {
+      enqueueSnackbar("Falha ao copiar texto", { variant: "error" });
+    }
+  }
 
   useEffect(() => {
     setWasCompleted(completedAchievements.includes(id));
@@ -69,6 +95,15 @@ export default function Achivement({
           {() => (
             <>
               <ModalBody className="flex flex-col items-center my-8">
+                {wasCompleted ? (
+                  <strong className="text-md font-bold bg-gradient-to-r from-[#8A2387] via-[#F27121] to-[#E94057] inline-block text-transparent bg-clip-text">
+                    CONQUISTA DESBLOQUEADA!
+                  </strong>
+                ) : (
+                  <p className="text-md text-foreground-400">
+                    Conquista Bloqueada
+                  </p>
+                )}
                 <Image
                   src={wasCompleted ? badge.image.url : badge.image.pixelated}
                   width={400}
@@ -90,6 +125,20 @@ export default function Achivement({
                     {description}
                   </p>
                 </span>
+
+                {wasCompleted ? (
+                  <Button
+                    variant="bordered"
+                    color="primary"
+                    fullWidth
+                    className="mt-2"
+                    size="lg"
+                    onPress={copyToClipboard}
+                    endContent={<ShareIcon height={24} />}
+                  >
+                    Compartilhe
+                  </Button>
+                ) : null}
               </ModalBody>
             </>
           )}
