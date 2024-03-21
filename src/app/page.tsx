@@ -24,13 +24,13 @@ export async function generateMetadata({
         description: achivement.description,
         images: [
           {
-            url: achivement.badge.image.smallUrl,
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
             width: 800,
             height: 800,
             alt: achivement.title,
           },
           {
-            url: achivement.badge.image.url,
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.url}`,
             width: 1800,
             height: 1600,
             alt: achivement.title,
