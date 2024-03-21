@@ -28,6 +28,14 @@ export async function generateMetadata({
         },
         type: "website",
       },
+      twitter: {
+        images: {
+          url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+          width: 800,
+          height: 800,
+          alt: achivement.title,
+        },
+      },
       icons: [
         {
           url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
