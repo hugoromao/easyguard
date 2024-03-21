@@ -22,20 +22,12 @@ export async function generateMetadata({
       openGraph: {
         title: achivement.title,
         description: achivement.description,
-        images: [
-          {
-            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
-            width: 800,
-            height: 800,
-            alt: achivement.title,
-          },
-          {
-            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.url}`,
-            width: 1800,
-            height: 1600,
-            alt: achivement.title,
-          },
-        ],
+        images: {
+          url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+          width: 800,
+          height: 800,
+          alt: achivement.title,
+        },
         type: "website",
       },
       icons: {
