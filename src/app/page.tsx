@@ -30,9 +30,11 @@ export async function generateMetadata({
         },
         type: "website",
       },
-      icons: {
-        icon: achivement.badge.image.url,
-      },
+      icons: [
+        {
+          url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+        },
+      ],
     };
   }
 
