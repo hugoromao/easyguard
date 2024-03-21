@@ -20,8 +20,6 @@ export async function generateMetadata({
       description:
         "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
       openGraph: {
-        title: achivement.title,
-        description: achivement.description,
         images: {
           url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
           width: 800,
