@@ -1,57 +1,45 @@
-"use client";
 import React from "react";
 
-import { Button } from "@nextui-org/react";
-import { KeyIcon } from "@heroicons/react/24/outline";
+import Home from "@/components/Home";
+import { achievements } from "@/utils/achievements";
+import { Metadata } from "next";
 
-import { GlobalContext } from "@/context/global";
+type Props = {
+  searchParams?: { achv_id: string };
+};
 
-import Base from "@/components/Base";
-import Tips from "@/components/Tips";
-import NextAchivement from "@/components/NextAchivement";
-import Head from "next/head";
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const achv_id = searchParams?.achv_id;
+  const achivement = achievements.find(({ id }) => String(id) === achv_id);
 
-export default function Home() {
-  const { onOpen } = React.useContext(GlobalContext);
+  if (achv_id && achivement) {
+    return {
+      title: achivement.title,
+      description: achivement.description,
+      openGraph: {
+        images: [achivement.badge.image.url],
+      },
+      icons: {
+        icon: achivement.badge.image.url,
+      },
+    };
+  }
 
-  return (
-    <Base>
-      <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
+  return {
+    title: "Gerador de Senhas Gamificado",
+    description:
+      "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
+    openGraph: {
+      images: ["https://gamified-password-generator.vercel.app/meta-tags.jpg"],
+    },
+    icons: {
+      icon: "/icons/icon-512x512.png",
+    },
+  };
+}
 
-      <div className="overflow-auto">
-        <div className="flex w-full h-1/3 relative p-6 bg-[#185449]">
-          <span className="text-[28px] text-white font-semibold w-full max-w-2xl mx-auto">
-            <h1 className="text-[#84E1A1]">Gerador de Senhas</h1>
-            <h1>Gamificado</h1>
-          </span>
-
-          <Button
-            color="secondary"
-            variant="solid"
-            size="lg"
-            startContent={<KeyIcon height={24} className="font-bold" />}
-            onClick={onOpen}
-            className="bg-green-50 text-green-800 shadow-lg font-medium max-w-2xl mx-auto"
-            style={{
-              position: "absolute",
-              top: "100%",
-              left: 24,
-              right: 24,
-              transform: "translateY(-50%)",
-            }}
-          >
-            Nova Senha
-          </Button>
-        </div>
-
-        <div className="p-6 pt-12 flex flex-col gap-2 w-full max-w-2xl mx-auto">
-          <NextAchivement />
-
-          <Tips />
-        </div>
-      </div>
-    </Base>
-  );
+export default function index() {
+  return <Home />;
 }

@@ -1,45 +1,8 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
+import Script from "next/script";
 
 import Providers from "./Providers";
 import "./globals.css";
-import Script from "next/script";
-import { achievements } from "@/utils/achievements";
-
-type Props = {
-  searchParams?: { achv_id: string };
-};
-
-export async function generateMetadata({
-  searchParams,
-}: Props): Promise<Metadata> {
-  const achv_id = searchParams?.achv_id;
-  const achivement = achievements.find(({ id }) => String(id) === achv_id);
-
-  if (achv_id && achivement) {
-    return {
-      title: achivement.title,
-      description: achivement.description,
-      openGraph: {
-        images: [achivement.badge.image.url],
-      },
-      icons: {
-        icon: achivement.badge.image.url,
-      },
-    };
-  }
-
-  return {
-    title: "Gerador de Senhas Gamificado",
-    description:
-      "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
-    openGraph: {
-      images: ["https://gamified-password-generator.vercel.app/meta-tags.jpg"],
-    },
-    icons: {
-      icon: "/icons/icon-512x512.png",
-    },
-  };
-}
 
 export const viewport: Viewport = {
   width: "device-width",
