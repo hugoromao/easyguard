@@ -20,21 +20,37 @@ export async function generateMetadata({
       description:
         "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
       openGraph: {
-        images: {
-          url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
-          width: 300,
-          height: 300,
-          alt: achivement.title,
-        },
+        images: [
+          {
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            width: 300,
+            height: 300,
+            alt: achivement.title,
+          },
+          {
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            width: 800,
+            height: 800,
+            alt: achivement.title,
+          },
+        ],
         type: "website",
       },
       twitter: {
-        images: {
-          url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
-          width: 300,
-          height: 300,
-          alt: achivement.title,
-        },
+        images: [
+          {
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            width: 300,
+            height: 300,
+            alt: achivement.title,
+          },
+          {
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            width: 800,
+            height: 800,
+            alt: achivement.title,
+          },
+        ],
       },
       icons: [
         {
