@@ -22,8 +22,8 @@ export async function generateMetadata({
       openGraph: {
         images: {
           url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
-          width: 800,
-          height: 800,
+          width: 300,
+          height: 300,
           alt: achivement.title,
         },
         type: "website",
@@ -31,8 +31,8 @@ export async function generateMetadata({
       twitter: {
         images: {
           url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
-          width: 800,
-          height: 800,
+          width: 300,
+          height: 300,
           alt: achivement.title,
         },
       },
