@@ -1,4 +1,4 @@
-export const steps: { title: string; description: string }[] = [
+export const steps: { title: string; description: string; img?: string }[] = [
   {
     title: "Sua segurança vale o esforço",
     description:
@@ -8,16 +8,19 @@ export const steps: { title: string; description: string }[] = [
     title: "Segurança em primeiro lugar",
     description:
       "Nosso algoritmo de geração é baseado em métodos científicos amplamente testados.",
+    img: "/onboarding/photo1.svg",
   },
   {
     title: "Compartilhe suas Conquistas",
     description:
       "Desenvolva comportamentos seguros enquanto se diverte completando os desafios.",
+    img: "/onboarding/photo2.svg",
   },
   {
     title: "Melhor ainda com um gerenciador",
     description:
       "Utilize nossa solução juntamente com o gerenciador de senhas Bitwarden.",
+    img: "/onboarding/photo3.png",
   },
   {
     title: "",
