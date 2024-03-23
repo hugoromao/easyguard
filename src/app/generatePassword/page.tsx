@@ -141,7 +141,7 @@ const GeneratePassword = ({
         push(
           "https://apps.apple.com/br/app/bitwarden-password-manager/id1137397744"
         );
-      }, 1000);
+      }, 10000);
       return;
     }
 
