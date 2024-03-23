@@ -1,5 +1,6 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
+import { isAndroid, isIOS } from "react-device-detect";
 import { enqueueSnackbar } from "notistack";
 import {
   Button,
@@ -126,6 +127,29 @@ const GeneratePassword = ({
     }
   }
 
+  function openBitwarden() {
+    if (isAndroid) {
+      push(
+        "intent://bitwarden.com#Intent;scheme=https;package=com.x8bit.bitwarden;end"
+      );
+      return;
+    }
+
+    if (isIOS) {
+      push("bitwarden://");
+      setTimeout(() => {
+        push(
+          "https://apps.apple.com/br/app/bitwarden-password-manager/id1137397744"
+        );
+      }, 1000);
+      return;
+    }
+
+    enqueueSnackbar("Falha ao abrir o BitWarden: Plataforma não reconhecida", {
+      variant: "error",
+    });
+  }
+
   useEffect(() => {
     onClose();
   }, []);
@@ -180,6 +204,10 @@ const GeneratePassword = ({
         </span>
 
         {data ? <PasswordStrength entropy={data.entropy} /> : null}
+
+        <Button variant="solid" color="secondary" onPress={openBitwarden}>
+          Abrir Bitwarden
+        </Button>
 
         <Button
           fullWidth

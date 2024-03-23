@@ -27,6 +27,7 @@
     "puppeteer": "^22.4.1",
     "react": "^18",
     "react-confetti": "^6.1.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18",
     "react-hook-form": "^7.49.3",
     "react-hotjar": "^6.2.0"
