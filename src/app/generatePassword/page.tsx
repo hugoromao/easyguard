@@ -137,11 +137,6 @@ const GeneratePassword = ({
 
     if (isIOS) {
       push("bitwarden://");
-      setTimeout(() => {
-        push(
-          "https://apps.apple.com/br/app/bitwarden-password-manager/id1137397744"
-        );
-      }, 10000);
       return;
     }
 
