@@ -9,10 +9,13 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 
 import { steps } from "./steps";
 import Image from "next/image";
+import { isAndroid, isIOS } from "react-device-detect";
+import { useRouter } from "next/navigation";
 
 const suezOne = Suez_One({ weight: ["400"], subsets: ["latin"] });
 
 const Onboarding = () => {
+  const { push } = useRouter();
   // eslint-disable-next-line no-unused-vars
   const [_, setShowOnboarding] = useLocalStorage("showOnboarding", true);
 
@@ -25,6 +28,20 @@ const Onboarding = () => {
 
   function finishOnboarding() {
     setShowOnboarding(false);
+  }
+
+  function downloadBitWarden() {
+    if (isAndroid) {
+      push("https://play.google.com/store/apps/details?id=com.x8bit.bitwarden");
+      return;
+    }
+    if (isIOS) {
+      push(
+        "https://apps.apple.com/br/app/bitwarden-password-manager/id1137397744"
+      );
+      return;
+    }
+    push("https://bitwarden.com/download/");
   }
 
   return (
@@ -145,13 +162,9 @@ const Onboarding = () => {
           </motion.p>
 
           {activeStep === 3 ? (
-            <a
-              href="https://bitwarden.com/download/"
-              target="_blank"
-              className="w-fit"
-            >
-              <Button color="secondary">Baixar BitWarden</Button>
-            </a>
+            <Button color="secondary" onPress={downloadBitWarden}>
+              Baixar BitWarden
+            </Button>
           ) : null}
 
           {isLastStep ? (

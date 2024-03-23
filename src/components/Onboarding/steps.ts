@@ -19,7 +19,7 @@ export const steps: { title: string; description: string; img?: string }[] = [
   {
     title: "Melhor ainda com um gerenciador",
     description:
-      "Utilize nossa solução juntamente com o gerenciador de senhas Bitwarden.",
+      "Você não precisa decorar tudo. Utilize nossa solução juntamente com o gerenciador de senhas Bitwarden.",
     img: "/onboarding/photo3.png",
   },
   {
