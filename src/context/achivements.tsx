@@ -15,6 +15,8 @@ export type AchivementsContextType = {
   setHistory: Dispatch<SetStateAction<HistoryItem[]>>;
   completedAchievements: number[];
   setCompletedAchievements: Dispatch<SetStateAction<number[]>>;
+  // eslint-disable-next-line no-unused-vars
+  sendCongratsSnack: (achivementId: number) => void;
 };
 
 export type Achievement = {
@@ -30,6 +32,7 @@ export const AchivementsContextDefaultValues: AchivementsContextType = {
   setHistory: () => ({}),
   completedAchievements: [],
   setCompletedAchievements: () => ({}),
+  sendCongratsSnack: () => ({}),
 };
 
 export const AchivementsContext = createContext<AchivementsContextType>(
@@ -45,15 +48,22 @@ export const AchivementsProvider: React.FC<{ children: React.ReactNode }> = ({
   >("completedAchievements", []);
 
   function onLocalStorageChange(history: HistoryItem[]) {
-    achievements.forEach(({ id, description, title, activationFunction }) => {
+    achievements.forEach(({ id, activationFunction }) => {
       if (
         activationFunction(history, completedAchievements) &&
         !completedAchievements.includes(id)
       ) {
-        enqueueSnackbar(`${title}:${description}`, { variant: "info" });
+        sendCongratsSnack(id);
         setCompletedAchievements((c) => [...c, id]);
       }
     });
+  }
+
+  function sendCongratsSnack(achivementId: number) {
+    const achv = achievements.find((a) => a.id === achivementId);
+    if (achv) {
+      enqueueSnackbar(`${achv.title}:${achv.description}`, { variant: "info" });
+    }
   }
 
   useEffect(() => {
@@ -68,6 +78,7 @@ export const AchivementsProvider: React.FC<{ children: React.ReactNode }> = ({
           setHistory,
           completedAchievements,
           setCompletedAchievements,
+          sendCongratsSnack,
         }}
       >
         {children}

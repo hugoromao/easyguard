@@ -29,7 +29,12 @@ export default function Achivement({
 }: AchivementType) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const { history, completedAchievements } = useContext(AchivementsContext);
+  const {
+    history,
+    completedAchievements,
+    setCompletedAchievements,
+    sendCongratsSnack,
+  } = useContext(AchivementsContext);
 
   const [wasCompleted, setWasCompleted] = useState(
     completedAchievements.includes(id)
@@ -55,6 +60,11 @@ export default function Achivement({
     }
   }
 
+  function completeAchivement() {
+    setCompletedAchievements((a) => [...a, id]);
+    sendCongratsSnack(id);
+  }
+
   useEffect(() => {
     setWasCompleted(completedAchievements.includes(id));
   }, [completedAchievements]);
@@ -78,6 +88,16 @@ export default function Achivement({
         <span className="flex flex-col gap-2 text-start w-full">
           <strong className="mt-auto text-foreground-600">{title}</strong>
           <p className="text-sm text-foreground-600">{description}</p>
+
+          {!wasCompleted && id !== 10 ? (
+            <Button
+              variant="solid"
+              color="primary"
+              onPress={completeAchivement}
+            >
+              Completar desafio
+            </Button>
+          ) : null}
           <Progress
             aria-label={`${title}-progress`}
             value={getProgress(history, completedAchievements) * 100}
