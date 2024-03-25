@@ -2,8 +2,8 @@
 import React from "react";
 
 import Head from "next/head";
-import { Button } from "@nextui-org/react";
-import { KeyIcon } from "@heroicons/react/24/outline";
+import { Button, Tooltip } from "@nextui-org/react";
+import { KeyIcon, QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
 import Base from "@/components/Base";
 import Tips from "@/components/Tips";
@@ -22,9 +22,26 @@ const Home = () => {
 
       <div className="overflow-auto">
         <div className="flex w-full h-1/3 relative p-6 bg-[#185449]">
-          <span className="text-[28px] text-white font-semibold w-full max-w-2xl mx-auto">
-            <h1 className="text-[#84E1A1]">Gerador de Senhas</h1>
-            <h1>Gamificado</h1>
+          <span className="flex text-[28px] text-white font-semibold w-full max-w-2xl mx-auto justify-between">
+            <span className="flex flex-col">
+              <h1 className="text-[#84E1A1]">Gerador de Senhas</h1>
+              <h1>Gamificado</h1>
+            </span>
+
+            <a
+              href="https://garnet-reindeer-e13.notion.site/Gerenciador-de-Senhas-Gamificado-Manual-passo-a-passo-f9cecd0d65af4f0cb1cadbc77d2c039d?pvs=4"
+              target="_blank"
+            >
+              <Tooltip content="Tutorial">
+                <Button variant="light" isIconOnly>
+                  <QuestionMarkCircleIcon
+                    width={24}
+                    height={24}
+                    color="#84E1A1"
+                  />
+                </Button>
+              </Tooltip>
+            </a>
           </span>
 
           <Button
