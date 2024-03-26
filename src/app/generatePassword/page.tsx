@@ -164,6 +164,7 @@ const GeneratePassword = ({
 
         <Input
           variant="bordered"
+          name="password"
           className="font-mono"
           value={data.password || ""}
           onChange={onPasswordFieldChange}

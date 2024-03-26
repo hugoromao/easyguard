@@ -65,7 +65,12 @@ export default function Achivement({
 
   return (
     <>
-      <Card isPressable onClick={onOpen} className="flex flex-col p-4">
+      <Card
+        aria-details={wasCompleted ? "completed" : "inprogress"}
+        isPressable
+        onClick={onOpen}
+        className="flex flex-col p-4"
+      >
         <Image
           src={wasCompleted ? badge.image.url : "/badges/default.jpg"}
           width={80}
@@ -81,6 +86,7 @@ export default function Achivement({
 
           {!wasCompleted && id !== 10 ? (
             <Button
+              aria-label="Completar desafio"
               variant="solid"
               color="primary"
               onPress={completeAchivement}

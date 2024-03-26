@@ -227,6 +227,7 @@ const Onboarding = () => {
               className="bg-[#84E1A1]"
               size="lg"
               onPress={() => setActiveStep((s) => s + 1)}
+              aria-label="Próxima página"
             >
               <ArrowRightIcon height={24} color="#095028" />
             </Button>

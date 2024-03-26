@@ -13,7 +13,10 @@
     "test:cov": "jest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cypress:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:test": "start-server-and-test dev http://localhost:3000 cy:run"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
@@ -49,13 +52,16 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "cypress": "^13.7.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-storybook": "^0.6.15",
     "husky": "^9.0.11",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
+    "start-server-and-test": "^2.0.3",
     "storybook": "^7.6.8",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",

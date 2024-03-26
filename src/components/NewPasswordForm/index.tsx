@@ -226,6 +226,7 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
                   {words.map(({ value, error }, index) => (
                     <span key={index} className="flex gap-2">
                       <Input
+                        name={`Palavra ${index + 1}`}
                         type="text"
                         label={`Palavra ${index + 1}`}
                         size="sm"
@@ -241,6 +242,7 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
                           variant="bordered"
                           isIconOnly
                           size="lg"
+                          name={`Remover Palavra ${index + 1}`}
                           onClick={() => removeWord(index)}
                           aria-label="remove"
                         >
@@ -264,6 +266,7 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
                     <Input
                       key={index}
                       type="number"
+                      name={`Número ${index + 1}`}
                       label={`Número ${index + 1}`}
                       size="sm"
                       pattern="[0-9]*"
@@ -281,6 +284,7 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
                         isIconOnly
                         size="lg"
                         onClick={() => removeNumber(index)}
+                        name={`Remover Número ${index + 1}`}
                         aria-label="remove"
                       >
                         <TrashIcon color="#EF5350" height={24} />
