@@ -22,13 +22,13 @@ export async function generateMetadata({
       openGraph: {
         images: [
           {
-            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.url}`,
             width: 300,
             height: 300,
             alt: achivement.title,
           },
           {
-            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.url}`,
             width: 800,
             height: 800,
             alt: achivement.title,
@@ -39,13 +39,13 @@ export async function generateMetadata({
       twitter: {
         images: [
           {
-            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.url}`,
             width: 300,
             height: 300,
             alt: achivement.title,
           },
           {
-            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+            url: `https://gamified-password-generator.vercel.app${achivement.badge.image.url}`,
             width: 800,
             height: 800,
             alt: achivement.title,
@@ -54,7 +54,7 @@ export async function generateMetadata({
       },
       icons: [
         {
-          url: `https://gamified-password-generator.vercel.app${achivement.badge.image.smallUrl}`,
+          url: `https://gamified-password-generator.vercel.app${achivement.badge.image.url}`,
         },
       ],
     };
