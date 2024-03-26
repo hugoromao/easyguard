@@ -28,7 +28,7 @@ const Home = () => {
               <h1>Gamificado</h1>
             </span>
 
-            <a
+          <a
               href="https://garnet-reindeer-e13.notion.site/Gerenciador-de-Senhas-Gamificado-Manual-passo-a-passo-f9cecd0d65af4f0cb1cadbc77d2c039d?pvs=4"
               target="_blank"
             >

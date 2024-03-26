@@ -7,7 +7,6 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  Progress,
   useDisclosure,
 } from "@nextui-org/react";
 
@@ -24,17 +23,12 @@ export default function Achivement({
   id,
   title,
   description,
-  getProgress,
   badge,
 }: AchivementType) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const {
-    history,
-    completedAchievements,
-    setCompletedAchievements,
-    sendCongratsSnack,
-  } = useContext(AchivementsContext);
+  const { completedAchievements, setCompletedAchievements, sendCongratsSnack } =
+    useContext(AchivementsContext);
 
   const [wasCompleted, setWasCompleted] = useState(
     completedAchievements.includes(id)
@@ -73,15 +67,11 @@ export default function Achivement({
     <>
       <Card isPressable onClick={onOpen} className="flex flex-col p-4">
         <Image
-          src={wasCompleted ? badge.image.smallUrl : badge.image.pixelated}
+          src={wasCompleted ? badge.image.url : "/badges/default.jpg"}
           width={80}
           height={80}
           alt={badge.image.alt}
-          className={`rounded-full bg-foreground-200 mb-4 ${
-            wasCompleted ? "" : "grayscale"
-          }`}
-          placeholder="blur"
-          blurDataURL={badge.image.blurredUrl}
+          className={`mb-4 ${wasCompleted ? "" : "grayscale rounded-md"}`}
           quality={40}
         />
 
@@ -98,10 +88,6 @@ export default function Achivement({
               Completar desafio
             </Button>
           ) : null}
-          <Progress
-            aria-label={`${title}-progress`}
-            value={getProgress(history, completedAchievements) * 100}
-          />
         </span>
       </Card>
 
@@ -125,14 +111,12 @@ export default function Achivement({
                   </p>
                 )}
                 <Image
-                  src={wasCompleted ? badge.image.url : badge.image.pixelated}
-                  width={400}
-                  height={400}
-                  placeholder="blur"
-                  blurDataURL={badge.image.blurredUrl}
+                  src={wasCompleted ? badge.image.url : "/badges/default.jpg"}
+                  width={250}
+                  height={250}
                   alt={badge.image.alt}
                   quality={100}
-                  className={`rounded-md shadow-xl transition-all mt-2 ${
+                  className={`rounded-md transition-all mt-2 ${
                     wasCompleted ? "" : "grayscale"
                   }`}
                 />
@@ -159,6 +143,19 @@ export default function Achivement({
                     Compartilhe
                   </Button>
                 ) : null}
+
+                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+                  <a href="https://www.figma.com/community/file/997572063390575469">
+                    Alteos stickers (Community)
+                  </a>{" "}
+                  © Alteos{" "}
+                  <a
+                    href="https://creativecommons.org/licenses/by/4.0/"
+                    className="underline"
+                  >
+                    CC BY 4.0
+                  </a>
+                </span>
               </ModalBody>
             </>
           )}
