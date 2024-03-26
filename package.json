@@ -14,8 +14,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky",
-    "cypress:open": "cypress open",
-    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --record --key 2db55fb9-d816-42c5-bcba-612af1a09b5a",
     "cy:test": "npm run build && start-server-and-test start http://localhost:3000 cy:run"
   },
   "dependencies": {
