@@ -9,8 +9,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
-        run: yarn install
+        run: npm install
       - name: Run Jest tests
-        run: yarn test
+        run: npm run test
       - name: Run Cypress tests
-        run: yarn cy:test
+        run: npm run cy:test
