@@ -71,7 +71,7 @@ describe("Passwords flux", () => {
   });
 });
 
-describe.only("Badges", () => {
+describe("Badges", () => {
   it("should complete the achivements correctly", () => {
     cy.visit("http://localhost:3000/achivements");
 
