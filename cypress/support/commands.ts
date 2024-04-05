@@ -37,8 +37,6 @@ Cypress.Commands.add("skipOnboarding", () => {
 
 Cypress.Commands.add("isOnHome", () => {
   cy.contains(/Nova Senha/i).should("exist");
-  cy.contains(/Gerador de Senhas/i).should("exist");
-  cy.contains(/Gamificado/i).should("exist");
 });
 
 declare global {

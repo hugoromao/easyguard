@@ -13,7 +13,7 @@ export default function Achivements() {
           Conquistas
         </h1>
 
-        <section className="grid grid-cols-2 gap-2 w-full max-w-2xl mx-auto">
+        <section className="grid grid-cols-1 gap-2 w-full max-w-2xl mx-auto">
           {achievements.map((achivement) => (
             <Achivement key={achivement.id} {...achivement} />
           ))}
