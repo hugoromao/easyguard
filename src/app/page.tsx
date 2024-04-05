@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   if (achv_id && achivement) {
     return {
-      title: "Gerador de Senhas Gamificado",
+      title: "EasyGuard",
       description:
         "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
       openGraph: {
@@ -61,7 +61,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: "Gerador de Senhas Gamificado",
+    title: "EasyGuard",
     description:
       "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
     openGraph: {

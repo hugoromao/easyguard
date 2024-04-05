@@ -3,10 +3,10 @@ import { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "uxyD4sNRG3G6mA",
-    name: "Gerador de Senhas Gamificado",
+    name: "EasyGuard",
     description:
       "Proteja suas contas online com senhas seguras e memoráveis, geradas através de um processo personalizado e cientificamente testado.",
-    short_name: "Gerador de Senhas Gamificado",
+    short_name: "EasyGuard",
     theme_color: "#185449",
     background_color: "#FAFAFA",
     start_url: "/",

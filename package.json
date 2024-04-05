@@ -1,8 +1,7 @@
 {
-  "name": "gamified-password-generator",
+  "name": "easyguard",
   "packageManager": "yarn@4.1.0",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,7 +14,7 @@
     "build-storybook": "storybook build",
     "prepare": "husky",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --record --key 2db55fb9-d816-42c5-bcba-612af1a09b5a",
+    "cy:run": "./node_modules/.bin/cypress run --record --key 2db55fb9-d816-42c5-bcba-612af1a09b5a",
     "cy:test": "npm run build && start-server-and-test start http://localhost:3000 cy:run"
   },
   "dependencies": {
