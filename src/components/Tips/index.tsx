@@ -5,9 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Tips = () => {
   const tips = [
-    "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente.",
-    "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres).",
-    "Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais ou significativas para o usuário.",
+    "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente",
+    "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres)",
+    "Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais",
+    "Senhas com frases longas são mais fáceis de memorizar e são mais seguras por causa de seu tamanho",
+    'Evite usar a mesma senha em várias contas. Utilize um <a href="https://bitwarden.com/download/" class="text-blue-500 font-semibold underline">gerenciador de senhas</a>',
+    "Não utilize padrões de teclado em suas senhas (Ex. QWERTY)"
   ];
 
   const [tipIndex, setTipIndex] = useState(-1);
@@ -55,9 +58,8 @@ const Tips = () => {
               transition={{ duration: 0.5 }}
               aria-label="tip"
               className="text-foreground-700"
-            >
-              {tips[tipIndex]}
-            </motion.p>
+              dangerouslySetInnerHTML={{ __html: tips[tipIndex] }}
+            />
           }
         </AnimatePresence>
       </Card>
