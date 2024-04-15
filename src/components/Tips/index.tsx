@@ -5,12 +5,18 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Tips = () => {
   const tips = [
-    "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente",
-    "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres)",
-    "Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais",
-    "Senhas com frases longas são mais fáceis de memorizar e são mais seguras por causa de seu tamanho",
-    'Evite usar a mesma senha em várias contas. Utilize um <a href="https://bitwarden.com/download/" class="text-blue-500 font-semibold underline">gerenciador de senhas</a>',
-    "Não utilize padrões de teclado em suas senhas (Ex. QWERTY)"
+    "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente.",
+    "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres).",
+    "Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais.",
+    "Senhas com frases longas são mais fáceis de memorizar e são mais seguras por causa de seu tamanho.",
+    'Evite usar a mesma senha em várias contas. Utilize um <a href="https://bitwarden.com/download/" class="text-blue-500 font-semibold underline">gerenciador de senhas</a>.',
+    "Não utilize padrões de teclado em suas senhas (Ex. QWERTY).",
+    "Sob nenhuma hipótese compartilhe suas senhas, mesmo com conhecidos ou familiares.",
+    "O requisito mais importante para uma senha é seu tamanho.",
+    "Frases longas são ótimas senhas.",
+    "Nunca anote suas senhas em papéis ou aplicativos de conversa. Use sempre um gerenciador de senhas.",
+    "Senha curtas(Ex: 9g*E[&), independente dos caracteres escolhidos, são totalmente inseguras.",
+    "Uma senha pode ser constituida apenas por letras, desde que seja longa o suficiente. Por exemplo, uma senha com 16 caracteres.",
   ];
 
   const [tipIndex, setTipIndex] = useState(-1);
