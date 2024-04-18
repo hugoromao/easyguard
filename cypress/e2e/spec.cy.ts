@@ -50,7 +50,7 @@ describe("Passwords flux", () => {
 
     cy.url().should(
       "eq",
-      "http://localhost:3000/generatePassword?words=%5B%22O+Sol%22%2C%22sussurou%22%2C%22segredos%22%2C%22suaves%22%2C%22ao+vento%22%2C%22brando%22%2C%22da+manh%C3%A3%22%5D&numbers=%5B%2214%22%2C%222016%22%2C%221080%22%2C%222048%22%5D"
+      "http://localhost:3000/generatePassword?words=%5B%22OSol%22%2C%22sussurou%22%2C%22segredos%22%2C%22suaves%22%2C%22aovento%22%2C%22brando%22%2C%22damanh%C3%A3%22%5D&numbers=%5B%2214%22%2C%222016%22%2C%221080%22%2C%222048%22%5D"
     );
 
     cy.get("[name='password']").then(($input) => {

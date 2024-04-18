@@ -252,7 +252,7 @@ describe("<NewPasswordForm", () => {
 
     expect(push).toHaveBeenCalledTimes(1);
     expect(push).toHaveBeenCalledWith(
-      "generatePassword?words=%5B%22Palavra+1%22%2C%22Palavra+2%22%2C%22Palavra+3%22%2C%22Palavra+4%22%5D&numbers=%5B%22123%22%2C%22456%22%5D"
+      "generatePassword?words=%5B%22Palavra1%22%2C%22Palavra2%22%2C%22Palavra3%22%2C%22Palavra4%22%5D&numbers=%5B%22123%22%2C%22456%22%5D"
     );
   });
 });

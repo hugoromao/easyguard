@@ -4,17 +4,17 @@ import {
   Button,
   Input,
   Modal,
+  Spinner,
   ModalBody,
-  ModalContent,
   ModalFooter,
   ModalHeader,
-  Spinner,
+  ModalContent,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
 import { validateUserNumbers, validateUserWords } from "../../utils/passwd";
-import { useRouter } from "next/navigation";
 
 type NewPasswordFormProps = {
   isOpen: boolean;
@@ -132,7 +132,9 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
       // TODO: Hash queryparams with bcrypt
       setLoading(true);
 
-      const wordsQueryParam = JSON.stringify(words.map((w) => w.value));
+      const wordsQueryParam = JSON.stringify(
+        words.map((w) => w.value.replaceAll(" ", ""))
+      );
       const numbersQueryParam = JSON.stringify(numbers.map((n) => n.value));
 
       const queryParams = new URLSearchParams({
