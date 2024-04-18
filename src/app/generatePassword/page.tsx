@@ -157,6 +157,10 @@ const GeneratePassword = ({
     );
   }
 
+  const isInsecurePassword = data.password
+    ? data.entropy < 60 || data.password.length < 16
+    : true;
+
   return (
     <>
       <main className="h-screen flex flex-col justify-center gap-4 p-4 w-full max-w-2xl mx-auto">
@@ -189,8 +193,8 @@ const GeneratePassword = ({
           </Button>
           <Button
             fullWidth
-            isDisabled={data.entropy < 60}
-            color={data.entropy < 60 ? "danger" : "primary"}
+            isDisabled={isInsecurePassword}
+            color={isInsecurePassword ? "danger" : "primary"}
             variant="shadow"
             startContent={<DocumentDuplicateIcon height={20} />}
             onClick={copyToClipboard}
@@ -199,7 +203,12 @@ const GeneratePassword = ({
           </Button>
         </span>
 
-        {data ? <PasswordStrength entropy={data.entropy} /> : null}
+        {data && data.password ? (
+          <PasswordStrength
+            entropy={data.entropy}
+            passwordLength={data.password.length}
+          />
+        ) : null}
 
         <Button variant="solid" color="secondary" onPress={openBitwarden}>
           Abrir Bitwarden
