@@ -1,25 +1,28 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, Skeleton } from "@nextui-org/react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Tips = () => {
-  const tips = [
-    "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente.",
-    "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres).",
-    "Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais.",
-    "Senhas com frases longas são mais fáceis de memorizar e são mais seguras por causa de seu tamanho.",
-    'Evite usar a mesma senha em várias contas. Utilize um <a href="https://bitwarden.com/download/" class="text-blue-500 font-semibold underline">gerenciador de senhas</a>.',
-    "Não utilize padrões de teclado em suas senhas (Ex. QWERTY).",
-    "Sob nenhuma hipótese compartilhe suas senhas, mesmo com conhecidos ou familiares.",
-    "O requisito mais importante para uma senha é seu tamanho.",
-    "Frases longas são ótimas senhas.",
-    "Nunca anote suas senhas em papéis ou aplicativos de conversa. Use sempre um gerenciador de senhas.",
-    "Senha curtas(Ex: 9g*E[&), independente dos caracteres escolhidos, são totalmente inseguras.",
-    "Uma senha pode ser constituida apenas por letras, desde que seja longa o suficiente. Por exemplo, uma senha com 16 caracteres.",
-  ];
+const delay = 12000;
 
+const tips = [
+  "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente.",
+  "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres).",
+  "Para garantir a segurança de uma senha, é essencial evitar incluir informações pessoais.",
+  "Senhas com frases longas são mais fáceis de memorizar e são mais seguras por causa de seu tamanho.",
+  'Evite usar a mesma senha em várias contas. Utilize um <a href="https://bitwarden.com/download/" class="text-blue-500 font-semibold underline">gerenciador de senhas</a>.',
+  "Não utilize padrões de teclado em suas senhas (Ex. QWERTY).",
+  "Sob nenhuma hipótese compartilhe suas senhas, mesmo com conhecidos ou familiares.",
+  "O requisito mais importante para uma senha é seu tamanho.",
+  "Frases longas são ótimas senhas.",
+  "Nunca anote suas senhas em papéis ou aplicativos de conversa. Use sempre um gerenciador de senhas.",
+  "Senha curtas(Ex: 9g*E[&), independente dos caracteres escolhidos, são totalmente inseguras.",
+  "Uma senha pode ser constituida apenas por letras, desde que seja longa o suficiente. Por exemplo, uma senha com 16 caracteres.",
+];
+
+const Tips = () => {
   const [tipIndex, setTipIndex] = useState(-1);
+  const intervalId = useRef<number | null>(null);
 
   function getNewTip() {
     const newIndex = Math.floor(Math.random() * tips.length);
@@ -28,7 +31,9 @@ const Tips = () => {
 
   useEffect(() => {
     getNewTip();
-    setInterval(getNewTip, 12000);
+    intervalId.current = window.setInterval(getNewTip, delay);
+
+    return () => clearInterval(intervalId.current!);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,10 +42,23 @@ const Tips = () => {
       <Skeleton aria-label="loading-tips" className="h-40 rounded-medium" />
     );
 
+  function changeTip() {
+    if (intervalId !== null) {
+      clearInterval(Number(intervalId.current));
+
+      getNewTip();
+      intervalId.current = window.setInterval(getNewTip, delay);
+    }
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <p className="text-gray-500">Você sabia?</p>
-      <Card className="grid grid-flow-col items-center gap-4 p-4">
+      <Card
+        className="grid grid-flow-col items-center justify-start gap-4 p-4"
+        isPressable
+        onPress={changeTip}
+      >
         <svg
           width="32"
           height="32"
@@ -63,7 +81,7 @@ const Tips = () => {
               exit={{ x: 5, opacity: 0 }}
               transition={{ duration: 0.5 }}
               aria-label="tip"
-              className="text-foreground-700"
+              className="text-foreground-700 text-left"
               dangerouslySetInnerHTML={{ __html: tips[tipIndex] }}
             />
           }
