@@ -106,6 +106,14 @@ export default function Settings() {
               </motion.li>
 
               <motion.li variants={item}>
+                <Link href="/countdown">
+                  <Button variant="flat" fullWidth>
+                    Countdown
+                  </Button>
+                </Link>
+              </motion.li>
+
+              <motion.li variants={item}>
                 <Button
                   variant="flat"
                   fullWidth
