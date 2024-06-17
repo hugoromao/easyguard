@@ -215,7 +215,7 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
         </ModalHeader>
 
         <ModalBody className="pb-0">
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} autoComplete="off">
             {step === 1 ? (
               <>
                 <div className="flex flex-col gap-2">
