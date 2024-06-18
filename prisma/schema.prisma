@@ -67,3 +67,21 @@ model TypingTest {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+model CombinatedTest {
+  id               Int      @id @default(autoincrement())
+  egPassword       String
+  btPassword       String
+  egTypedPassword1 String
+  egTypedPassword2 String
+  egTypedPassword3 String
+  egTypedPassword4 String
+  egTypedPassword5 String
+  btTypedPassword1 String
+  btTypedPassword2 String
+  btTypedPassword3 String
+  btTypedPassword4 String
+  btTypedPassword5 String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

@@ -32,6 +32,7 @@ export const passwordConfig = {
 };
 
 const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
+  const isDevelopment = process.env.NODE_ENV === "development";
   const btPassword1 = generator.generate(passwordConfig);
   const btPassword2 = generator.generate(passwordConfig);
 
@@ -121,7 +122,11 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     />,
     <>
       <strong>Vídeo 1</strong>
-      <video controls autoPlay onEnded={() => setStep((s) => s + 1)}>
+      <video
+        controls={isDevelopment}
+        autoPlay
+        onEnded={() => setStep((s) => s + 1)}
+      >
         <source src="/videos/1.mp4" type="video/mp4" />
       </video>
     </>,
@@ -139,7 +144,11 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     />,
     <>
       <strong>Vídeo 2</strong>
-      <video controls autoPlay onEnded={() => setStep((s) => s + 1)}>
+      <video
+        controls={isDevelopment}
+        autoPlay
+        onEnded={() => setStep((s) => s + 1)}
+      >
         <source src="/videos/2.mp4" type="video/mp4" />
       </video>
     </>,

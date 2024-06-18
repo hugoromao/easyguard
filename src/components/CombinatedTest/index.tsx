@@ -1,13 +1,18 @@
-"use client";
+import React, { useState } from "react";
 
-import React, { useEffect, useState } from "react";
 import generator from "generate-password";
-import { Button, Input, useDisclosure } from "@nextui-org/react";
 
 import NewPasswordForm, { Input as InputType } from "../NewPasswordForm";
-import { generatePassword } from "@/utils/passwd";
+
 import { passwordConfig } from "../PasswordMemoryTest";
 import { useForm } from "react-hook-form";
+import { Button, Input, useDisclosure } from "@nextui-org/react";
+import { generatePassword } from "@/utils/passwd";
+import Countdown from "../Countdown";
+
+type CombinatedTestProps = {
+  onFinishTest: () => void;
+};
 
 type Inputs = {
   egTypedPassword1: string;
@@ -22,11 +27,8 @@ type Inputs = {
   btTypedPassword5: string;
 };
 
-type TypingTestProps = {
-  onFinishTest: () => void;
-};
-
-const TypingTest = ({ onFinishTest }: TypingTestProps) => {
+const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
+  const isDevelopment = process.env.NODE_ENV === "development";
   const btPassword = generator.generate(passwordConfig);
 
   const { register, handleSubmit } = useForm<Inputs>();
@@ -43,14 +45,16 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
       words.map((w) => w.value),
       numbers.map((n) => Number(n.value))
     );
+
     if (password.password) setEgPassword(password.password);
+
     setStep((s) => s + 1);
     onClose();
   }
 
   async function onSubmit(data: Inputs) {
     try {
-      await fetch("/api/tt", {
+      await fetch("/api/ct", {
         method: "POST",
         body: JSON.stringify({
           egPassword,
@@ -69,12 +73,24 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
 
   const steps = [
     <>
-      <p>Primeira senha: {egPassword}</p>
-
       <Button onPress={onOpen}>Criar primeira senha</Button>
     </>,
+    <Countdown
+      key="countdown"
+      passwords={[egPassword!]}
+      onCountdownEnds={() => setStep((s) => s + 1)}
+    />,
     <>
-      <h1>Senha escolhida: {egPassword}</h1>
+      <strong>Vídeo 3</strong>
+      <video
+        controls={isDevelopment}
+        autoPlay
+        onEnded={() => setStep((s) => s + 1)}
+      >
+        <source src="/videos/3.mp4" type="video/mp4" />
+      </video>
+    </>,
+    <>
       <Input {...register("egTypedPassword1")} />
       <Input {...register("egTypedPassword2")} />
       <Input {...register("egTypedPassword3")} />
@@ -82,9 +98,22 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
       <Input {...register("egTypedPassword5")} />
       <Button onClick={() => setStep((s) => s + 1)}>Próximo</Button>
     </>,
-    <></>,
+    <Countdown
+      key="countdown"
+      passwords={[btPassword]}
+      onCountdownEnds={() => setStep((s) => s + 1)}
+    />,
     <>
-      <h1>Senha escolhida: {btPassword}</h1>
+      <strong>Vídeo 4</strong>
+      <video
+        controls={isDevelopment}
+        autoPlay
+        onEnded={() => setStep((s) => s + 1)}
+      >
+        <source src="/videos/4.mp4" type="video/mp4" />
+      </video>
+    </>,
+    <>
       <Input {...register("btTypedPassword1")} />
       <Input {...register("btTypedPassword2")} />
       <Input {...register("btTypedPassword3")} />
@@ -93,10 +122,6 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
       <Button type="submit">Finalizar</Button>
     </>,
   ];
-
-  useEffect(() => {
-    if (step === 2) setStep((s) => s + 1);
-  }, [step]);
 
   return (
     <main className="flex flex-col gap-2">
@@ -111,4 +136,4 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
   );
 };
 
-export default TypingTest;
+export default CombinatedTest;

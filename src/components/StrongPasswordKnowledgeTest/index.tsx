@@ -35,7 +35,6 @@ const StrongPasswordKnowledTest = () => {
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(data: any) {
-    console.log(data);
     try {
       setLoading(true);
       await fetch("/api/spkt", {
