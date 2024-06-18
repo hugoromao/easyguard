@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Confetti from "react-confetti";
@@ -14,6 +14,20 @@ import Link from "next/link";
 
 const Estudo = () => {
   const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      const message = "Your work will be lost.";
+      event.returnValue = message;
+      return message;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col p-4 h-[calc(100dvh)]">
