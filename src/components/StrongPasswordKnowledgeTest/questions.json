@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "question": "Para que uma senha seja forte basta ter caracteres variados, tais como letras, números e caracteres especiais."
+  },
+  {
+    "id": 2,
+    "question": "Uma senha forte em relação a ataques de força bruta não pode ser constituída apenas por um tipo de caractere, tal como letras."
+  },
+  {
+    "id": 3,
+    "question": "Um dos principais requisitos para que uma senha seja forte é o seu tamanho (número de caracteres)."
+  },
+  {
+    "id": 4,
+    "question": "Uma senha forte em relação ao ataque de dicionário não pode ter apenas uma palavra com significado para o usuário, tal como o nome de um animal de estimação."
+  },
+  {
+    "id": 5,
+    "question": "Senhas fortes devem ser trocadas semanalmente, sob pena de o usuário ficar em situação de risco."
+  },
+  {
+    "id": 6,
+    "question": "É uma estratégia adequada, para criar uma senha forte, utilizar várias palavras combinadas de línguas diferentes."
+  },
+  {
+    "id": 7,
+    "question": "Para que uma senha seja forte basta que ela seja difícil de lembrar."
+  },
+  {
+    "id": 8,
+    "question": "Mesmo que uma senha seja considerada forte, não é seguro utilizá-la em várias contas."
+  },
+  {
+    "id": 9,
+    "question": "Para que uma senha seja forte ela deve ser exclusivamente gerada por um computador."
+  },
+  {
+    "id": 10,
+    "question": "Mesmo que uma senha seja considerada forte, é aconselhável que o usuário a troque periodicamente."
+  },
+  {
+    "id": 11,
+    "question": "Para sistemas robustos como Facebook ou Instagram, que apresentam muitas camadas de segurança, não é preciso se preocupar com a força da senha do usuário."
+  },
+  {
+    "id": 12,
+    "question": "É seguro manter a senha padrão gerada por um sistema porque profissionais de segurança, que ajudaram a criar esse sistema, garantem que senhas padrão sejam fortes."
+  },
+  {
+    "id": 13,
+    "question": "Para serviços importantes, como Internet Banking, é recomendado criar a senha mais complexa possível e anotá-la em um local seguro, como a agenda pessoal ou em um bloco de notas do seu computador pessoal, para evitar esquecê-la."
+  },
+  {
+    "id": 14,
+    "question": "Uma boa forma de armazenar senhas é usar um gerenciador de senhas, que se baseia no uso de uma senha mestra para proteger todas as demais."
+  },
+  {
+    "id": 15,
+    "question": "Não é seguro utilizar a mesma senha para redes sociais pessoais e contas de trabalho, mesmo que a senha seja forte."
+  },
+  {
+    "id": 16,
+    "question": "Uma prática recomendada na criação de senhas fortes é a utilização de padrões de teclado, tais como QWERTY ou QAZWSX."
+  },
+  {
+    "id": 17,
+    "question": "A senha a seguir não é forte: {)/$<$+]+-_!@%?#."
+  },
+  {
+    "id": 18,
+    "question": "É recomendável usar frases como senha, desde que sejam longas e complexas."
+  },
+  {
+    "id": 19,
+    "question": "É recomendável compartilhar sua senha com familiares da sua confiança, para que você não corra o risco de esquecê-la, ficando sem acesso a uma conta importante."
+  },
+  {
+    "id": 20,
+    "question": "A senha a seguir é forte: 9g*E[&"
+  }
+]

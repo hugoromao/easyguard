@@ -114,6 +114,14 @@ export default function Settings() {
               </motion.li>
 
               <motion.li variants={item}>
+                <Link href="/estudo">
+                  <Button variant="flat" fullWidth>
+                    Estudo
+                  </Button>
+                </Link>
+              </motion.li>
+
+              <motion.li variants={item}>
                 <Button
                   variant="flat"
                   fullWidth
