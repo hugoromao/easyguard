@@ -10,7 +10,7 @@ import {
   ModalHeader,
   ModalContent,
 } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+
 import { enqueueSnackbar } from "notistack";
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
@@ -19,6 +19,8 @@ import { validateUserNumbers, validateUserWords } from "../../utils/passwd";
 type NewPasswordFormProps = {
   isOpen: boolean;
   onOpenChange: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onFinish: (words: Input[], numbers: Input[]) => void;
 };
 
 export type Input = {
@@ -26,9 +28,11 @@ export type Input = {
   error?: string;
 };
 
-const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
-  const { push } = useRouter();
-
+const NewPasswordForm = ({
+  isOpen,
+  onOpenChange,
+  onFinish,
+}: NewPasswordFormProps) => {
   const [step, setStep] = useState(1);
   const [words, setWords] = useState<Input[]>([
     { value: "", error: undefined },
@@ -131,18 +135,7 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
     if (!hasErrors) {
       // TODO: Hash queryparams with bcrypt
       setLoading(true);
-
-      const wordsQueryParam = JSON.stringify(
-        words.map((w) => w.value.replaceAll(" ", ""))
-      );
-      const numbersQueryParam = JSON.stringify(numbers.map((n) => n.value));
-
-      const queryParams = new URLSearchParams({
-        words: wordsQueryParam,
-        numbers: numbersQueryParam,
-      }).toString();
-
-      push(`generatePassword?${queryParams}`);
+      onFinish(words, numbers);
     }
   }
 
@@ -279,6 +272,7 @@ const NewPasswordForm = ({ isOpen, onOpenChange }: NewPasswordFormProps) => {
                       }
                       isInvalid={!!error}
                       errorMessage={error}
+                      autoFocus={index === 0}
                     />
                     {index >= 2 ? (
                       <Button

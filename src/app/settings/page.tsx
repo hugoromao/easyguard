@@ -73,6 +73,14 @@ export default function Settings() {
               animate="show"
             >
               <motion.li variants={item}>
+                <Link href="/estudo">
+                  <Button variant="flat" fullWidth>
+                    Testes científicos
+                  </Button>
+                </Link>
+              </motion.li>
+
+              <motion.li variants={item}>
                 <Button
                   variant="flat"
                   fullWidth

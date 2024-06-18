@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model StrongPasswordKnowledgeTest {
+  id        Int      @id @default(autoincrement())
+  name      String
+  qd1       String
+  qd2       String
+  qo1       String
+  qo2       String
+  qo3       String
+  qo4       String
+  qo5       String
+  qo6       String
+  qo7       String
+  qo8       String
+  qo9       String
+  qo10      String
+  qo11      String
+  qo12      String
+  qo13      String
+  qo14      String
+  qo15      String
+  qo16      String
+  qo17      String
+  qo18      String
+  qo19      String
+  qo20      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MemoryTest {
+  id               Int      @id @default(autoincrement())
+  egPassword1      String
+  egPassword2      String
+  btPassword1      String
+  btPassword2      String
+  egTypedPassword1 String
+  egTypedPassword2 String
+  btTypedPassword1 String
+  btTypedPassword2 String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model TypingTest {
+  id               Int      @id @default(autoincrement())
+  egPassword       String
+  btPassword       String
+  egTypedPassword1 String
+  egTypedPassword2 String
+  egTypedPassword3 String
+  egTypedPassword4 String
+  egTypedPassword5 String
+  btTypedPassword1 String
+  btTypedPassword2 String
+  btTypedPassword3 String
+  btTypedPassword4 String
+  btTypedPassword5 String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model CombinatedTest {
+  id               Int      @id @default(autoincrement())
+  egPassword       String
+  btPassword       String
+  egTypedPassword1 String
+  egTypedPassword2 String
+  egTypedPassword3 String
+  egTypedPassword4 String
+  egTypedPassword5 String
+  btTypedPassword1 String
+  btTypedPassword2 String
+  btTypedPassword3 String
+  btTypedPassword4 String
+  btTypedPassword5 String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
