@@ -29,7 +29,13 @@ const Question = ({ id, question, register }: QuestionProps) => {
   );
 };
 
-const StrongPasswordKnowledTest = () => {
+type StrongPasswordKnowledTestProps = {
+  onFinishTest: () => void;
+};
+
+const StrongPasswordKnowledTest = ({
+  onFinishTest,
+}: StrongPasswordKnowledTestProps) => {
   const { register, handleSubmit } = useForm();
 
   const [loading, setLoading] = useState(false);
@@ -44,6 +50,7 @@ const StrongPasswordKnowledTest = () => {
           "Content-Type": "application/json",
         },
       });
+      onFinishTest();
     } catch (err) {
       console.error(err);
     } finally {
