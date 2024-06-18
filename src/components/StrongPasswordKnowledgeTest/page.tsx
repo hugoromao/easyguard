@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import { Button, Card, Input, Radio, RadioGroup } from "@nextui-org/react";
 
@@ -17,11 +17,11 @@ const Question = ({ id, question, register }: QuestionProps) => {
   return (
     <Card className="p-4">
       <p className="mb-2">{`${id} - ${question}`}</p>
-      <RadioGroup name={`${id}`}>
-        <Radio value="true" {...register(`${id}`, { required: true })}>
+      <RadioGroup name={`qo${id}`}>
+        <Radio value="true" {...register(`qo${id}`, { required: true })}>
           Verdadeiro
         </Radio>
-        <Radio value="false" {...register(`${id}`, { required: true })}>
+        <Radio value="false" {...register(`qo${id}`, { required: true })}>
           Falso
         </Radio>
       </RadioGroup>
@@ -32,8 +32,24 @@ const Question = ({ id, question, register }: QuestionProps) => {
 const StrongPasswordKnowledTest = () => {
   const { register, handleSubmit } = useForm();
 
-  function onSubmit(data: any) {
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(data: any) {
     console.log(data);
+    try {
+      setLoading(true);
+      await fetch("/api/spkt", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -41,7 +57,10 @@ const StrongPasswordKnowledTest = () => {
       className="flex flex-col gap-2 py-6"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <strong>Questão discursiva</strong>
+      <p>Nome completo</p>
+      <Input placeholder="Digite aqui" {...register("name")} />
+
+      <strong className="mt-4">Questão discursiva</strong>
       <p>
         Crie uma senha que você considere forte e adequada para utilizar no seu
         dia a dia.
@@ -51,14 +70,14 @@ const StrongPasswordKnowledTest = () => {
       <p>Justifique por quais motivos essa senha é forte.</p>
       <Input placeholder="Digite aqui" {...register("qd2")} />
 
-      <strong>Questões objetivas</strong>
+      <strong className="mt-4">Questões objetivas</strong>
       <p>Responda com verdadeiro ou falso.</p>
 
       {questionsData.map(({ id, question }) => (
         <Question key={id} id={id} question={question} register={register} />
       ))}
 
-      <Button type="submit" variant="solid" color="primary">
+      <Button type="submit" variant="solid" color="primary" isLoading={loading}>
         Próximo
       </Button>
     </form>
