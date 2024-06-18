@@ -23,14 +23,15 @@ type Inputs = {
   btTypedPassword2: string;
 };
 
+export const passwordConfig = {
+  length: 16,
+  lowercase: true,
+  numbers: true,
+  symbols: true,
+  uppercase: true,
+};
+
 const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
-  const passwordConfig = {
-    length: 16,
-    lowercase: true,
-    numbers: true,
-    symbols: true,
-    uppercase: true,
-  };
   const btPassword1 = generator.generate(passwordConfig);
   const btPassword2 = generator.generate(passwordConfig);
 
