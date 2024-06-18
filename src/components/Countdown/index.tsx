@@ -8,9 +8,10 @@ import { PlayIcon } from "@heroicons/react/24/outline";
 type CountdownProps = {
   passwords: string[];
   onCountdownEnds: () => void;
+  text?: string;
 };
 
-const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
+const Countdown = ({ text, passwords, onCountdownEnds }: CountdownProps) => {
   const countStart = process.env.NODE_ENV === "development" ? 10 : 180;
 
   const [count, { startCountdown }] = useCountdown({
@@ -34,6 +35,7 @@ const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
 
   return (
     <div className="w-full h-[-webkit-fill-available] flex flex-col items-center justify-center gap-4">
+      {text ? <p>{text}</p> : null}
       <p>Tempo restante(segundos): {count}</p>
       <Progress
         aria-label="time remaining"
@@ -42,6 +44,7 @@ const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
 
       {passwords.map((p, index) => (
         <Input
+          isReadOnly
           key={p}
           label={`Senha ${index + 1}`}
           type={isVisible ? "text" : "password"}
@@ -52,8 +55,12 @@ const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
       ))}
 
       <span className="flex gap-2">
-        <Button isIconOnly color="primary" onPress={startTest}>
-          <PlayIcon height={24} />
+        <Button
+          startContent={<PlayIcon height={24} />}
+          color="primary"
+          onPress={startTest}
+        >
+          INICIAR
         </Button>
       </span>
     </div>

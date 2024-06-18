@@ -63,6 +63,10 @@ const StrongPasswordKnowledTest = ({
       className="flex flex-col gap-2 py-6"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <h1 className="font-bold text-2xl">
+        Teste de conhecimento sobre senhas fortes
+      </h1>
+
       <p>Nome completo</p>
       <Input placeholder="Digite aqui" {...register("name")} />
 
