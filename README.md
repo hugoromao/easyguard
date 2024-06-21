@@ -51,7 +51,7 @@ Utilizamos uma sessão especial na aplicação para condução dos testes que en
 - Docker
 - Docker compose
 
-Faça o build da imagem e suba o container Docker utilizando o plugin docker-compose.
+Faça o build da imagem e suba o container Docker utilizando o plugin docker-compose. Certifique-se de que a porta 5400 está disponível.
 
 ```
 docker compose build
@@ -76,3 +76,5 @@ Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação e
 ```
 npm run dev
 ```
+
+Você pode acessar a aplicação a partir do endereço http://localhost:3000/. Os formulários dos testes podem ser acessados peloa página de configurações a partir do botão “Avaliação em laboratório”.
