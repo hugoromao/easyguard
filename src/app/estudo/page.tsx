@@ -54,7 +54,7 @@ const Estudo = () => {
             EasyGuard.
           </p>
           <p className="text-center text-gray-600 text-sm italic">
-            Duração média: Duas horas
+            Duração média: Uma hora e 30 minutos.
           </p>
 
           <Button variant="faded" onPress={() => setStep((s) => s + 1)}>

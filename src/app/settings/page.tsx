@@ -1,18 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { useContext, useState } from "react";
 
 import dayjs from "dayjs";
+import { motion } from "framer-motion";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
-import { motion } from "framer-motion";
 
 import Base from "@/components/Base";
 
 import { AchivementsContext } from "@/context/achivements";
 import { useLocalStorage } from "@uidotdev/usehooks";
-import Link from "next/link";
 
 export default function Settings() {
   // eslint-disable-next-line no-unused-vars
@@ -73,14 +73,6 @@ export default function Settings() {
               animate="show"
             >
               <motion.li variants={item}>
-                <Link href="/estudo">
-                  <Button variant="flat" fullWidth>
-                    Testes científicos
-                  </Button>
-                </Link>
-              </motion.li>
-
-              <motion.li variants={item}>
                 <Button
                   variant="flat"
                   fullWidth
@@ -135,6 +127,12 @@ export default function Settings() {
               </motion.li>
             </motion.ul>
           ) : null}
+
+          <Link href="/estudo">
+            <Button variant="flat" fullWidth>
+              Avaliação em laboratório
+            </Button>
+          </Link>
 
           <Button
             variant="flat"
