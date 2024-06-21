@@ -67,8 +67,8 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=publ
 Execute os seguintes comandos para gerar os tipos e as tabelas do banco.
 
 ```
-npm run prisma generate
-npm run prisma migrate deploy
+npx prisma generate
+npx prisma migrate deploy
 ```
 
 Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação escuta na porta 3000.
