@@ -8,7 +8,7 @@ Resumo do Artigo: _"Embora o uso de serviços on-line tenha aumentado substancia
 
 ## Resumo
 
-O gerador de senhas EasyGuard oferece uma estratégia para a criação de senhas fortes e memoráveis a partir de entradas significativas do usuário. Nosso objetivo principal é o desenvolvimento do comportamento de “Projetar senhas fortes”. Nesse repositório, apresentamos os links de acesso e
+O gerador de senhas EasyGuard oferece uma estratégia para a criação de senhas fortes e memoráveis a partir de entradas significativas do usuário. Nosso objetivo principal com essa aplicação é o desenvolvimento do comportamento de “Projetar senhas fortes”. Nesse repositório, apresentamos os links de acesso e
 instalação, os procedimentos para execução do projeto em máquina local e as configurações utilizadas durante a coleta de dados.
 
 ## Acesso público ao EasyGuard
@@ -48,8 +48,8 @@ Utilizamos uma sessão especial na aplicação para condução dos testes que en
 
 ### Requisitos
 
-- Docker
-- Docker Compose
+- Docker 26.1.1 ou mais recente
+- Docker Compose v2.27.0 ou mais recente
 
 Construa a imagem e suba o container Docker utilizando o Docker Compose. Certifique-se de que a porta 5400 está disponível:
 
