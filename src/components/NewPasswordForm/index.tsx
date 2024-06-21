@@ -265,7 +265,6 @@ const NewPasswordForm = ({
                       label={`Número ${index + 1}`}
                       size="sm"
                       pattern="[0-9]*"
-                      required
                       value={value}
                       onChange={(e) =>
                         onNumberInputChange(e.target.value, index)

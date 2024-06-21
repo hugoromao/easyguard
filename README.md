@@ -1,5 +1,7 @@
 # EasyGuard: Gerador de senhas seguras e memoráveis
 
+![EasyGuard](./public/survey1.png)
+
 Este repositório está vinculado ao artigo "Construção e teste de app gamificado gerador de senhas seguras e memoráveis: Um estudo exploratório em cibersegurança", de Hugo Lima Romão e Marcelo Henrique Oliveira Henklain.
 
 Resumo do Artigo: _"Embora o uso de serviços on-line tenha aumentado substancialmente na última década, a força das senhas criadas pelos usuários se manteve em níveis preocupantes. O objetivo deste estudo foi desenvolver e avaliar a eficiência de aplicativo gamificado em relação ao desenvolvimento do comportamento de “projetar senhas fortes”. Avaliamos os aspectos da ferramenta a partir de um estudo com cinco participantes durante o período de nove dias. Em comparação com os algoritmos de geração de senhas convencionais, verificamos que as senhas geradas por nossa aplicação desempenharam 40,89% melhor em teste de memorização, 12,19% melhor em teste de digitação e 15,63% melhor em teste combinado. Nossa abordagem se mostrou promissora no ensino de técnicas que combinam senhas fortes e mais memoráveis."_
@@ -26,7 +28,7 @@ git clone https://github.com/hugoromao/easyguard
 cd easyguard
 ```
 
-Instale as dependências do projeto
+Instale as dependências do projeto.
 
 ```
 npm install
@@ -38,7 +40,7 @@ Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação e
 npm run dev
 ```
 
-### Passos adicionais para execução dos testes de conhecimento sobre senhas fortes, memória, digitação e combinado.
+### Passos adicionais para execução dos testes descritos no artigo
 
 Utilizamos uma sessão especial na aplicação para condução dos testes que envolvem a avaliação das senhas geradas. Isso envolve a configuração de um servidor de banco de dados para o armazenamento dos resultados. Os códigos a seguir descrevem o passo a passo necessário para reprodução dos testes utilizados no artigo.
 
