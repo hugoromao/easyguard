@@ -1,6 +1,6 @@
 # EasyGuard: Gerador de senhas seguras e memoráveis
 
-![EasyGuard](./public/survey1.png)
+<p align="center"><img src="./public/survey1.png" alt="EasyGuard" height="200" /></p>
 
 Este repositório está vinculado ao artigo "Construção e teste de app gamificado gerador de senhas seguras e memoráveis: Um estudo exploratório em cibersegurança", de Hugo Lima Romão e Marcelo Henrique Oliveira Henklain.
 
