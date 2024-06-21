@@ -61,7 +61,7 @@ docker compose up -d
 Crie um arquivo `.env` e adicione o seguinte conteúdo:
 
 ```
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5400/postgres?schema=public"
 ```
 
 Execute os seguintes comandos para gerar os tipos e as tabelas do banco.
