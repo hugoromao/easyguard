@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EasyGuard: Gerador de senhas seguras e memoráveis
 
-## Getting Started
+Este repositório está vinculado ao artigo "Construção e teste de app gamificado gerador de senhas seguras e memoráveis: Um estudo exploratório em cibersegurança", de Hugo Lima Romão e Marcelo Henrique Oliveira Henklain.
 
-First, run the development server:
+Resumo do Artigo: _"Embora o uso de serviços on-line tenha aumentado substancialmente na última década, a força das senhas criadas pelos usuários se manteve em níveis preocupantes. O objetivo deste estudo foi desenvolver e avaliar a eficiência de aplicativo gamificado em relação ao desenvolvimento do comportamento de “projetar senhas fortes”. Avaliamos os aspectos da ferramenta a partir de um estudo com cinco participantes durante o período de nove dias. Em comparação com os algoritmos de geração de senhas convencionais, verificamos que as senhas geradas por nossa aplicação desempenharam 40,89% melhor em teste de memorização, 12,19% melhor em teste de digitação e 15,63% melhor em teste combinado. Nossa abordagem se mostrou promissora no ensino de técnicas que combinam senhas fortes e mais memoráveis."_
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Resumo
+
+O gerador de senhas EasyGuard oferece uma estratégia para a criação de senhas fortes e memoráveis a partir de entradas significativas do usuário. Nesse repositório, apresentamos os links de acesso e
+instação, os procedimentos para execução do projeto em máquina local e as configurações utilizadas durante a coleta de dados.
+
+## Acesso público ao EasyGuard
+
+O projeto proposto é disponibilizado de duas formas. A primeira, na Internet, como uma aplicação web, a partir do endereço <https://easyguard.vercel.app>. A segunda forma é por meio da instalação de um aplicativo Android, disponível no endereço <https://play.google.com/store/apps/details?id=app.hugoromao.gamified_password_generator.twa>.
+
+## Executando o projeto localmente
+
+### Requisitos
+
+- Node.js 18.20.3 ou mais recente.
+
+Clone o projeto em sua máquina.
+
+```
+git clone https://github.com/hugoromao/easyguard
+cd easyguard
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Instale as dependências do projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação escuta na porta 3000.
 
-## Learn More
+```
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Passos adicionais para execução dos testes de conhecimento sobre senhas fortes, memória, digitação e combinado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Utilizamos uma sessão especial na aplicação para condução dos testes que envolvem a avaliação das senhas geradas. Isso envolve a configuração de um servidor de banco de dados para o armazenamento dos resultados. Os códigos a seguir descrevem o passo a passo necessário para reprodução dos testes utilizados no artigo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Requisitos
 
-## Deploy on Vercel
+- Docker
+- Docker compose
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Faça o build da imagem e suba o container Docker utilizando o plugin docker-compose.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+docker compose build
+docker compose up -d
+```
+
+Crie um arquivo `.env` e adicione o seguinte conteúdo:
+
+```
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres?schema=public"
+```
+
+Execute os seguintes comandos para gerar os tipos e as tabelas do banco.
+
+```
+npm run prisma generate
+npm run prisma migrate dev
+```
+
+Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação escuta na porta 3000.
+
+```
+npm run dev
+```
