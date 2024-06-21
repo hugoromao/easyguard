@@ -34,11 +34,13 @@ Instale as dependências do projeto.
 npm install
 ```
 
-Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação escuta na porta 3000.
+Inicie o servidor web em versão de desenvolvimento.
 
 ```
 npm run dev
 ```
+
+Você pode acessar a aplicação a partir do endereço http://localhost:3000/. Por padrão a aplicação utiliza a porta 3000.
 
 ### Passos adicionais para execução dos testes descritos no artigo
 
@@ -66,7 +68,7 @@ Execute os seguintes comandos para gerar os tipos e as tabelas do banco.
 
 ```
 npm run prisma generate
-npm run prisma migrate dev
+npm run prisma migrate deploy
 ```
 
 Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação escuta na porta 3000.
