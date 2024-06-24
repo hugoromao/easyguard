@@ -11434,6 +11434,7 @@ __metadata:
     eslint-config-next: "npm:14.0.4"
     eslint-plugin-cypress: "npm:^2.15.1"
     eslint-plugin-storybook: "npm:^0.6.15"
+    fastest-levenshtein: "npm:^1.0.16"
     framer-motion: "npm:^11.2.11"
     generate-password: "npm:^1.7.1"
     husky: "npm:^9.0.11"
@@ -12626,6 +12627,13 @@ __metadata:
   version: 2.0.6
   resolution: "fast-levenshtein@npm:2.0.6"
   checksum: 10c0/111972b37338bcb88f7d9e2c5907862c280ebf4234433b95bc611e518d192ccb2d38119c4ac86e26b668d75f7f3894f4ff5c4982899afced7ca78633b08287c4
+  languageName: node
+  linkType: hard
+
+"fastest-levenshtein@npm:^1.0.16":
+  version: 1.0.16
+  resolution: "fastest-levenshtein@npm:1.0.16"
+  checksum: 10c0/7e3d8ae812a7f4fdf8cad18e9cde436a39addf266a5986f653ea0d81e0de0900f50c0f27c6d5aff3f686bcb48acbd45be115ae2216f36a6a13a7dbbf5cad878b
   languageName: node
   linkType: hard
 

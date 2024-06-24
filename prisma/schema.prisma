@@ -9,6 +9,7 @@ datasource db {
 
 model StrongPasswordKnowledgeTest {
   id        Int      @id @default(autoincrement())
+  posTest   Boolean  @default(false)
   name      String
   qd1       String
   qd2       String
@@ -84,4 +85,26 @@ model CombinatedTest {
   btTypedPassword5 String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+model UsabilitySurvey {
+  id        Int      @id @default(autoincrement())
+  name      String
+  q1        Int
+  q2        Int
+  q3        Int
+  q4        Int
+  q5        Int
+  q6        Int
+  q7        Int
+  q8        Int
+  q9        Int
+  q10       Int
+  q11       Int
+  q12       Int
+  q13       Int
+  q14       Int
+  q15       Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
