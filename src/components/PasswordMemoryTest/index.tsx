@@ -61,7 +61,7 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
   function onFinish1(words: InputType[], numbers: InputType[]) {
     const password = generatePassword(
       words.map((w) => w.value),
-      numbers.map((n) => Number(n.value))
+      numbers.map((n) => Number(n.value)),
     );
     if (password.password) setEgPassword1(password.password.slice(0, 16));
     onClose1();
@@ -70,7 +70,7 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
   function onFinish2(words: InputType[], numbers: InputType[]) {
     const password = generatePassword(
       words.map((w) => w.value),
-      numbers.map((n) => Number(n.value))
+      numbers.map((n) => Number(n.value)),
     );
     if (password.password) setEgPassword2(password.password.slice(0, 16));
     onClose2();
@@ -171,11 +171,13 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
       <Input
         isRequired
         placeholder="Digite a senha 1"
+        autoComplete="off"
         {...register("egTypedPassword1")}
       />
       <Input
         isRequired
         placeholder="Digite a senha 2"
+        autoComplete="off"
         {...register("egTypedPassword2")}
       />
       <Button
@@ -212,11 +214,13 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
       <Input
         isRequired
         placeholder="Digite a senha 1"
+        autoComplete="off"
         {...register("btTypedPassword1", { required: true })}
       />
       <Input
         isRequired
         placeholder="Digite a senha 2"
+        autoComplete="off"
         {...register("btTypedPassword2", { required: true })}
       />
       <Button type="submit" isLoading={loading}>
@@ -227,7 +231,11 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
 
   return (
     <main className="flex flex-col gap-2">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <form
+        autoComplete="off"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-2"
+      >
         {steps[step]}
       </form>
       <NewPasswordForm

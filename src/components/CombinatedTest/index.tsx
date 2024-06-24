@@ -40,11 +40,11 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
 
   function onCompletedNewPasswordForm(
     words: InputType[],
-    numbers: InputType[]
+    numbers: InputType[],
   ) {
     const password = generatePassword(
       words.map((w) => w.value),
-      numbers.map((n) => Number(n.value))
+      numbers.map((n) => Number(n.value)),
     );
 
     if (password.password) setEgPassword(password.password.slice(0, 16));
@@ -179,7 +179,11 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
 
   return (
     <main className="flex flex-col gap-2">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <form
+        autoComplete="off"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-2"
+      >
         {steps[step]}
       </form>
 
