@@ -17,7 +17,7 @@ O projeto proposto é disponibilizado de duas formas. A primeira, na Internet, c
 
 ## Executando o projeto localmente
 
-### Requisitos
+### Dependências
 
 - Node.js 18.20.3 ou mais recente.
 
