@@ -12,6 +12,7 @@ type TestChartProps = {
   colors?: string[];
   leftAxisLegend?: string;
   data: any[];
+  maxValue?: number;
 };
 
 const TestChart = ({
@@ -19,6 +20,7 @@ const TestChart = ({
   keys = ["EasyGuard", "Bitwarden"],
   colors = ["#4285F4", "#34A853"],
   leftAxisLegend = "Percentual de acerto",
+  maxValue = 100,
   data,
 }: TestChartProps) => {
   const chart = useRef<HTMLDivElement | null>(null);
@@ -50,6 +52,7 @@ const TestChart = ({
           margin={{ top: 5, bottom: 100, left: 50, right: 30 }}
           padding={0.3}
           colors={colors}
+          maxValue={maxValue}
           axisBottom={{
             tickSize: 5,
             tickPadding: 5,

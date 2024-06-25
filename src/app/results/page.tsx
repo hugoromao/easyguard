@@ -34,6 +34,7 @@ const index = async () => {
         keys={["Usabilidade", "Informação", "Interface"]}
         colors={["#4285F4", "#EA4335", "#FBBC04"]}
         leftAxisLegend="Escore PSSUQ"
+        maxValue={7}
         data={data.usabilityScores}
       />
     </main>
