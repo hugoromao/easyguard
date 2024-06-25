@@ -8,14 +8,19 @@ import dayjs from "dayjs";
 
 type TestChartProps = {
   title: string;
-  data: {
-    name: string;
-    EasyGuard: number;
-    Bitwarden: number;
-  }[];
+  keys?: string[];
+  colors?: string[];
+  leftAxisLegend?: string;
+  data: any[];
 };
 
-const TestChart = ({ title, data }: TestChartProps) => {
+const TestChart = ({
+  title,
+  keys = ["EasyGuard", "Bitwarden"],
+  colors = ["#4285F4", "#34A853"],
+  leftAxisLegend = "Percentual de acerto",
+  data,
+}: TestChartProps) => {
   const chart = useRef<HTMLDivElement | null>(null);
 
   async function downloadChart() {
@@ -40,11 +45,11 @@ const TestChart = ({ title, data }: TestChartProps) => {
         <ResponsiveBar
           data={data as any}
           groupMode="grouped"
-          keys={["EasyGuard", "Bitwarden"]}
+          keys={keys}
           indexBy="name"
           margin={{ top: 5, bottom: 100, left: 50, right: 30 }}
           padding={0.3}
-          colors={["#4285F4", "#34A853"]}
+          colors={colors}
           axisBottom={{
             tickSize: 5,
             tickPadding: 5,
@@ -57,7 +62,7 @@ const TestChart = ({ title, data }: TestChartProps) => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Percentual de acerto",
+            legend: leftAxisLegend,
             legendPosition: "middle",
             legendOffset: -40,
             truncateTickAt: 0,

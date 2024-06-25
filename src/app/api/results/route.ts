@@ -124,8 +124,9 @@ export async function GET() {
     );
 
     const usabilityScores = usabilityTest.map((data) => ({
-      usability: mean([data.q1, data.q2, data.q3, data.q4, data.q5, data.q6]),
-      information: mean([
+      name: data.name,
+      Usabilidade: mean([data.q1, data.q2, data.q3, data.q4, data.q5, data.q6]),
+      Informação: mean([
         data.q7,
         data.q8,
         data.q9,
@@ -133,7 +134,7 @@ export async function GET() {
         data.q11,
         data.q12,
       ]),
-      interface: mean([data.q13, data.q14, data.q15]),
+      Interface: mean([data.q13, data.q14, data.q15]),
     }));
 
     return Response.json({
