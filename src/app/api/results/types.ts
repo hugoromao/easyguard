@@ -30,18 +30,21 @@ export interface Po {
 }
 
 export interface MemoryScore {
-  egScore: number;
-  btScore: number;
+  name: string;
+  EasyGuard: number;
+  Bitwarden: number;
 }
 
 export interface TypingScore {
-  egScore: number;
-  btScore: number;
+  name: string;
+  EasyGuard: number;
+  Bitwarden: number;
 }
 
 export interface CombinatedScore {
-  egScore: number;
-  btScore: number;
+  name: string;
+  EasyGuard: number;
+  Bitwarden: number;
 }
 
 export interface UsabilityScore {

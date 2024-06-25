@@ -5,6 +5,10 @@ import { prismaClient } from "../../../utils/prisma";
 import { ResultsResponse } from "./types";
 import { mapResult, mean } from "./utils";
 
+function percent(number: number) {
+  return Number(((16 - number) * 100) / 16);
+}
+
 export async function GET() {
   try {
     const usabilityTest = await prismaClient.usabilitySurvey.findMany();
@@ -17,12 +21,19 @@ export async function GET() {
       orderBy: { name: "asc" },
     });
 
-    const memoryResult = await prismaClient.memoryTest.findMany();
-    const typingResult = await prismaClient.typingTest.findMany();
-    const combinatedResult = await prismaClient.combinatedTest.findMany();
+    const memoryResult = await prismaClient.memoryTest.findMany({
+      orderBy: { name: "asc" },
+    });
+    const typingResult = await prismaClient.typingTest.findMany({
+      orderBy: { name: "asc" },
+    });
+    const combinatedResult = await prismaClient.combinatedTest.findMany({
+      orderBy: { name: "asc" },
+    });
 
     const memoryScores = memoryResult.map(
       ({
+        name,
         egPassword1,
         egTypedPassword1,
         egPassword2,
@@ -32,19 +43,21 @@ export async function GET() {
         btTypedPassword1,
         btTypedPassword2,
       }) => ({
-        egScore: mean([
-          distance(egPassword1, egTypedPassword1),
-          distance(egPassword2, egTypedPassword2),
+        name,
+        EasyGuard: mean([
+          percent(distance(egPassword1, egTypedPassword1)),
+          percent(distance(egPassword2, egTypedPassword2)),
         ]),
-        btScore: mean([
-          distance(btPassword1, btTypedPassword1),
-          distance(btPassword2, btTypedPassword2),
+        Bitwarden: mean([
+          percent(distance(btPassword1, btTypedPassword1)),
+          percent(distance(btPassword2, btTypedPassword2)),
         ]),
       }),
     );
 
     const typingScores = typingResult.map(
       ({
+        name,
         egPassword,
         egTypedPassword1,
         egTypedPassword2,
@@ -58,25 +71,27 @@ export async function GET() {
         btTypedPassword4,
         btTypedPassword5,
       }) => ({
-        egScore: mean([
-          distance(egPassword, egTypedPassword1),
-          distance(egPassword, egTypedPassword2),
-          distance(egPassword, egTypedPassword3),
-          distance(egPassword, egTypedPassword4),
-          distance(egPassword, egTypedPassword5),
+        name,
+        EasyGuard: mean([
+          percent(distance(egPassword, egTypedPassword1)),
+          percent(distance(egPassword, egTypedPassword2)),
+          percent(distance(egPassword, egTypedPassword3)),
+          percent(distance(egPassword, egTypedPassword4)),
+          percent(distance(egPassword, egTypedPassword5)),
         ]),
-        btScore: mean([
-          distance(btPassword, btTypedPassword1),
-          distance(btPassword, btTypedPassword2),
-          distance(btPassword, btTypedPassword3),
-          distance(btPassword, btTypedPassword4),
-          distance(btPassword, btTypedPassword5),
+        Bitwarden: mean([
+          percent(distance(btPassword, btTypedPassword1)),
+          percent(distance(btPassword, btTypedPassword2)),
+          percent(distance(btPassword, btTypedPassword3)),
+          percent(distance(btPassword, btTypedPassword4)),
+          percent(distance(btPassword, btTypedPassword5)),
         ]),
       }),
     );
 
     const combinatedScores = combinatedResult.map(
       ({
+        name,
         egPassword,
         egTypedPassword1,
         egTypedPassword2,
@@ -90,19 +105,20 @@ export async function GET() {
         btTypedPassword4,
         btTypedPassword5,
       }) => ({
-        egScore: mean([
-          distance(egPassword, egTypedPassword1),
-          distance(egPassword, egTypedPassword2),
-          distance(egPassword, egTypedPassword3),
-          distance(egPassword, egTypedPassword4),
-          distance(egPassword, egTypedPassword5),
+        name,
+        EasyGuard: mean([
+          percent(distance(egPassword, egTypedPassword1)),
+          percent(distance(egPassword, egTypedPassword2)),
+          percent(distance(egPassword, egTypedPassword3)),
+          percent(distance(egPassword, egTypedPassword4)),
+          percent(distance(egPassword, egTypedPassword5)),
         ]),
-        btScore: mean([
-          distance(btPassword, btTypedPassword1),
-          distance(btPassword, btTypedPassword2),
-          distance(btPassword, btTypedPassword3),
-          distance(btPassword, btTypedPassword4),
-          distance(btPassword, btTypedPassword5),
+        Bitwarden: mean([
+          percent(distance(btPassword, btTypedPassword1)),
+          percent(distance(btPassword, btTypedPassword2)),
+          percent(distance(btPassword, btTypedPassword3)),
+          percent(distance(btPassword, btTypedPassword4)),
+          percent(distance(btPassword, btTypedPassword5)),
         ]),
       }),
     );

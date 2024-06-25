@@ -39,6 +39,7 @@ model StrongPasswordKnowledgeTest {
 
 model MemoryTest {
   id               Int      @id @default(autoincrement())
+  name             String   @default("unknown")
   egPassword1      String
   egPassword2      String
   btPassword1      String
@@ -53,6 +54,7 @@ model MemoryTest {
 
 model TypingTest {
   id               Int      @id @default(autoincrement())
+  name             String   @default("unknown")
   egPassword       String
   btPassword       String
   egTypedPassword1 String
@@ -71,6 +73,7 @@ model TypingTest {
 
 model CombinatedTest {
   id               Int      @id @default(autoincrement())
+  name             String   @default("unknown")
   egPassword       String
   btPassword       String
   egTypedPassword1 String

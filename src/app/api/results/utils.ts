@@ -24,7 +24,9 @@ export const gabarito = {
 };
 
 export function mean(values: number[]) {
-  return values.reduce((prev, curr) => prev + curr) / values.length;
+  return Number(
+    (values.reduce((prev, curr) => prev + curr) / values.length).toFixed(2),
+  );
 }
 
 export function getKnowledgeTestScorePercent(qos: any) {
