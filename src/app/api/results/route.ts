@@ -14,21 +14,21 @@ export async function GET() {
     const usabilityTest = await prismaClient.usabilitySurvey.findMany();
     const preResult = await prismaClient.strongPasswordKnowledgeTest.findMany({
       where: { posTest: false },
-      orderBy: { name: "asc" },
+      orderBy: { id: "asc" },
     });
     const posResult = await prismaClient.strongPasswordKnowledgeTest.findMany({
       where: { posTest: true },
-      orderBy: { name: "asc" },
+      orderBy: { id: "asc" },
     });
 
     const memoryResult = await prismaClient.memoryTest.findMany({
-      orderBy: { name: "asc" },
+      orderBy: { id: "asc" },
     });
     const typingResult = await prismaClient.typingTest.findMany({
-      orderBy: { name: "asc" },
+      orderBy: { id: "asc" },
     });
     const combinatedResult = await prismaClient.combinatedTest.findMany({
-      orderBy: { name: "asc" },
+      orderBy: { id: "asc" },
     });
 
     const memoryScores = memoryResult.map(
