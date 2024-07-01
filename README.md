@@ -2,9 +2,9 @@
 
 <p align="center"><img src="./public/survey1.png" alt="EasyGuard" height="200" /></p>
 
-Este repositório está vinculado ao artigo "Construção e teste de app gamificado gerador de senhas seguras e memoráveis: Um estudo exploratório em cibersegurança", de Hugo Lima Romão e Marcelo Henrique Oliveira Henklain.
+Este repositório está vinculado ao artigo "Construção e Teste de App Gamificado Gerador de Senhas Fortes e Memoráveis: Um Estudo Exploratório", de Hugo Lima Romão, Marcelo Henrique Oliveira Henklain, Felipe Leite Lobo e Eduardo Luzeiro Feitosa.
 
-Resumo do Artigo: _"Embora o uso de serviços on-line tenha aumentado substancialmente na última década, a força das senhas criadas pelos usuários se manteve em níveis preocupantes. O objetivo deste estudo foi desenvolver e avaliar a eficiência de aplicativo gamificado em relação ao desenvolvimento do comportamento de “projetar senhas fortes”. Avaliamos os aspectos da ferramenta a partir de um estudo com cinco participantes durante o período de nove dias. Em comparação com os algoritmos de geração de senhas convencionais, verificamos que as senhas geradas por nossa aplicação desempenharam 40,89% melhor em teste de memorização, 12,19% melhor em teste de digitação e 15,63% melhor em teste combinado. Nossa abordagem se mostrou promissora no ensino de técnicas que combinam senhas fortes e mais memoráveis."_
+Resumo do Artigo: _"O objetivo deste estudo foi desenvolver e avaliar a eficiência de app gamificado em relação ao desenvolvimento do comportamento de “projetar senhas fortes”. Avaliamos sua eficiência em um estudo com 10 participantes, durante nove dias. Em comparação com o algoritmo de geração de senhas convencional, verificamos que as senhas geradas por nosso app desempenharam 40,89\% melhor em teste de memorização, 12,19\% melhor em teste de digitação e 15,63\% melhor em teste combinado. Nossa abordagem se mostrou promissora no ensino de técnicas que combinam senhas fortes e mais memoráveis."_
 
 ## Resumo
 
@@ -41,40 +41,3 @@ npm run dev
 ```
 
 Você pode acessar a aplicação a partir do endereço http://localhost:3000/. Por padrão a aplicação utiliza a porta 3000.
-
-### Passos adicionais para execução dos testes descritos no artigo
-
-Utilizamos uma sessão especial na aplicação para condução dos testes que envolvem a avaliação das senhas geradas e conhecimento sobre senhas fortes. Isso envolve a configuração de um servidor de banco de dados para o armazenamento dos resultados. Os códigos a seguir descrevem o passo a passo necessário para reprodução dos testes utilizados no artigo.
-
-### Requisitos
-
-- Docker 26.1.1 ou mais recente
-- Docker Compose v2.27.0 ou mais recente
-
-Construa a imagem e suba o container Docker utilizando o Docker Compose. Certifique-se de que a porta 5400 está disponível:
-
-```
-docker compose build
-docker compose up -d
-```
-
-Crie um arquivo `.env` e adicione o seguinte conteúdo:
-
-```
-DATABASE_URL="postgresql://postgres:postgres@localhost:5400/postgres?schema=public"
-```
-
-Execute os seguintes comandos para gerar os tipos e as tabelas do banco:
-
-```
-npx prisma generate
-npx prisma migrate deploy
-```
-
-Inicie o servidor web em versão de desenvolvimento. Por padrão a aplicação utiliza a porta 3000:
-
-```
-npm run dev
-```
-
-Você pode acessar a aplicação a partir do endereço http://localhost:3000/. Os formulários dos testes podem ser acessados pela página de configurações a partir do botão “Avaliação em laboratório” ou em http://localhost:3000/estudo.
