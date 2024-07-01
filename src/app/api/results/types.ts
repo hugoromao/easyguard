@@ -4,6 +4,7 @@ export interface ResultsResponse {
   typingScores: TypingScore[];
   combinatedScores: CombinatedScore[];
   usabilityScores: UsabilityScore[];
+  meanScores: { name: string; EasyGuard: number; Bitwarden: number }[];
 }
 
 export interface KnowledgeTestScore {

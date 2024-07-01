@@ -137,6 +137,36 @@ export async function GET() {
       Interface: mean([data.q13, data.q14, data.q15]),
     }));
 
+    const meanScores = [
+      {
+        name: "Teste de memória",
+        EasyGuard:
+          memoryScores.reduce((prev, cur) => prev + cur.EasyGuard, 0) /
+          memoryScores.length,
+        Bitwarden:
+          memoryScores.reduce((prev, cur) => prev + cur.Bitwarden, 0) /
+          memoryScores.length,
+      },
+      {
+        name: "Teste de digitação",
+        EasyGuard:
+          typingScores.reduce((prev, cur) => prev + cur.EasyGuard, 0) /
+          memoryScores.length,
+        Bitwarden:
+          typingScores.reduce((prev, cur) => prev + cur.Bitwarden, 0) /
+          memoryScores.length,
+      },
+      {
+        name: "Teste combinado",
+        EasyGuard:
+          combinatedScores.reduce((prev, cur) => prev + cur.EasyGuard, 0) /
+          memoryScores.length,
+        Bitwarden:
+          combinatedScores.reduce((prev, cur) => prev + cur.Bitwarden, 0) /
+          memoryScores.length,
+      },
+    ];
+
     return Response.json({
       knowledgeTestScore: {
         pre: mapResult(preResult),
@@ -146,6 +176,7 @@ export async function GET() {
       typingScores,
       combinatedScores,
       usabilityScores,
+      meanScores,
     } as ResultsResponse);
   } catch (error: any) {
     return new Response(`Failed: ${error.message}`, {

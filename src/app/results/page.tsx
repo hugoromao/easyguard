@@ -30,6 +30,10 @@ const index = async () => {
         data={data.combinatedScores}
       />
       <TestChart
+        title="Diferença de média de acertos nos testes"
+        data={data.meanScores}
+      />
+      <TestChart
         title="Escores das subescalas do PSSUQ"
         keys={["Usabilidade", "Informação", "Interface"]}
         colors={["#4285F4", "#EA4335", "#FBBC04"]}
