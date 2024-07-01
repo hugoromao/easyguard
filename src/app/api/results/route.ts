@@ -3,7 +3,7 @@ import { distance } from "fastest-levenshtein";
 import { prismaClient } from "../../../utils/prisma";
 
 import { ResultsResponse } from "./types";
-import { mapResult, mean } from "./utils";
+import { mapResult, mean, stdp } from "./utils";
 
 function percent(number: number) {
   return Number(((16 - number) * 100) / 16);
@@ -140,30 +140,24 @@ export async function GET() {
     const meanScores = [
       {
         name: "Teste de memória",
-        EasyGuard:
-          memoryScores.reduce((prev, cur) => prev + cur.EasyGuard, 0) /
-          memoryScores.length,
-        Bitwarden:
-          memoryScores.reduce((prev, cur) => prev + cur.Bitwarden, 0) /
-          memoryScores.length,
+        EasyGuard: mean(memoryScores.map((v) => v.EasyGuard)),
+        Bitwarden: mean(memoryScores.map((v) => v.Bitwarden)),
+        EasyGuardStdp: stdp(memoryScores.map((v) => v.EasyGuard)),
+        BitwardenStdp: stdp(memoryScores.map((v) => v.Bitwarden)),
       },
       {
         name: "Teste de digitação",
-        EasyGuard:
-          typingScores.reduce((prev, cur) => prev + cur.EasyGuard, 0) /
-          memoryScores.length,
-        Bitwarden:
-          typingScores.reduce((prev, cur) => prev + cur.Bitwarden, 0) /
-          memoryScores.length,
+        EasyGuard: mean(typingScores.map((v) => v.EasyGuard)),
+        Bitwarden: mean(typingScores.map((v) => v.Bitwarden)),
+        EasyGuardStdp: stdp(typingScores.map((v) => v.EasyGuard)),
+        BitwardenStdp: stdp(typingScores.map((v) => v.Bitwarden)),
       },
       {
         name: "Teste combinado",
-        EasyGuard:
-          combinatedScores.reduce((prev, cur) => prev + cur.EasyGuard, 0) /
-          memoryScores.length,
-        Bitwarden:
-          combinatedScores.reduce((prev, cur) => prev + cur.Bitwarden, 0) /
-          memoryScores.length,
+        EasyGuard: mean(combinatedScores.map((v) => v.EasyGuard)),
+        Bitwarden: mean(combinatedScores.map((v) => v.Bitwarden)),
+        EasyGuardStdp: stdp(combinatedScores.map((v) => v.EasyGuard)),
+        BitwardenStdp: stdp(combinatedScores.map((v) => v.Bitwarden)),
       },
     ];
 

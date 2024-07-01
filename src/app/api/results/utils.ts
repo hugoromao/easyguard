@@ -29,6 +29,22 @@ export function mean(values: number[]) {
   );
 }
 
+export function stdp(populacao: number[]) {
+  const n = populacao.length;
+  if (n === 0) return 0;
+
+  const media = populacao.reduce((a, b) => a + b, 0) / n;
+
+  const somaQuadrados = populacao.reduce(
+    (soma, valor) => soma + Math.pow(valor - media, 2),
+    0,
+  );
+
+  const variancia = somaQuadrados / n;
+
+  return Math.sqrt(variancia);
+}
+
 export function getKnowledgeTestScorePercent(qos: any) {
   const hitsCount = Object.entries(qos).reduce((count, [key, value]) => {
     return count + (gabarito[key as "qo1"] === value ? 1 : 0);
