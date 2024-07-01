@@ -48,6 +48,7 @@ const TestChart = ({
           data={data as any}
           groupMode="grouped"
           keys={keys}
+          enableLabel={false}
           indexBy="name"
           margin={{ top: 5, bottom: 100, left: 50, right: 30 }}
           padding={0.3}
