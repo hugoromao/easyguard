@@ -1,7 +1,8 @@
 "use client";
 import React, { useRef } from "react";
 
-import { ResponsiveBar } from "@nivo/bar";
+import { BarDatum, ComputedDatum, ResponsiveBar } from "@nivo/bar";
+import { OrdinalColorScaleConfig } from "@nivo/colors";
 import { toJpeg } from "html-to-image";
 import download from "downloadjs";
 import dayjs from "dayjs";
@@ -9,7 +10,7 @@ import dayjs from "dayjs";
 type TestChartProps = {
   title: string;
   keys?: string[];
-  colors?: string[];
+  colors?: OrdinalColorScaleConfig<ComputedDatum<BarDatum>> | undefined;
   leftAxisLegend?: string;
   data: any[];
   maxValue?: number;
@@ -18,7 +19,7 @@ type TestChartProps = {
 const TestChart = ({
   title,
   keys = ["EasyGuard", "Bitwarden"],
-  colors = ["#4285F4", "#34A853"],
+  colors = ["#009A46", "#B0C3F1"],
   leftAxisLegend = "Percentual de acerto",
   maxValue = 100,
   data,
@@ -35,7 +36,7 @@ const TestChart = ({
   return (
     <>
       <div
-        className="flex flex-col items-center gap-4 w-[1024px] h-[576px] bg-white"
+        className="flex flex-col items-center gap-4 w-[1105px] min-h-[775px] bg-white"
         ref={chart}
       >
         <h1
