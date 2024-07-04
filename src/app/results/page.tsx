@@ -4,6 +4,8 @@ import { ResultsResponse } from "../api/results/types";
 
 import TestChart from "@/components/TestChart";
 
+import { mean } from "../api/results/utils";
+
 const index = async () => {
   const response = await fetch(
     process.env.NODE_ENV === "development"
@@ -35,7 +37,7 @@ const index = async () => {
       />
       <TestChart
         title="Escores das subescalas do PSSUQ"
-        keys={["Usabilidade", "Informação", "Interface"]}
+        keys={["Utilidade", "Informação", "Interface"]}
         colors={["#4285F4", "#EA4335", "#FBBC04"]}
         leftAxisLegend="Escore PSSUQ"
         maxValue={7}
@@ -44,31 +46,18 @@ const index = async () => {
 
       <TestChart
         title="Escore médio das subescalas do PSSUQ"
-        keys={["Usabilidade", "Informação", "Interface"]}
+        keys={["Utilidade", "Informação", "Interface"]}
         colors={["#4285F4", "#EA4335", "#FBBC04"]}
         leftAxisLegend="Escore PSSUQ"
         maxValue={7}
         data={[
-          data.usabilityScores.reduce(
-            (prev, cur) => {
-              return {
-                Usabilidade: prev.Usabilidade + cur.Usabilidade,
-                Informação: prev.Informação + cur.Informação,
-                Interface: prev.Interface + cur.Interface,
-              };
-            },
-            {
-              Usabilidade: 0,
-              Informação: 0,
-              Interface: 0,
-            },
-          ),
-        ].map(({ Usabilidade, Informação, Interface }) => ({
-          name: "",
-          Usabilidade: Usabilidade / data.usabilityScores.length,
-          Informação: Informação / data.usabilityScores.length,
-          Interface: Interface / data.usabilityScores.length,
-        }))}
+          {
+            name: "",
+            Utilidade: mean(data.usabilityScores.map((v) => v.Utilidade)),
+            Informação: mean(data.usabilityScores.map((v) => v.Informação)),
+            Interface: mean(data.usabilityScores.map((v) => v.Interface)),
+          },
+        ]}
       />
     </main>
   );

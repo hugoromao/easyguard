@@ -50,7 +50,7 @@ export interface CombinatedScore {
 
 export interface UsabilityScore {
   name: string;
-  Usabilidade: number;
+  Utilidade: number;
   Informação: number;
   Interface: number;
 }
