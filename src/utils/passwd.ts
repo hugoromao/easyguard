@@ -96,10 +96,7 @@ export function validateEntropy(password: string): number {
   if (/[!"£$%^&*()]/.test(password)) chars = chars + 10;
   if (/[`¬\-=_+[\]{};'#:@~,./<>?\\|]/.test(password)) chars = chars + 23;
 
-  let entropy = parseInt(
-    String(Math.log2(Math.pow(chars, password.length))),
-    10
-  );
+  let entropy = Math.log2(Math.pow(chars, password.length));
 
   return entropy;
 }
@@ -139,7 +136,7 @@ export function generatePassword(iw: string[], inu: number[]): Data {
 
     if (randomNumber === 1 || numbers.length === 0) {
       const randomSpecialIndex = Math.floor(
-        Math.random() * specialCaracters.length
+        Math.random() * specialCaracters.length,
       );
       temp.push(specialCaracters[randomSpecialIndex]);
     }
