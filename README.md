@@ -64,6 +64,10 @@ Nosso método de criação de senhas se baseia em palavras significativas para v
 
 Se quiser, você pode aumentar a força da senha adicionando mais palavras, o que é ideal para contas mais importantes, como contas bancárias ou de trabalho.
 
+![2.png](/public/EasyGuard%20Manual%20passo%20a%20passo%20f9cecd0d65af4f0cb1cadbc77d2c039d/Untitled%201.png)
+
+![2.png](/public/EasyGuard%20Manual%20passo%20a%20passo%20f9cecd0d65af4f0cb1cadbc77d2c039d/Untitled%202.png)
+
 Depois de escolhes as palavras, você será redirecionado para a página onde sua senha estará disponível para uso. Destacamos as seções mais importantes da página na imagem a seguir.
 
 ![Untitled](/public/EasyGuard%20Manual%20passo%20a%20passo%20f9cecd0d65af4f0cb1cadbc77d2c039d/Untitled%203.png)
