@@ -4,7 +4,7 @@
 
 Este repositório está vinculado ao artigo "EasyGuard: Um gerador de senhas seguras e memoráveis", de Hugo Lima Romão, Marcelo Henrique Oliveira Henklain, Felipe Leite Lobo e Eduardo Luzeiro Feitosa.
 
-Resumo do Artigo: _"Ciberataques têm aumentado progressivamente conforme nossas vidas tornam-se mais digitais. Contribuem para esse cenário os comportamentos inseguros de usuários. Dentre eles, destaca-se o uso de senhas fracas. Para lidar com esse problema, desenvolvemos o sistema web e o app EasyGuard. Neste estudo, nós caracterizamos essa ferramenta em termos das tecnologias que adota, de suas funcionalidades e das estratégias de gamificação que emprega, para gerar senhas seguras e memoráveis a partir de inputs fornecidos pelo usuário, produzindo a cada senha criada reforçadores que ensinem o comportamento de projetar senhas fortes e que o tornem mais recorrente."_
+Resumo do Artigo: _"Embora o uso de serviços on-line tenha aumentado substancialmente na última década, a força das senhas criadas pelos usuários não mudou muito. O objetivo deste estudo foi desenvolver e avaliar a eficiência de app gamificado em relação ao desenvolvimento do comportamento de ?projetar senhas fortes?. Avaliamos a sua eficiência em um estudo com cinco participantes, durante nove dias. Em comparação com o algoritmo de geração de senhas convencional, verificamos que as senhas geradas por nosso app desempenharam 40,89% melhor em teste de memorização, 12,19% melhor em teste de digitação e 15,63% melhor em teste combinado. Nossa abordagem se mostrou promissora no ensino de técnicas que combinam senhas fortes e mais memoráveis."_
 
 ## Resumo
 
