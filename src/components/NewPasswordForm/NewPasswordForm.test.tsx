@@ -173,7 +173,7 @@ describe("<NewPasswordForm onFinish={() => ({})}", () => {
     fireEvent.click(screen.getByRole("button", { name: "next" }));
     fireEvent.click(screen.getByRole("button", { name: "goBack" }));
 
-    expect(screen.getByText("Vamos criar uma nova senha!"));
+    expect(screen.getByText("Etapa 1"));
   });
 
   it("should throw an error if the 'numbers' fields are empty.", () => {

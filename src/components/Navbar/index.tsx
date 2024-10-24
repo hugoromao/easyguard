@@ -17,7 +17,7 @@ import { GlobalContext } from "../../context/global";
 import { Tooltip } from "@nextui-org/react";
 
 const Navbar = () => {
-  const { onOpen } = useContext(GlobalContext);
+  const { onPasswordTypeOpen } = useContext(GlobalContext);
 
   const pathname = usePathname();
 
@@ -87,7 +87,7 @@ const Navbar = () => {
         <button
           aria-label="nova-senha"
           className="p-4 rounded-xl hover:bg-default-100"
-          onClick={onOpen}
+          onClick={onPasswordTypeOpen}
         >
           <svg
             width="32"

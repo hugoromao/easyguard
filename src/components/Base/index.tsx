@@ -11,6 +11,7 @@ import NewPasswordForm, { Input } from "@/components/NewPasswordForm";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import Onboarding from "../Onboarding";
 import { useRouter } from "next/navigation";
+import PasswordTypeModal from "../PasswordTypeModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,13 @@ type BaseProps = {
 
 const Base = ({ children }: BaseProps) => {
   const { push } = useRouter();
-  const { isOpen, onOpenChange } = useContext(GlobalContext);
+  const {
+    isOpen,
+    onOpenChange,
+    isPasswordTypeOpen,
+    onOpenPasswordTypeChange,
+    onPasswordTypeClose,
+  } = useContext(GlobalContext);
 
   const [showOnboarding] = useLocalStorage("showOnboarding", true);
 
@@ -54,6 +61,13 @@ const Base = ({ children }: BaseProps) => {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         onFinish={onFinish}
+      />
+
+      <PasswordTypeModal
+        isOpen={isPasswordTypeOpen}
+        onOpenChange={onOpenPasswordTypeChange}
+        onClose={onPasswordTypeClose}
+        onOpenType1={onOpenChange}
       />
     </>
   );

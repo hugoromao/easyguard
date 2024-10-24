@@ -14,6 +14,10 @@ export type GlobalContextType = {
   onClose: () => void;
   onOpenChange: () => void;
   goParty(): void;
+  isPasswordTypeOpen: boolean;
+  onPasswordTypeOpen: () => void;
+  onPasswordTypeClose: () => void;
+  onOpenPasswordTypeChange: () => void;
 };
 
 export type Achievement = {
@@ -30,6 +34,10 @@ export const GlobalContextDefaultValues: GlobalContextType = {
   onClose: () => ({}),
   onOpenChange: () => ({}),
   goParty: () => ({}),
+  isPasswordTypeOpen: false,
+  onPasswordTypeOpen: () => ({}),
+  onPasswordTypeClose: () => ({}),
+  onOpenPasswordTypeChange: () => ({}),
 };
 
 export const GlobalContext = createContext<GlobalContextType>(
@@ -40,6 +48,12 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isPasswordTypeOpen,
+    onOpen: onPasswordTypeOpen,
+    onClose: onPasswordTypeClose,
+    onOpenChange: onOpenPasswordTypeChange,
+  } = useDisclosure();
 
   const [party, setParty] = useState(false);
 
@@ -56,6 +70,10 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
           onClose,
           onOpenChange,
           goParty,
+          isPasswordTypeOpen,
+          onPasswordTypeOpen,
+          onPasswordTypeClose,
+          onOpenPasswordTypeChange,
         }}
       >
         {children}

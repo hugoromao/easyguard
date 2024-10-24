@@ -12,7 +12,7 @@ import NextAchivement from "@/components/NextAchivement";
 import { GlobalContext } from "@/context/global";
 
 const Home = () => {
-  const { onOpen } = React.useContext(GlobalContext);
+  const { onPasswordTypeOpen } = React.useContext(GlobalContext);
 
   return (
     <Base>
@@ -55,7 +55,7 @@ const Home = () => {
             variant="solid"
             size="lg"
             startContent={<KeyIcon height={24} className="font-bold" />}
-            onClick={onOpen}
+            onClick={onPasswordTypeOpen}
             className="bg-green-50 text-green-800 shadow-lg font-medium max-w-2xl mx-auto"
             style={{
               position: "absolute",

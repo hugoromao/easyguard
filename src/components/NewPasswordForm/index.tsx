@@ -56,7 +56,7 @@ const NewPasswordForm = ({
     >
       <ModalContent>
         <ModalHeader className="text-[24px] font-semibold">
-          {step === 1 ? "Vamos criar uma nova senha!" : null}
+          {step === 1 ? "Etapa 1" : null}
           {step === 2 ? "Última etapa" : null}
         </ModalHeader>
 

@@ -65,6 +65,7 @@ describe("<Navbar />", () => {
       globalProviderProps: {
         isOpen: true,
         onOpen,
+        onPasswordTypeOpen: onOpen,
         onClose: jest.fn(),
         goParty: jest.fn(),
         onOpenChange: jest.fn(),
