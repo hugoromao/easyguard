@@ -5,6 +5,8 @@ import {
   specialCaracters,
 } from "./patterns";
 
+import dict from "./dict.json";
+
 export function validateUserWords(words: string[]): CustomError[] {
   const errors: CustomError[] = [];
 
@@ -136,7 +138,7 @@ export function generatePassword(iw: string[], inu: number[]): Data {
 
     if (randomNumber === 1 || numbers.length === 0) {
       const randomSpecialIndex = Math.floor(
-        Math.random() * specialCaracters.length,
+        Math.random() * specialCaracters.length
       );
       temp.push(specialCaracters[randomSpecialIndex]);
     }
@@ -179,5 +181,40 @@ export function generatePassword(iw: string[], inu: number[]): Data {
     password: password,
     entropy,
     errors: [...wordErrors, ...numberErrors, ...generatedPasswordErrors],
+  };
+}
+
+function getRandomInputs(array: string[], numIndexes = 5) {
+  const indexes: string[] = [];
+
+  if (numIndexes > array.length) {
+    throw new Error(
+      "O número de índices solicitados é maior que o tamanho do array."
+    );
+  }
+
+  while (indexes.length < numIndexes) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+
+    if (!indexes.includes(array[randomIndex])) {
+      indexes.push(array[randomIndex]);
+    }
+  }
+
+  return indexes;
+}
+
+export function generatePassword2(): Data {
+  const password = getRandomInputs(dict).join(
+    getRandomInputs(specialCaracters, 1)[0]
+  );
+
+  const entropy = validateEntropy(password);
+
+  return {
+    success: true,
+    password,
+    entropy,
+    errors: [],
   };
 }

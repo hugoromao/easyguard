@@ -18,7 +18,12 @@ import {
   InformationCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import { Data, generatePassword, validateEntropy } from "../../utils/passwd";
+import {
+  Data,
+  generatePassword,
+  generatePassword2,
+  validateEntropy,
+} from "../../utils/passwd";
 
 import Dice from "./dice";
 import { useRouter } from "next/navigation";
@@ -32,14 +37,14 @@ const Page = () => {
   const params = useSearchParams();
 
   if (!params) {
-    return <code>Parâmetros não informados.</code>;
+    return <GeneratePassword />;
   }
 
   const receivedWords = params.get("words");
   const receivedNumbers = params.get("numbers");
 
   if (!receivedWords || !receivedNumbers) {
-    return <code>Parâmetros não informados.</code>;
+    return <GeneratePassword />;
   }
 
   return (
@@ -55,33 +60,39 @@ const Page = () => {
 export default Page;
 
 type GeneratePasswordProps = {
-  receivedWords: string[];
-  receivedNumbers: number[];
+  receivedWords?: string[];
+  receivedNumbers?: number[];
 };
 
 const GeneratePassword = ({
   receivedWords,
   receivedNumbers,
 }: GeneratePasswordProps) => {
+  const hasParams = receivedWords != undefined && receivedNumbers != undefined;
+
   const { push } = useRouter();
   const { onClose } = useContext(GlobalContext);
   const { setHistory } = useContext(AchivementsContext);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [data, setData] = useState<Data>(
-    generatePassword(
-      receivedWords,
-      receivedNumbers.map((n) => Number(n))
-    )
+    hasParams
+      ? generatePassword(
+          receivedWords,
+          receivedNumbers.map((n) => Number(n))
+        )
+      : generatePassword2()
   );
   const [wasUsed, setWasUsed] = useState(false);
 
   function regeneratePassword() {
     setData(
-      generatePassword(
-        receivedWords,
-        receivedNumbers.map((n) => Number(n))
-      )
+      hasParams
+        ? generatePassword(
+            receivedWords,
+            receivedNumbers.map((n) => Number(n))
+          )
+        : generatePassword2()
     );
     setWasUsed(false);
   }
