@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Input,
@@ -11,10 +11,9 @@ import {
   ModalContent,
 } from "@nextui-org/react";
 
-import { enqueueSnackbar } from "notistack";
 import { ArrowRightIcon, TrashIcon } from "@heroicons/react/20/solid";
 
-import { validateUserNumbers, validateUserWords } from "../../utils/passwd";
+import { useNewPasswordFormViewModel } from "./viewmodel";
 
 type NewPasswordFormProps = {
   isOpen: boolean;
@@ -33,166 +32,20 @@ const NewPasswordForm = ({
   onOpenChange,
   onFinish,
 }: NewPasswordFormProps) => {
-  const [step, setStep] = useState(1);
-  const [words, setWords] = useState<Input[]>([
-    { value: "", error: undefined },
-    { value: "", error: undefined },
-    { value: "", error: undefined },
-    { value: "", error: undefined },
-  ]);
-  const [numbers, setNumbers] = useState<Input[]>([
-    { value: "", error: undefined },
-    { value: "", error: undefined },
-  ]);
-
-  const [loading, setLoading] = useState(false);
-
-  function nextStep() {
-    setStep((s) => s + 1);
-  }
-
-  function clearErrors() {
-    setWords((words) => words.map((w) => ({ ...w, error: undefined })));
-    setNumbers((numbers) => numbers.map((w) => ({ ...w, error: undefined })));
-  }
-
-  function validateWords() {
-    let hasErrors = false;
-
-    words.forEach((word, index) => {
-      if (word.value === "") {
-        hasErrors = true;
-        setWords((w) => {
-          const temp = w;
-          temp[index].error = `Este campo é obrigatório.`;
-          return [...temp];
-        });
-      }
-    });
-    if (words.findIndex((w) => w.value === "") !== -1) return;
-
-    const errors = validateUserWords(words.map((w) => w.value));
-    errors.forEach((err) => {
-      hasErrors = true;
-      const hasIndex = err.index !== undefined;
-
-      if (hasIndex) {
-        setWords((words) => {
-          const temp = words;
-          temp[err.index!].error = err.message;
-          return [...temp];
-        });
-      } else {
-        enqueueSnackbar(err.message, { variant: "error" });
-      }
-    });
-
-    if (!hasErrors) nextStep();
-  }
-
-  function validateNumbers() {
-    let hasErrors = false;
-
-    numbers.forEach((number, index) => {
-      if (number.value === "") {
-        hasErrors = true;
-        setNumbers((w) => {
-          const temp = w;
-          temp[index].error = `Este campo é obrigatório.`;
-          return [...temp];
-        });
-      }
-
-      if (isNaN(Number(number.value))) {
-        hasErrors = true;
-        setNumbers((w) => {
-          const temp = w;
-          temp[index].error = `Número inválido.`;
-          return [...temp];
-        });
-      }
-    });
-
-    if (numbers.findIndex((n) => n.value === "") !== -1) return;
-    if (numbers.findIndex((n) => isNaN(Number(n.value))) !== -1) return;
-
-    const errors = validateUserNumbers(numbers.map((n) => Number(n.value)));
-    errors.forEach((err) => {
-      hasErrors = true;
-      const hasIndex = err.index !== undefined;
-
-      if (hasIndex) {
-        setNumbers((numbers) => {
-          const temp = numbers;
-          temp[err.index!].error = err.message;
-          return [...temp];
-        });
-      } else {
-        enqueueSnackbar(err.message, { variant: "error" });
-      }
-    });
-
-    if (!hasErrors) {
-      // TODO: Hash queryparams with bcrypt
-      setLoading(true);
-      onFinish(words, numbers);
-    }
-  }
-
-  function onSubmit(e?: React.FormEvent<HTMLFormElement>) {
-    e?.preventDefault();
-    if (step === 1) {
-      clearErrors();
-      validateWords();
-    } else {
-      clearErrors();
-      validateNumbers();
-    }
-  }
-
-  function onWordInputChange(value: string, wordIndex: number) {
-    setWords((w) => {
-      const temp = w;
-      temp[wordIndex].value = value;
-      return [...temp];
-    });
-  }
-
-  function onNumberInputChange(value: string, wordIndex: number) {
-    setNumbers((w) => {
-      const temp = w;
-      temp[wordIndex].value = value;
-      return [...temp];
-    });
-  }
-
-  function addWord() {
-    setWords((w) => {
-      return [...w, { value: "", error: undefined }];
-    });
-  }
-
-  function removeWord(index: number) {
-    setWords((w) => {
-      const temp = w;
-      temp.splice(index, 1);
-      return [...temp];
-    });
-  }
-
-  function addNumber() {
-    setNumbers((w) => {
-      return [...w, { value: "", error: undefined }];
-    });
-  }
-
-  function removeNumber(index: number) {
-    setNumbers((n) => {
-      const temp = n;
-      temp.splice(index, 1);
-      return [...temp];
-    });
-  }
+  const {
+    step,
+    setStep,
+    onSubmit,
+    words,
+    onWordInputChange,
+    removeWord,
+    numbers,
+    onNumberInputChange,
+    removeNumber,
+    addNumber,
+    addWord,
+    loading,
+  } = useNewPasswordFormViewModel(onFinish);
 
   return (
     <Modal

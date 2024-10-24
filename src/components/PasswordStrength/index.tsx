@@ -22,14 +22,20 @@ const PasswordStrength = ({
       activate: (e: number) => e >= 200,
       emoji: "🎉",
       title: "Sua senha é Incrível!",
-      description: `Sua senha possui <strong>${entropy}</strong> bits de entropia. Use o
+      description: `Sua senha possui <strong>${new Intl.NumberFormat(
+        "pt-BR"
+      ).format(entropy)}</strong> bits de entropia. Use o
       botão de copiar senha para contabilizar suas conquistas.`,
     },
     {
       activate: (e: number) => e >= 60 && e < 200,
       emoji: "🔒",
       title: "Sua senha é forte",
-      description: `Sua senha possui <strong>${entropy}</strong> bits de entropia. Adicionando mais caracteres sua senha pode ficar ainda mais segura!`,
+      description: `Sua senha possui <strong>${new Intl.NumberFormat(
+        "pt-BR"
+      ).format(
+        entropy
+      )}</strong> bits de entropia. Adicionando mais caracteres sua senha pode ficar ainda mais segura!`,
     },
   ];
 

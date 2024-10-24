@@ -1,6 +1,5 @@
 {
   "name": "easyguard",
-  "packageManager": "yarn@4.1.0",
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
@@ -74,5 +73,6 @@
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.2"
-  }
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
