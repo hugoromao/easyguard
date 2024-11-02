@@ -8,11 +8,16 @@ import { PlayIcon } from "@heroicons/react/24/outline";
 type CountdownProps = {
   passwords: string[];
   onCountdownEnds: () => void;
-  text?: string;
 };
 
-const Countdown = ({ text, passwords, onCountdownEnds }: CountdownProps) => {
-  const countStart = process.env.NODE_ENV === "development" ? 10 : 180;
+const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
+  const countStart = process.env.NODE_ENV === "development" ? 10 : 10;
+
+  const text = `Agora você terá <strong>três minutos</strong> para memorizar ${
+    passwords.length > 1 ? "as senhas" : "a senha"
+  }. Após esse período, um vídeo de distração será iniciado automaticamente. Quando o vídeo terminar, você deverá digitar o máximo possível que conseguiu memorizar ${
+    passwords.length > 1 ? "das senhas" : "da senha"
+  }. <strong>Clique em INICIAR quando estiver pronto</strong>.`;
 
   const [count, { startCountdown }] = useCountdown({
     countStart,
@@ -35,7 +40,7 @@ const Countdown = ({ text, passwords, onCountdownEnds }: CountdownProps) => {
 
   return (
     <div className="w-full h-[-webkit-fill-available] flex flex-col items-center justify-center gap-4">
-      {text ? <p>{text}</p> : null}
+      {text ? <p dangerouslySetInnerHTML={{ __html: text }} /> : null}
       <p>Tempo restante(segundos): {count}</p>
       <Progress
         aria-label="time remaining"

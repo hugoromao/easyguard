@@ -1,126 +1,218 @@
-import React, { useState } from "react";
+import React from "react";
 
-import generator from "generate-password";
+import NewPasswordForm from "../NewPasswordForm";
 
-import NewPasswordForm, { Input as InputType } from "../NewPasswordForm";
-
-import { passwordConfig } from "../PasswordMemoryTest";
-import { useForm } from "react-hook-form";
-import { Button, Input, useDisclosure } from "@nextui-org/react";
-import { generatePassword } from "@/utils/passwd";
+import { Button } from "@nextui-org/react";
 import Countdown from "../Countdown";
+import { useCombinatedTestViewModel } from "./viewmodel";
+import { CustomInput } from "../TypingTest";
 
 type CombinatedTestProps = {
   onFinishTest: () => void;
 };
 
-type Inputs = {
-  egTypedPassword1: string;
-  egTypedPassword2: string;
-  egTypedPassword3: string;
-  egTypedPassword4: string;
-  egTypedPassword5: string;
-  btTypedPassword1: string;
-  btTypedPassword2: string;
-  btTypedPassword3: string;
-  btTypedPassword4: string;
-  btTypedPassword5: string;
-};
-
 const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
-  const isDevelopment = process.env.NODE_ENV === "development";
-  const btPassword = generator.generate(passwordConfig);
-
-  const { register, handleSubmit, getValues } = useForm<Inputs>();
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-
-  const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(0);
-  const [egPassword, setEgPassword] = useState<string | undefined>();
-
-  function onCompletedNewPasswordForm(
-    words: InputType[],
-    numbers: InputType[],
-  ) {
-    const password = generatePassword(
-      words.map((w) => w.value),
-      numbers.map((n) => Number(n.value)),
-    );
-
-    if (password.password) setEgPassword(password.password.slice(0, 16));
-
-    setStep((s) => s + 1);
-    onClose();
-  }
-
-  async function onSubmit(data: Inputs) {
-    try {
-      setLoading(true);
-      await fetch("/api/ct", {
-        method: "POST",
-        body: JSON.stringify({
-          egPassword,
-          btPassword,
-          ...data,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      onFinishTest();
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const {
+    btPassword,
+    eg1Password1,
+    eg2Password1,
+    getValues,
+    handleSubmit,
+    isDevelopment,
+    isOpen,
+    loading,
+    onCompletedNewPasswordForm,
+    onOpen,
+    onOpenChange,
+    onSubmit,
+    register,
+    step,
+    setStep,
+    changeEg2Password1,
+    eg1Password1Info,
+    setEg1Password1Info,
+    eg1Password2Info,
+    setEg1Password2Info,
+    eg1Password3Info,
+    setEg1Password3Info,
+    eg1Password4Info,
+    setEg1Password4Info,
+    eg1Password5Info,
+    setEg1Password5Info,
+    eg2Password1Info,
+    setEg2Password1Info,
+    eg2Password2Info,
+    setEg2Password2Info,
+    eg2Password3Info,
+    setEg2Password3Info,
+    eg2Password4Info,
+    setEg2Password4Info,
+    eg2Password5Info,
+    setEg2Password5Info,
+    btPassword1Info,
+    setBtPassword1Info,
+    btPassword2Info,
+    setBtPassword2Info,
+    btPassword3Info,
+    setBtPassword3Info,
+    btPassword4Info,
+    setBtPassword4Info,
+    btPassword5Info,
+    setBtPassword5Info,
+  } = useCombinatedTestViewModel({ onFinishTest });
 
   const steps = [
     <>
-      <h1 className="font-bold text-2xl">Teste combinado</h1>
+      <h1 className="font-bold text-2xl mt-4">Teste combinado</h1>
       <p>
         Esse é o último teste. Ele envolve tanto os aspectos de memorização
         quanto de digitação. Vamos precisar que você crie uma última senha
         utilizando nossa ferramenta, basta utilizar o seguinte botão.
       </p>
 
+      <Button onPress={changeEg2Password1}>
+        {eg2Password1 ? "Alterar" : "Criar"} primeira senha
+      </Button>
+      {eg2Password1 ? (
+        <strong className="text-center mb-4">{eg2Password1}</strong>
+      ) : null}
       <Button onPress={onOpen}>Criar senha</Button>
     </>,
     <Countdown
       key="countdown"
-      passwords={[egPassword!]}
+      passwords={[eg1Password1!]}
       onCountdownEnds={() => setStep((s) => s + 1)}
-      text="Agora você terá três minutos para memorizar as senhas. Após esse período, um vídeo de distração será iniciado automaticamente. Quando o vídeo terminar, você deverá digitar o máximo possível que conseguiu memorizar das senhas. Clique em INICIAR quando estiver pronto."
     />,
     <>
-      <strong>Vídeo 3</strong>
+      <strong className="mt-4">Vídeo 3</strong>
       <video
         controls={isDevelopment}
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/3.mp4" type="video/mp4" />
+        <source src="/videos/debug.mp4" type="video/mp4" />
       </video>
     </>,
     <>
-      <p>
+      <p className="mt-4">
+        Nessa tela você vai digitar a senha o mais rápido possível cinco vezes.
+        Utilize os cinco campos abaixo para digitar a senha.
+      </p>
+      <CustomInput
+        id="1"
+        registerName="eg1TypedPassword1"
+        register={register}
+        egPasswordInfo={eg1Password1Info}
+        setEgPasswordInfo={setEg1Password1Info}
+      />
+      <CustomInput
+        id="2"
+        registerName="eg1TypedPassword2"
+        register={register}
+        egPasswordInfo={eg1Password2Info}
+        setEgPasswordInfo={setEg1Password2Info}
+      />
+      <CustomInput
+        id="3"
+        registerName="eg1TypedPassword3"
+        register={register}
+        egPasswordInfo={eg1Password3Info}
+        setEgPasswordInfo={setEg1Password3Info}
+      />
+      <CustomInput
+        id="4"
+        registerName="eg1TypedPassword4"
+        register={register}
+        egPasswordInfo={eg1Password4Info}
+        setEgPasswordInfo={setEg1Password4Info}
+      />
+      <CustomInput
+        id="5"
+        registerName="eg1TypedPassword5"
+        register={register}
+        egPasswordInfo={eg1Password5Info}
+        setEgPasswordInfo={setEg1Password5Info}
+      />
+      <Button
+        onClick={() => {
+          if (
+            getValues("eg1TypedPassword1") &&
+            getValues("eg1TypedPassword2") &&
+            getValues("eg1TypedPassword3") &&
+            getValues("eg1TypedPassword4") &&
+            getValues("eg1TypedPassword5")
+          ) {
+            setStep((s) => s + 1);
+          }
+        }}
+      >
+        Próximo
+      </Button>
+    </>,
+    <Countdown
+      key="countdown"
+      passwords={[eg2Password1!]}
+      onCountdownEnds={() => setStep((s) => s + 1)}
+    />,
+    <>
+      <strong className="mt-4">Vídeo 4</strong>
+      <video
+        controls={isDevelopment}
+        autoPlay
+        onEnded={() => setStep((s) => s + 1)}
+      >
+        <source src="/videos/debug.mp4" type="video/mp4" />
+      </video>
+    </>,
+    <>
+      <p className="mt-4">
         Nessa tela você vai digitar a senha o mais rápido possível cinco vezes,
         sem poder apagar qualquer caracter que tenha digitado errado. Utilize os
         cinco campos abaixo para digitar a senha.
       </p>
-      <Input placeholder="Linha 1" {...register("egTypedPassword1")} />
-      <Input placeholder="Linha 2" {...register("egTypedPassword2")} />
-      <Input placeholder="Linha 3" {...register("egTypedPassword3")} />
-      <Input placeholder="Linha 4" {...register("egTypedPassword4")} />
-      <Input placeholder="Linha 5" {...register("egTypedPassword5")} />
+      <CustomInput
+        id="1"
+        registerName="eg2TypedPassword1"
+        register={register}
+        egPasswordInfo={eg2Password1Info}
+        setEgPasswordInfo={setEg2Password1Info}
+      />
+      <CustomInput
+        id="2"
+        registerName="eg2TypedPassword2"
+        register={register}
+        egPasswordInfo={eg2Password2Info}
+        setEgPasswordInfo={setEg2Password2Info}
+      />
+      <CustomInput
+        id="3"
+        registerName="eg2TypedPassword3"
+        register={register}
+        egPasswordInfo={eg2Password3Info}
+        setEgPasswordInfo={setEg2Password3Info}
+      />
+      <CustomInput
+        id="4"
+        registerName="eg2TypedPassword4"
+        register={register}
+        egPasswordInfo={eg2Password4Info}
+        setEgPasswordInfo={setEg2Password4Info}
+      />
+      <CustomInput
+        id="5"
+        registerName="eg2TypedPassword5"
+        register={register}
+        egPasswordInfo={eg2Password5Info}
+        setEgPasswordInfo={setEg2Password5Info}
+      />
       <Button
         onClick={() => {
           if (
-            getValues("egTypedPassword1") &&
-            getValues("egTypedPassword2") &&
-            getValues("egTypedPassword3") &&
-            getValues("egTypedPassword4") &&
-            getValues("egTypedPassword5")
+            getValues("eg2TypedPassword1") &&
+            getValues("eg2TypedPassword2") &&
+            getValues("eg2TypedPassword3") &&
+            getValues("eg2TypedPassword4") &&
+            getValues("eg2TypedPassword5")
           ) {
             setStep((s) => s + 1);
           }
@@ -135,41 +227,56 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
       onCountdownEnds={() => setStep((s) => s + 1)}
     />,
     <>
-      <strong>Vídeo 4</strong>
+      <strong className="mt-4">Vídeo 5</strong>
       <video
         controls={isDevelopment}
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/4.mp4" type="video/mp4" />
+        <source src="/videos/debug.mp4" type="video/mp4" />
       </video>
     </>,
     <>
-      <p>
+      <p className="mt-4">
         Agora você vai fazer o mesmo para a senha gerada pelo computador. Digite
         a senha o mais rápido possível cinco vezes, sem poder apagar qualquer
         caracter que tenha digitado errado. Utilize os cinco campos abaixo para
         digitar a senha.
       </p>
-      <Input
-        placeholder="Linha 1"
-        {...register("btTypedPassword1", { required: true })}
+      <CustomInput
+        id="1"
+        registerName="btTypedPassword1"
+        register={register}
+        egPasswordInfo={btPassword1Info}
+        setEgPasswordInfo={setBtPassword1Info}
       />
-      <Input
-        placeholder="Linha 2"
-        {...register("btTypedPassword2", { required: true })}
+      <CustomInput
+        id="2"
+        registerName="btTypedPassword2"
+        register={register}
+        egPasswordInfo={btPassword2Info}
+        setEgPasswordInfo={setBtPassword2Info}
       />
-      <Input
-        placeholder="Linha 3"
-        {...register("btTypedPassword3", { required: true })}
+      <CustomInput
+        id="3"
+        registerName="btTypedPassword3"
+        register={register}
+        egPasswordInfo={btPassword3Info}
+        setEgPasswordInfo={setBtPassword3Info}
       />
-      <Input
-        placeholder="Linha 4"
-        {...register("btTypedPassword4", { required: true })}
+      <CustomInput
+        id="4"
+        registerName="btTypedPassword4"
+        register={register}
+        egPasswordInfo={btPassword4Info}
+        setEgPasswordInfo={setBtPassword4Info}
       />
-      <Input
-        placeholder="Linha 5"
-        {...register("btTypedPassword5", { required: true })}
+      <CustomInput
+        id="5"
+        registerName="btTypedPassword5"
+        register={register}
+        egPasswordInfo={btPassword5Info}
+        setEgPasswordInfo={setBtPassword5Info}
       />
       <Button type="submit" isLoading={loading}>
         FINALIZAR

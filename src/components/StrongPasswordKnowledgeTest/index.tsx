@@ -43,13 +43,17 @@ const StrongPasswordKnowledTest = ({
   async function onSubmit(data: any) {
     try {
       setLoading(true);
-      await fetch("/api/spkt", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/strong-password-knowledge-tests`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_KEY}`,
+          },
+          method: "POST",
+          body: JSON.stringify({ data }),
+        }
+      ).then((r) => r.json());
       onFinishTest();
     } catch (err) {
       console.error(err);

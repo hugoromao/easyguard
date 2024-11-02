@@ -1,79 +1,117 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import generator from "generate-password";
-import { Button, Input, useDisclosure } from "@nextui-org/react";
+import React, { useEffect } from "react";
+import { Button, Input } from "@nextui-org/react";
 
-import NewPasswordForm, { Input as InputType } from "../NewPasswordForm";
-import { generatePassword } from "@/utils/passwd";
-import { passwordConfig } from "../PasswordMemoryTest";
-import { useForm } from "react-hook-form";
+import NewPasswordForm from "../NewPasswordForm";
 
-type Inputs = {
-  egTypedPassword1: string;
-  egTypedPassword2: string;
-  egTypedPassword3: string;
-  egTypedPassword4: string;
-  egTypedPassword5: string;
-  btTypedPassword1: string;
-  btTypedPassword2: string;
-  btTypedPassword3: string;
-  btTypedPassword4: string;
-  btTypedPassword5: string;
-};
+import { Inputs, PasswordTypeInfo, useTypingTestViewModel } from "./viewmodel";
+import { CheckIcon } from "@heroicons/react/24/outline";
+import dayjs from "dayjs";
+import { UseFormRegister } from "react-hook-form";
 
 type TypingTestProps = {
   onFinishTest: () => void;
 };
 
-const TypingTest = ({ onFinishTest }: TypingTestProps) => {
-  const btPassword = generator.generate(passwordConfig);
+type CustomInputProps = {
+  id: string;
+  registerName: string;
+  register: UseFormRegister<Inputs>;
+  egPasswordInfo: PasswordTypeInfo;
+  setEgPasswordInfo: React.Dispatch<React.SetStateAction<PasswordTypeInfo>>;
+};
 
-  const { register, handleSubmit, getValues } = useForm<Inputs>();
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-
-  const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(0);
-  const [egPassword, setEgPassword] = useState<string | undefined>();
-
-  function onCompletedNewPasswordForm(
-    words: InputType[],
-    numbers: InputType[],
-  ) {
-    const password = generatePassword(
-      words.map((w) => w.value),
-      numbers.map((n) => Number(n.value)),
-    );
-    if (password.password) setEgPassword(password.password.slice(0, 16));
-    setStep((s) => s + 1);
-    onClose();
-  }
-
-  async function onSubmit(data: Inputs) {
-    try {
-      setLoading(true);
-      await fetch("/api/tt", {
-        method: "POST",
-        body: JSON.stringify({
-          egPassword,
-          btPassword,
-          ...data,
-        }),
-        headers: {
-          "Content-Type": "application/json",
+export const CustomInput = ({
+  id,
+  registerName,
+  register,
+  egPasswordInfo,
+  setEgPasswordInfo,
+}: CustomInputProps) => {
+  return (
+    <Input
+      placeholder={`Linha ${id}`}
+      onKeyDown={(e) => {
+        if (e.key === "Backspace") {
+          setEgPasswordInfo((i) => ({
+            ...i,
+            backspaceCount: i.backspaceCount + 1,
+          }));
+        }
+      }}
+      {...register(registerName as any, {
+        onChange: () => {
+          if (egPasswordInfo.timestamp.start === null) {
+            setEgPasswordInfo((o) => ({
+              ...o,
+              timestamp: { ...o.timestamp, start: dayjs().unix() },
+            }));
+          }
         },
-      });
-      onFinishTest();
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
+        onBlur: () => {
+          setEgPasswordInfo((o) => ({
+            ...o,
+            timestamp: { ...o.timestamp, end: dayjs().unix() },
+          }));
+        },
+      })}
+    />
+  );
+};
+
+const TypingTest = ({ onFinishTest }: TypingTestProps) => {
+  const {
+    getValues,
+    handleSubmit,
+    isOpen,
+    loading,
+    onCompletedNewPasswordForm,
+    onOpen,
+    onOpenChange,
+    onSubmit,
+    register,
+    step,
+    setStep,
+    changeEg2Password1,
+    eg2Password1,
+    eg1Password1,
+    btPassword,
+    eg1Password1Info,
+    setEg1Password1Info,
+    eg1Password2Info,
+    setEg1Password2Info,
+    eg1Password3Info,
+    setEg1Password3Info,
+    eg1Password4Info,
+    setEg1Password4Info,
+    eg1Password5Info,
+    setEg1Password5Info,
+    eg2Password1Info,
+    setEg2Password1Info,
+    eg2Password2Info,
+    setEg2Password2Info,
+    eg2Password3Info,
+    setEg2Password3Info,
+    eg2Password4Info,
+    setEg2Password4Info,
+    eg2Password5Info,
+    setEg2Password5Info,
+    btPassword1Info,
+    setBtPassword1Info,
+    btPassword2Info,
+    setBtPassword2Info,
+    btPassword3Info,
+    setBtPassword3Info,
+    btPassword4Info,
+    setBtPassword4Info,
+    btPassword5Info,
+    setBtPassword5Info,
+  } = useTypingTestViewModel({ onFinishTest });
 
   const steps = [
     <>
-      <h1 className="font-bold text-2xl">Teste de digitação</h1>
+      <h1 className="font-bold text-2xl mt-4">Teste de digitação</h1>
 
       <p>
         Neste teste, avaliamos o quanto as senhas geradas pelo EasyGuard são
@@ -82,34 +120,81 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
       </p>
 
       <p>
-        Vamos precisar que você crie uma senha utilizando nossa ferramenta,
+        Vamos precisar que você crie duas senhas utilizando nossa ferramenta,
         basta clicar no botão a seguir.
       </p>
 
-      <Button onPress={onOpen}>Criar senha</Button>
+      <Button onPress={changeEg2Password1}>
+        {eg2Password1 ? "Alterar" : "Criar"} primeira senha
+      </Button>
+      {eg2Password1 ? (
+        <strong className="text-center mb-4">{eg2Password1}</strong>
+      ) : null}
+
+      <Button
+        onPress={onOpen}
+        isDisabled={eg1Password1 !== undefined}
+        color={eg1Password1 !== undefined ? "primary" : "default"}
+        startContent={
+          eg1Password1 !== undefined ? <CheckIcon height={24} /> : undefined
+        }
+      >
+        Criar segunda senha
+      </Button>
     </>,
     <>
-      <p>
-        Nessa tela você vai digitar a senha o mais rápido possível cinco vezes,
-        sem poder apagar qualquer caracter que tenha digitado errado. Utilize os
-        cinco campos abaixo para digitar a senha.
+      <p className="mt-4">
+        Nessa tela você vai digitar a senha o mais rápido possível cinco vezes.
+        Utilize os cinco campos abaixo para digitar a senha.
       </p>
       <em>
-        Senha escolhida: <strong>{egPassword}</strong>
+        Senha escolhida: <strong>{eg1Password1}</strong>
       </em>
-      <Input placeholder="Linha 1" {...register("egTypedPassword1")} />
-      <Input placeholder="Linha 2" {...register("egTypedPassword2")} />
-      <Input placeholder="Linha 3" {...register("egTypedPassword3")} />
-      <Input placeholder="Linha 4" {...register("egTypedPassword4")} />
-      <Input placeholder="Linha 5" {...register("egTypedPassword5")} />
+
+      <CustomInput
+        id="1"
+        registerName="eg1TypedPassword1"
+        register={register}
+        egPasswordInfo={eg1Password1Info}
+        setEgPasswordInfo={setEg1Password1Info}
+      />
+      <CustomInput
+        id="2"
+        registerName="eg1TypedPassword2"
+        register={register}
+        egPasswordInfo={eg1Password2Info}
+        setEgPasswordInfo={setEg1Password2Info}
+      />
+      <CustomInput
+        id="3"
+        registerName="eg1TypedPassword3"
+        register={register}
+        egPasswordInfo={eg1Password3Info}
+        setEgPasswordInfo={setEg1Password3Info}
+      />
+      <CustomInput
+        id="4"
+        registerName="eg1TypedPassword4"
+        register={register}
+        egPasswordInfo={eg1Password4Info}
+        setEgPasswordInfo={setEg1Password4Info}
+      />
+      <CustomInput
+        id="5"
+        registerName="eg1TypedPassword5"
+        register={register}
+        egPasswordInfo={eg1Password5Info}
+        setEgPasswordInfo={setEg1Password5Info}
+      />
+
       <Button
         onClick={() => {
           if (
-            getValues("egTypedPassword1") &&
-            getValues("egTypedPassword2") &&
-            getValues("egTypedPassword3") &&
-            getValues("egTypedPassword4") &&
-            getValues("egTypedPassword5")
+            getValues("eg1TypedPassword1") &&
+            getValues("eg1TypedPassword2") &&
+            getValues("eg1TypedPassword3") &&
+            getValues("eg1TypedPassword4") &&
+            getValues("eg1TypedPassword5")
           ) {
             setStep((s) => s + 1);
           }
@@ -120,7 +205,71 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
     </>,
     <></>,
     <>
-      <p>
+      <p className="mt-4">
+        Agora você vai fazer o mesmo para a senha gerada pelo EasyGuard. Digite
+        a senha o mais rápido possível cinco vezes, sem poder apagar qualquer
+        caracter que tenha digitado errado. Utilize os cinco campos abaixo para
+        digitar a senha.
+      </p>
+      <em>
+        Senha escolhida: <strong>{eg2Password1}</strong>
+      </em>
+
+      <CustomInput
+        id="1"
+        registerName="eg2TypedPassword1"
+        register={register}
+        egPasswordInfo={eg2Password1Info}
+        setEgPasswordInfo={setEg2Password1Info}
+      />
+      <CustomInput
+        id="2"
+        registerName="eg2TypedPassword2"
+        register={register}
+        egPasswordInfo={eg2Password2Info}
+        setEgPasswordInfo={setEg2Password2Info}
+      />
+      <CustomInput
+        id="3"
+        registerName="eg2TypedPassword3"
+        register={register}
+        egPasswordInfo={eg2Password3Info}
+        setEgPasswordInfo={setEg2Password3Info}
+      />
+      <CustomInput
+        id="4"
+        registerName="eg2TypedPassword4"
+        register={register}
+        egPasswordInfo={eg2Password4Info}
+        setEgPasswordInfo={setEg2Password4Info}
+      />
+      <CustomInput
+        id="5"
+        registerName="eg2TypedPassword5"
+        register={register}
+        egPasswordInfo={eg2Password5Info}
+        setEgPasswordInfo={setEg2Password5Info}
+      />
+
+      <Button
+        onClick={() => {
+          if (
+            getValues("eg2TypedPassword1") &&
+            getValues("eg2TypedPassword2") &&
+            getValues("eg2TypedPassword3") &&
+            getValues("eg2TypedPassword4") &&
+            getValues("eg2TypedPassword5")
+          ) {
+            setStep((s) => s + 1);
+          }
+        }}
+      >
+        Próximo
+      </Button>
+    </>,
+    <></>,
+    <>
+      <p className="mt-4">
         Agora você vai fazer o mesmo para a senha gerada pelo computador. Digite
         a senha o mais rápido possível cinco vezes, sem poder apagar qualquer
         caracter que tenha digitado errado. Utilize os cinco campos abaixo para
@@ -131,31 +280,43 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
           Senha escolhida: <strong>{btPassword}</strong>
         </em>
       ) : null}
-      <Input
-        isRequired
-        placeholder="Linha 1"
-        {...register("btTypedPassword1", { required: true })}
+
+      <CustomInput
+        id="1"
+        registerName="btTypedPassword1"
+        register={register}
+        egPasswordInfo={btPassword1Info}
+        setEgPasswordInfo={setBtPassword1Info}
       />
-      <Input
-        isRequired
-        placeholder="Linha 2"
-        {...register("btTypedPassword2", { required: true })}
+      <CustomInput
+        id="2"
+        registerName="btTypedPassword2"
+        register={register}
+        egPasswordInfo={btPassword2Info}
+        setEgPasswordInfo={setBtPassword2Info}
       />
-      <Input
-        isRequired
-        placeholder="Linha 3"
-        {...register("btTypedPassword3", { required: true })}
+      <CustomInput
+        id="3"
+        registerName="btTypedPassword3"
+        register={register}
+        egPasswordInfo={btPassword3Info}
+        setEgPasswordInfo={setBtPassword3Info}
       />
-      <Input
-        isRequired
-        placeholder="Linha 4"
-        {...register("btTypedPassword4", { required: true })}
+      <CustomInput
+        id="4"
+        registerName="btTypedPassword4"
+        register={register}
+        egPasswordInfo={btPassword4Info}
+        setEgPasswordInfo={setBtPassword4Info}
       />
-      <Input
-        isRequired
-        placeholder="Linha 5"
-        {...register("btTypedPassword5", { required: true })}
+      <CustomInput
+        id="5"
+        registerName="btTypedPassword5"
+        register={register}
+        egPasswordInfo={btPassword5Info}
+        setEgPasswordInfo={setBtPassword5Info}
       />
+
       <Button type="submit" isLoading={loading}>
         FINALIZAR
       </Button>
@@ -164,6 +325,7 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
 
   useEffect(() => {
     if (step === 2) setStep((s) => s + 1);
+    if (step === 4) setStep((s) => s + 1);
   }, [step]);
 
   return (
