@@ -36,8 +36,7 @@ type StrongPasswordKnowledTestProps = {
 const StrongPasswordKnowledTest = ({
   onFinishTest,
 }: StrongPasswordKnowledTestProps) => {
-  const { register, handleSubmit } = useForm();
-
+  const { register, handleSubmit, formState } = useForm();
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(data: any) {
@@ -91,7 +90,13 @@ const StrongPasswordKnowledTest = ({
         <Question key={id} id={id} question={question} register={register} />
       ))}
 
-      <Button type="submit" variant="solid" color="primary" isLoading={loading}>
+      <Button
+        isDisabled={!formState.isValid}
+        color={formState.isValid ? "primary" : "default"}
+        type="submit"
+        variant="solid"
+        isLoading={loading}
+      >
         Próximo
       </Button>
     </form>

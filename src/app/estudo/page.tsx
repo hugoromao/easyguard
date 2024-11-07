@@ -10,7 +10,6 @@ import TypingTest from "@/components/TypingTest";
 import CombinatedTest from "@/components/CombinatedTest";
 import PasswordMemoryTest from "@/components/PasswordMemoryTest";
 import StrongPasswordKnowledTest from "@/components/StrongPasswordKnowledgeTest";
-import Link from "next/link";
 import { useEstudoViewModel } from "./viewmodel";
 
 const Estudo = () => {
@@ -20,12 +19,7 @@ const Estudo = () => {
     <>
       <div className="flex flex-col items-center pt-0 p-4 h-[calc(100dvh)] overflow-x-hidden overflow-y-auto">
         {step !== 0 ? (
-          <Progress
-            aria-label="time remaining"
-            className="pt-4"
-            value={(step * 100) / 5}
-            color="secondary"
-          />
+          <Progress className="pt-4" value={(step * 100) / 5} />
         ) : null}
 
         <div className="flex flex-col max-w-[720px] m-auto">
@@ -80,11 +74,13 @@ const Estudo = () => {
               <h1 className="font-bold text-4xl text-center">
                 Estudo finalizado!
               </h1>
-              <Link href="/">
-                <Button variant="solid" color="primary">
-                  Voltar para o início
-                </Button>
-              </Link>
+
+              <p className="text-center">
+                Agradecemos sua participação!🔬
+                <br />
+                Você pode fechar esta janela
+              </p>
+
               <Confetti
                 style={{ pointerEvents: "none" }}
                 numberOfPieces={100}

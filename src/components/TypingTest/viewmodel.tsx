@@ -36,7 +36,7 @@ type Props = {
 export const useTypingTestViewModel = ({ onFinishTest }: Props) => {
   const [btPassword] = useState(generator.generate(passwordConfig));
 
-  const { register, handleSubmit, getValues } = useForm<Inputs>();
+  const { register, handleSubmit, getValues, watch } = useForm<Inputs>();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const [eg1Password1, setEg1Password1] = useState<string | undefined>();
@@ -146,6 +146,7 @@ export const useTypingTestViewModel = ({ onFinishTest }: Props) => {
     useState<PasswordTypeInfo>(defaultPasswordInfo);
 
   return {
+    watch,
     register,
     handleSubmit,
     getValues,

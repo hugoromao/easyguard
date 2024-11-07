@@ -66,7 +66,7 @@ const NewPasswordForm = ({
               <>
                 <div className="flex flex-col gap-2">
                   <p className="mb-2">
-                    Para começar, vamos precisar de quatro palavras(ou mais).
+                    Para começar, vamos precisar de quatro palavras (ou mais).
                     Quanto mais sem sentido, melhor! Você pode tentar criar uma
                     história bizarra com as palavras, como: “corajoso, buriti,
                     do mato, fez vestibular”.

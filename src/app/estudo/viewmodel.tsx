@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useEstudoViewModel = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(3);
 
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
@@ -12,10 +12,15 @@ export const useEstudoViewModel = () => {
 
     window.addEventListener("beforeunload", handleBeforeUnload);
 
+    if (step === 5) {
+      console.log("remove event");
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    }
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []);
+  }, [step]);
 
   return { step, setStep };
 };

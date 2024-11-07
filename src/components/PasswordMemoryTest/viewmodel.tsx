@@ -35,7 +35,7 @@ export const usePasswordMemoryTestViewModel = ({ onFinishTest }: Props) => {
   const btPassword1 = generator.generate(passwordConfig);
   const btPassword2 = generator.generate(passwordConfig);
 
-  const { register, handleSubmit, getValues } = useForm<Inputs>();
+  const { register, handleSubmit, getValues, watch } = useForm<Inputs>();
 
   const {
     isOpen: isOpen1,
@@ -154,5 +154,6 @@ export const usePasswordMemoryTestViewModel = ({ onFinishTest }: Props) => {
     setEg2Password1,
     changeEg2Password2,
     setEg2Password2,
+    watch,
   };
 };

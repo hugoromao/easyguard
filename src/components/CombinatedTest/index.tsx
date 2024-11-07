@@ -16,7 +16,6 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     btPassword,
     eg1Password1,
     eg2Password1,
-    getValues,
     handleSubmit,
     isDevelopment,
     isOpen,
@@ -65,9 +64,8 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     <>
       <h1 className="font-bold text-2xl mt-4">Teste combinado</h1>
       <p>
-        Esse é o último teste. Ele envolve tanto os aspectos de memorização
-        quanto de digitação. Vamos precisar que você crie uma última senha
-        utilizando nossa ferramenta, basta utilizar o seguinte botão.
+        Esse é o último teste. Vamos precisar que você crie uma última senha
+        utilizando nossa ferramenta, basta utilizar os seguintes botões.
       </p>
 
       <Button onPress={changeEg2Password1}>
@@ -133,19 +131,7 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
         egPasswordInfo={eg1Password5Info}
         setEgPasswordInfo={setEg1Password5Info}
       />
-      <Button
-        onClick={() => {
-          if (
-            getValues("eg1TypedPassword1") &&
-            getValues("eg1TypedPassword2") &&
-            getValues("eg1TypedPassword3") &&
-            getValues("eg1TypedPassword4") &&
-            getValues("eg1TypedPassword5")
-          ) {
-            setStep((s) => s + 1);
-          }
-        }}
-      >
+      <Button color="primary" onClick={() => setStep((s) => s + 1)}>
         Próximo
       </Button>
     </>,
@@ -205,19 +191,7 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
         egPasswordInfo={eg2Password5Info}
         setEgPasswordInfo={setEg2Password5Info}
       />
-      <Button
-        onClick={() => {
-          if (
-            getValues("eg2TypedPassword1") &&
-            getValues("eg2TypedPassword2") &&
-            getValues("eg2TypedPassword3") &&
-            getValues("eg2TypedPassword4") &&
-            getValues("eg2TypedPassword5")
-          ) {
-            setStep((s) => s + 1);
-          }
-        }}
-      >
+      <Button color="primary" onClick={() => setStep((s) => s + 1)}>
         Próximo
       </Button>
     </>,
@@ -278,7 +252,7 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
         egPasswordInfo={btPassword5Info}
         setEgPasswordInfo={setBtPassword5Info}
       />
-      <Button type="submit" isLoading={loading}>
+      <Button color="primary" type="submit" isLoading={loading}>
         FINALIZAR
       </Button>
     </>,

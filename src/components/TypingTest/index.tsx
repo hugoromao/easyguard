@@ -56,13 +56,20 @@ export const CustomInput = ({
           }));
         },
       })}
+      onPaste={(e) => {
+        e.preventDefault();
+        return false;
+      }}
+      onCopy={(e) => {
+        e.preventDefault();
+        return false;
+      }}
     />
   );
 };
 
 const TypingTest = ({ onFinishTest }: TypingTestProps) => {
   const {
-    getValues,
     handleSubmit,
     isOpen,
     loading,
@@ -107,6 +114,7 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
     setBtPassword4Info,
     btPassword5Info,
     setBtPassword5Info,
+    watch,
   } = useTypingTestViewModel({ onFinishTest });
 
   const steps = [
@@ -114,14 +122,8 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
       <h1 className="font-bold text-2xl mt-4">Teste de digitação</h1>
 
       <p>
-        Neste teste, avaliamos o quanto as senhas geradas pelo EasyGuard são
-        mais fáceis de serem digitadas em comparação com as senhas geradas por
-        algoritmos convencionais.
-      </p>
-
-      <p>
         Vamos precisar que você crie duas senhas utilizando nossa ferramenta,
-        basta clicar no botão a seguir.
+        basta clicar nos botões a seguir.
       </p>
 
       <Button onPress={changeEg2Password1}>
@@ -147,7 +149,7 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
         Nessa tela você vai digitar a senha o mais rápido possível cinco vezes.
         Utilize os cinco campos abaixo para digitar a senha.
       </p>
-      <em>
+      <em className="select-none">
         Senha escolhida: <strong>{eg1Password1}</strong>
       </em>
 
@@ -188,16 +190,26 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
       />
 
       <Button
+        isDisabled={
+          !(
+            watch("eg1TypedPassword1") &&
+            watch("eg1TypedPassword2") &&
+            watch("eg1TypedPassword3") &&
+            watch("eg1TypedPassword4") &&
+            watch("eg1TypedPassword5")
+          )
+        }
+        color={
+          watch("eg1TypedPassword1") &&
+          watch("eg1TypedPassword2") &&
+          watch("eg1TypedPassword3") &&
+          watch("eg1TypedPassword4") &&
+          watch("eg1TypedPassword5")
+            ? "primary"
+            : "default"
+        }
         onClick={() => {
-          if (
-            getValues("eg1TypedPassword1") &&
-            getValues("eg1TypedPassword2") &&
-            getValues("eg1TypedPassword3") &&
-            getValues("eg1TypedPassword4") &&
-            getValues("eg1TypedPassword5")
-          ) {
-            setStep((s) => s + 1);
-          }
+          setStep((s) => s + 1);
         }}
       >
         Próximo
@@ -211,7 +223,7 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
         caracter que tenha digitado errado. Utilize os cinco campos abaixo para
         digitar a senha.
       </p>
-      <em>
+      <em className="select-none">
         Senha escolhida: <strong>{eg2Password1}</strong>
       </em>
 
@@ -252,17 +264,25 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
       />
 
       <Button
-        onClick={() => {
-          if (
-            getValues("eg2TypedPassword1") &&
-            getValues("eg2TypedPassword2") &&
-            getValues("eg2TypedPassword3") &&
-            getValues("eg2TypedPassword4") &&
-            getValues("eg2TypedPassword5")
-          ) {
-            setStep((s) => s + 1);
-          }
-        }}
+        isDisabled={
+          !(
+            watch("eg2TypedPassword1") &&
+            watch("eg2TypedPassword2") &&
+            watch("eg2TypedPassword3") &&
+            watch("eg2TypedPassword4") &&
+            watch("eg2TypedPassword5")
+          )
+        }
+        color={
+          watch("eg2TypedPassword1") &&
+          watch("eg2TypedPassword2") &&
+          watch("eg2TypedPassword3") &&
+          watch("eg2TypedPassword4") &&
+          watch("eg2TypedPassword5")
+            ? "primary"
+            : "default"
+        }
+        onClick={() => setStep((s) => s + 1)}
       >
         Próximo
       </Button>
@@ -276,7 +296,7 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
         digitar a senha.
       </p>
       {!loading ? (
-        <em>
+        <em className="select-none">
           Senha escolhida: <strong>{btPassword}</strong>
         </em>
       ) : null}
@@ -317,7 +337,28 @@ const TypingTest = ({ onFinishTest }: TypingTestProps) => {
         setEgPasswordInfo={setBtPassword5Info}
       />
 
-      <Button type="submit" isLoading={loading}>
+      <Button
+        isDisabled={
+          !(
+            watch("btTypedPassword1") &&
+            watch("btTypedPassword2") &&
+            watch("btTypedPassword3") &&
+            watch("btTypedPassword4") &&
+            watch("btTypedPassword5")
+          )
+        }
+        color={
+          watch("btTypedPassword1") &&
+          watch("btTypedPassword2") &&
+          watch("btTypedPassword3") &&
+          watch("btTypedPassword4") &&
+          watch("btTypedPassword5")
+            ? "primary"
+            : "default"
+        }
+        type="submit"
+        isLoading={loading}
+      >
         FINALIZAR
       </Button>
     </>,

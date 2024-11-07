@@ -28,7 +28,7 @@ const Countdown = () => {
 
   return (
     <div className="h-[calc(100dvh)] max-w-lg flex flex-col items-center justify-center mx-auto gap-4">
-      <p>Tempo restante(segundos): {count}</p>
+      <p>Tempo restante (segundos): {count}</p>
       <Progress
         aria-label="time remaining"
         value={(count * 100) / countStart}

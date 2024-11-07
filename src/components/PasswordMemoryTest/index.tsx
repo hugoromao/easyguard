@@ -16,7 +16,6 @@ type PasswordMemoryTestProps = {
 
 const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
   const {
-    getValues,
     handleSubmit,
     isDevelopment,
     isOpen1,
@@ -45,12 +44,6 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
   const steps = [
     <>
       <h1 className="font-bold text-2xl pt-4">Teste de memória</h1>
-      <p>
-        Neste teste, avaliamos o quanto as senhas geradas pelo EasyGuard são
-        mais memoráveis em comparação com as geradas por algoritmos
-        convencionais.
-      </p>
-
       <p>
         Vamos precisar que você crie quatro senhas utilizando nossa ferramenta,
         basta utilizar os seguintes botões.
@@ -113,27 +106,16 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         se preocupe se não conseguir lembrar tudo.
       </p>
       <Input
-        isRequired
         placeholder="Digite a senha 1"
         autoComplete="off"
         {...register("eg1TypedPassword1")}
       />
       <Input
-        isRequired
         placeholder="Digite a senha 2"
         autoComplete="off"
         {...register("eg1TypedPassword2")}
       />
-      <Button
-        onPress={() => {
-          if (
-            getValues("eg1TypedPassword1") &&
-            getValues("eg1TypedPassword2")
-          ) {
-            setStep((s) => s + 1);
-          }
-        }}
-      >
+      <Button color="primary" onPress={() => setStep((s) => s + 1)}>
         Próximo
       </Button>
     </>,
@@ -158,27 +140,16 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         se preocupe se não conseguir lembrar tudo.
       </p>
       <Input
-        isRequired
         placeholder="Digite a senha 1"
         autoComplete="off"
         {...register("eg2TypedPassword1")}
       />
       <Input
-        isRequired
         placeholder="Digite a senha 2"
         autoComplete="off"
         {...register("eg2TypedPassword2")}
       />
-      <Button
-        onPress={() => {
-          if (
-            getValues("eg2TypedPassword1") &&
-            getValues("eg2TypedPassword2")
-          ) {
-            setStep((s) => s + 1);
-          }
-        }}
-      >
+      <Button color="primary" onPress={() => setStep((s) => s + 1)}>
         Próximo
       </Button>
     </>,
@@ -203,18 +174,16 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         uma vez, não se preocupe se não conseguir lembrar tudo.
       </p>
       <Input
-        isRequired
         placeholder="Digite a senha 1"
         autoComplete="off"
-        {...register("btTypedPassword1", { required: true })}
+        {...register("btTypedPassword1")}
       />
       <Input
-        isRequired
         placeholder="Digite a senha 2"
         autoComplete="off"
-        {...register("btTypedPassword2", { required: true })}
+        {...register("btTypedPassword2")}
       />
-      <Button type="submit" isLoading={loading}>
+      <Button color="primary" type="submit" isLoading={loading}>
         FINALIZAR
       </Button>
     </>,
