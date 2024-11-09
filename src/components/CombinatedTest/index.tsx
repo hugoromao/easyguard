@@ -82,13 +82,13 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
       onCountdownEnds={() => setStep((s) => s + 1)}
     />,
     <>
-      <strong className="mt-4">Vídeo 3</strong>
+      <strong className="mt-4">Vídeo 4</strong>
       <video
         controls={isDevelopment}
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/debug.mp4" type="video/mp4" />
+        <source src="/videos/4.mp4" type="video/mp4" />
       </video>
     </>,
     <>
@@ -141,13 +141,13 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
       onCountdownEnds={() => setStep((s) => s + 1)}
     />,
     <>
-      <strong className="mt-4">Vídeo 4</strong>
+      <strong className="mt-4">Vídeo 5</strong>
       <video
         controls={isDevelopment}
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/debug.mp4" type="video/mp4" />
+        <source src="/videos/5.mp4" type="video/mp4" />
       </video>
     </>,
     <>
@@ -201,13 +201,13 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
       onCountdownEnds={() => setStep((s) => s + 1)}
     />,
     <>
-      <strong className="mt-4">Vídeo 5</strong>
+      <strong className="mt-4">Vídeo 6</strong>
       <video
         controls={isDevelopment}
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/debug.mp4" type="video/mp4" />
+        <source src="/videos/6.mp4" type="video/mp4" />
       </video>
     </>,
     <>

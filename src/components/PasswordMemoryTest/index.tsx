@@ -97,7 +97,7 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/debug.mp4" type="video/mp4" />
+        <source src="/videos/1.mp4" type="video/mp4" />
       </video>
     </>,
     <>
@@ -131,7 +131,7 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/debug.mp4" type="video/mp4" />
+        <source src="/videos/2.mp4" type="video/mp4" />
       </video>
     </>,
     <>
@@ -165,7 +165,7 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         autoPlay
         onEnded={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/debug.mp4" type="video/mp4" />
+        <source src="/videos/3.mp4" type="video/mp4" />
       </video>
     </>,
     <>
