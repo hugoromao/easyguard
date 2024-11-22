@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useEstudoViewModel = () => {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
