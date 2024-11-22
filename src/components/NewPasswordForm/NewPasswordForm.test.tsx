@@ -148,7 +148,7 @@ describe("<NewPasswordForm onFinish={() => ({})}", () => {
       )
     );
     expect(screen.getAllByRole("spinbutton").length).toBe(2);
-    expect(screen.getByRole("button", { name: "Adicionar número" }));
+    expect(screen.getByRole("button", { name: "Adicionar mais um número" }));
     expect(screen.getByRole("button", { name: "next" }));
   });
 
@@ -200,7 +200,7 @@ describe("<NewPasswordForm onFinish={() => ({})}", () => {
     expect(screen.getAllByText(/Este campo é obrigatório/u).length).toEqual(2);
   });
 
-  it('should add a textbox field when the "Adicionar número" button is clicked', () => {
+  it('should add a textbox field when the "Adicionar mais um número" button is clicked', () => {
     render(
       <NewPasswordForm onFinish={() => ({})} isOpen onOpenChange={() => ({})} />
     );
@@ -219,7 +219,9 @@ describe("<NewPasswordForm onFinish={() => ({})}", () => {
     });
 
     fireEvent.click(screen.getByRole("button", { name: "next" }));
-    fireEvent.click(screen.getByRole("button", { name: "Adicionar número" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Adicionar mais um número" })
+    );
 
     expect(screen.getAllByRole("spinbutton").length).toBe(3);
   });
@@ -243,7 +245,9 @@ describe("<NewPasswordForm onFinish={() => ({})}", () => {
     });
 
     fireEvent.click(screen.getByRole("button", { name: "next" }));
-    fireEvent.click(screen.getByRole("button", { name: "Adicionar número" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Adicionar mais um número" })
+    );
     fireEvent.click(screen.getByRole("button", { name: "remove" }));
 
     expect(screen.getAllByRole("spinbutton").length).toBe(2);

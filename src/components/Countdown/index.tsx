@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useCountdown } from "usehooks-ts";
-import { Button, Input, Progress } from "@nextui-org/react";
+import { Button, Card, Progress } from "@nextui-org/react";
 import { PlayIcon } from "@heroicons/react/24/outline";
 
 type CountdownProps = {
@@ -13,18 +13,19 @@ type CountdownProps = {
 const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
   const countStart = process.env.NODE_ENV === "development" ? 10 : 180;
 
+  const [isVisible, setIsVisible] = useState(false);
   const text = `Agora você terá <strong>três minutos</strong> para memorizar ${
     passwords.length > 1 ? "as senhas" : "a senha"
   }. Após esse período, um vídeo de distração será iniciado automaticamente. Quando o vídeo terminar, você deverá digitar o máximo possível que conseguiu memorizar ${
     passwords.length > 1 ? "das senhas" : "da senha"
-  }. <strong>Clique em INICIAR quando estiver pronto</strong>.`;
+  }.${
+    isVisible ? "" : "<strong>Clique em INICIAR quando estiver pronto</strong>."
+  }`;
 
   const [count, { startCountdown }] = useCountdown({
     countStart,
     intervalMs: 1000,
   });
-
-  const [isVisible, setIsVisible] = useState(false);
 
   function startTest() {
     setIsVisible(true);
@@ -39,7 +40,7 @@ const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
   }, [count]);
 
   return (
-    <div className="w-full h-[-webkit-fill-available] flex flex-col items-center justify-center gap-4">
+    <div className="w-full h-[-webkit-fill-available] flex flex-col items-center justify-center gap-4 select-none">
       {text ? <p dangerouslySetInnerHTML={{ __html: text }} /> : null}
 
       {isVisible ? (
@@ -51,15 +52,12 @@ const Countdown = ({ passwords, onCountdownEnds }: CountdownProps) => {
           />
 
           {passwords.map((p, index) => (
-            <Input
-              isReadOnly
-              key={p}
-              label={`Senha ${index + 1}`}
-              type={"text"}
-              size="lg"
-              defaultValue={p}
-              fullWidth
-            />
+            <>
+              <Card className="bg-zinc-100 p-2 px-4 w-full">
+                <p className="font-light text-sm">Senha {index + 1}</p>
+                <strong>{p}</strong>
+              </Card>
+            </>
           ))}
         </>
       ) : null}

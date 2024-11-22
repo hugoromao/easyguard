@@ -15,6 +15,8 @@ type TypingTestProps = {
 };
 
 type CustomInputProps = {
+  placeholder?: string;
+  autoComplete?: string;
   id: string;
   registerName: string;
   register: UseFormRegister<Inputs>;
@@ -28,10 +30,13 @@ export const CustomInput = ({
   register,
   egPasswordInfo,
   setEgPasswordInfo,
+  placeholder = `Linha ${id}`,
+  autoComplete = "off",
 }: CustomInputProps) => {
   return (
     <Input
-      placeholder={`Linha ${id}`}
+      autoComplete={autoComplete}
+      placeholder={placeholder}
       onKeyDown={(e) => {
         if (e.key === "Backspace") {
           setEgPasswordInfo((i) => ({

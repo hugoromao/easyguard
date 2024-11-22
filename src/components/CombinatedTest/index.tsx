@@ -17,7 +17,6 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     eg1Password1,
     eg2Password1,
     handleSubmit,
-    isDevelopment,
     isOpen,
     loading,
     onCompletedNewPasswordForm,
@@ -83,13 +82,22 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     />,
     <>
       <strong className="mt-4">Vídeo 4</strong>
-      <video
-        controls={isDevelopment}
-        autoPlay
-        onEnded={() => setStep((s) => s + 1)}
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/--h_vIA5WwU?si=GL0HM3zbQshFdyuP&amp;controls=0&autoplay=1"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+      <Button
+        className="w-fit ml-auto"
+        color="primary"
+        onPress={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/4.mp4" type="video/mp4" />
-      </video>
+        Próximo
+      </Button>
     </>,
     <>
       <p className="mt-4">
@@ -142,13 +150,22 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     />,
     <>
       <strong className="mt-4">Vídeo 5</strong>
-      <video
-        controls={isDevelopment}
-        autoPlay
-        onEnded={() => setStep((s) => s + 1)}
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/hUkzh_5_lOw?si=xF7-VrpHXuIyFLvH&amp;controls=0&autoplay=1"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+      <Button
+        className="w-fit ml-auto"
+        color="primary"
+        onPress={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/5.mp4" type="video/mp4" />
-      </video>
+        Próximo
+      </Button>
     </>,
     <>
       <p className="mt-4">
@@ -201,14 +218,22 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
       onCountdownEnds={() => setStep((s) => s + 1)}
     />,
     <>
-      <strong className="mt-4">Vídeo 6</strong>
-      <video
-        controls={isDevelopment}
-        autoPlay
-        onEnded={() => setStep((s) => s + 1)}
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/ZgZccxuj2RY?si=7RPV0Fa0C8mbOx_b?si=T0yPNQeA6ugqt06t&amp;controls=0&autoplay=1"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+      <Button
+        className="w-fit ml-auto"
+        color="primary"
+        onPress={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/6.mp4" type="video/mp4" />
-      </video>
+        Próximo
+      </Button>
     </>,
     <>
       <p className="mt-4">

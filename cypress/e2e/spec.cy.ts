@@ -36,14 +36,14 @@ describe("Passwords flux", () => {
     cy.get("[type=submit]").click();
     cy.get("[name='Número 1']").type("14");
     cy.get("[name='Número 2']").type("2016");
-    cy.contains("Adicionar número").click();
-    cy.contains("Adicionar número").click();
+    cy.contains("Adicionar mais um número").click();
+    cy.contains("Adicionar mais um número").click();
     cy.get("[name='Número 3']").type("14");
     cy.get("[name='Número 4']").type("2016");
     cy.get("[name='Remover Número 4']").click();
     cy.get("[name='Remover Número 3']").click();
-    cy.contains("Adicionar número").click();
-    cy.contains("Adicionar número").click();
+    cy.contains("Adicionar mais um número").click();
+    cy.contains("Adicionar mais um número").click();
     cy.get("[name='Número 3']").type("1080");
     cy.get("[name='Número 4']").type("2048");
     cy.get("[type=submit]").click();

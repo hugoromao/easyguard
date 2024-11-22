@@ -169,7 +169,7 @@ const NewPasswordForm = ({
                     color="primary"
                     onClick={addNumber}
                   >
-                    Adicionar número
+                    Adicionar mais um número
                   </Button>
                 </>
               ) : null}

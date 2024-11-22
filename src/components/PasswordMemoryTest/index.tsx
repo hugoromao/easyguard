@@ -17,7 +17,6 @@ type PasswordMemoryTestProps = {
 const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
   const {
     handleSubmit,
-    isDevelopment,
     isOpen1,
     isOpen2,
     loading,
@@ -53,7 +52,7 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         {eg2Password1 ? "Alterar" : "Criar"} primeira senha
       </Button>
       {eg2Password1 ? (
-        <strong className="text-center mb-4">{eg2Password1}</strong>
+        <strong className="text-center mb-4 select-none">{eg2Password1}</strong>
       ) : null}
 
       <Button onPress={changeEg2Password2}>
@@ -92,13 +91,22 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     />,
     <>
       <strong className="mt-4">Vídeo 1</strong>
-      <video
-        controls={isDevelopment}
-        autoPlay
-        onEnded={() => setStep((s) => s + 1)}
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/TbLVc8fnw7c?si=NDNaIuB9gzOFkP7c&amp;controls=0&autoplay=1"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+      <Button
+        className="w-fit ml-auto"
+        color="primary"
+        onPress={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/1.mp4" type="video/mp4" />
-      </video>
+        Próximo
+      </Button>
     </>,
     <>
       <p className="mt-4">
@@ -108,11 +116,19 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
       <Input
         placeholder="Digite a senha 1"
         autoComplete="off"
+        onPaste={(e) => {
+          e.preventDefault();
+          return false;
+        }}
         {...register("eg1TypedPassword1")}
       />
       <Input
         placeholder="Digite a senha 2"
         autoComplete="off"
+        onPaste={(e) => {
+          e.preventDefault();
+          return false;
+        }}
         {...register("eg1TypedPassword2")}
       />
       <Button color="primary" onPress={() => setStep((s) => s + 1)}>
@@ -126,13 +142,22 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     />,
     <>
       <strong className="mt-4">Vídeo 2</strong>
-      <video
-        controls={isDevelopment}
-        autoPlay
-        onEnded={() => setStep((s) => s + 1)}
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/4zMgf3gK7p8?si=Am3bN-XM7Z2o64et&amp;controls=0&autoplay=1"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+      <Button
+        className="w-fit ml-auto"
+        color="primary"
+        onPress={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/2.mp4" type="video/mp4" />
-      </video>
+        Próximo
+      </Button>
     </>,
     <>
       <p className="mt-4">
@@ -143,11 +168,19 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         placeholder="Digite a senha 1"
         autoComplete="off"
         {...register("eg2TypedPassword1")}
+        onPaste={(e) => {
+          e.preventDefault();
+          return false;
+        }}
       />
       <Input
         placeholder="Digite a senha 2"
         autoComplete="off"
         {...register("eg2TypedPassword2")}
+        onPaste={(e) => {
+          e.preventDefault();
+          return false;
+        }}
       />
       <Button color="primary" onPress={() => setStep((s) => s + 1)}>
         Próximo
@@ -160,13 +193,22 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     />,
     <>
       <strong>Vídeo 3</strong>
-      <video
-        controls={isDevelopment}
-        autoPlay
-        onEnded={() => setStep((s) => s + 1)}
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/55D_3uaKXYE?si=zyiXatdVgK5QuP1U&amp;controls=0&autoplay=1"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+      <Button
+        className="w-fit ml-auto"
+        color="primary"
+        onPress={() => setStep((s) => s + 1)}
       >
-        <source src="/videos/3.mp4" type="video/mp4" />
-      </video>
+        Próximo
+      </Button>
     </>,
     <>
       <p className="mt-4">
@@ -177,11 +219,19 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         placeholder="Digite a senha 1"
         autoComplete="off"
         {...register("btTypedPassword1")}
+        onPaste={(e) => {
+          e.preventDefault();
+          return false;
+        }}
       />
       <Input
         placeholder="Digite a senha 2"
         autoComplete="off"
         {...register("btTypedPassword2")}
+        onPaste={(e) => {
+          e.preventDefault();
+          return false;
+        }}
       />
       <Button color="primary" type="submit" isLoading={loading}>
         FINALIZAR

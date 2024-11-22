@@ -36,14 +36,14 @@ const Estudo = () => {
                 Avaliação EasyGuard
               </h1>
               <p className="text-center">
-                Diante de um cenário onde cada vez mais nossa presença digital
-                aumenta, as senhas atuam como principal mecanismo de defesa
-                contra violações à nossa privacidade e vazamento de informações
-                pessoais e profissinoais.
+                Em um cenário onde cada vez mais nossa presença digital aumenta,
+                as senhas atuam como principal mecanismo de defesa contra
+                violações à nossa privacidade e vazamento de informações
+                pessoais e profissionais.
               </p>
               <p className="text-center">
-                Essa pesquisa avalia a estratégia de criação de senhas utilizada
-                no EasyGuard.
+                Esta pesquisa avalia a estratégia de criação de senhas utilizada
+                pelo EasyGuard.
               </p>
               <p className="text-center text-gray-600 text-sm italic">
                 Duração média: Uma hora e 30 minutos.
