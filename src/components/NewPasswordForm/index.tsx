@@ -52,7 +52,7 @@ const NewPasswordForm = ({
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       backdrop="blur"
-      scrollBehavior="inside"
+      scrollBehavior="normal"
     >
       <ModalContent>
         <ModalHeader className="text-[24px] font-semibold">
