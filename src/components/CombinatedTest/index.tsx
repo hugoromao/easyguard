@@ -71,7 +71,7 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
         {eg2Password1 ? "Alterar" : "Criar"} primeira senha
       </Button>
       {eg2Password1 ? (
-        <strong className="text-center mb-4">{eg2Password1}</strong>
+        <strong className="text-center mb-4 break-all">{eg2Password1}</strong>
       ) : null}
       <Button onPress={onOpen}>Criar senha</Button>
     </>,

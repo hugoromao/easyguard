@@ -52,14 +52,16 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
         {eg2Password1 ? "Alterar" : "Criar"} primeira senha
       </Button>
       {eg2Password1 ? (
-        <strong className="text-center mb-4 select-none">{eg2Password1}</strong>
+        <strong className="text-center mb-4 select-none break-all">
+          {eg2Password1}
+        </strong>
       ) : null}
 
       <Button onPress={changeEg2Password2}>
         {eg2Password2 ? "Alterar" : "Criar"} segunda senha
       </Button>
       {eg2Password2 ? (
-        <strong className="text-center mb-4">{eg2Password2}</strong>
+        <strong className="text-center mb-4 break-all">{eg2Password2}</strong>
       ) : null}
 
       <Button
