@@ -94,14 +94,13 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     <>
       <strong className="mt-4">Vídeo 1</strong>
       <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/TbLVc8fnw7c?si=NDNaIuB9gzOFkP7c&amp;controls=0&autoplay=1"
+        className="w-[100%] aspect-video"
+        src="https://www.youtube.com/embed/TbLVc8fnw7c?si=NDNaIuB9gzOFkP7c&amp;controls=1&autoplay=1"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-      ></iframe>
+      />
       <Button
         className="w-fit ml-auto"
         color="primary"
@@ -145,14 +144,13 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     <>
       <strong className="mt-4">Vídeo 2</strong>
       <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/4zMgf3gK7p8?si=Am3bN-XM7Z2o64et&amp;controls=0&autoplay=1"
+        className="w-[100%] aspect-video"
+        src="https://www.youtube.com/embed/4zMgf3gK7p8?si=Am3bN-XM7Z2o64et&amp;controls=1&autoplay=1"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-      ></iframe>
+      />
       <Button
         className="w-fit ml-auto"
         color="primary"
@@ -196,9 +194,8 @@ const PasswordMemoryTest = ({ onFinishTest }: PasswordMemoryTestProps) => {
     <>
       <strong>Vídeo 3</strong>
       <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/55D_3uaKXYE?si=zyiXatdVgK5QuP1U&amp;controls=0&autoplay=1"
+        className="w-[100%] aspect-video"
+        src="https://www.youtube.com/embed/55D_3uaKXYE?si=zyiXatdVgK5QuP1U&amp;controls=1&autoplay=1"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"

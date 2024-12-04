@@ -83,14 +83,13 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     <>
       <strong className="mt-4">Vídeo 4</strong>
       <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/--h_vIA5WwU?si=GL0HM3zbQshFdyuP&amp;controls=0&autoplay=1"
+        className="w-[100%] aspect-video"
+        src="https://www.youtube.com/embed/--h_vIA5WwU?si=GL0HM3zbQshFdyuP&amp;controls=1&autoplay=1"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-      ></iframe>
+      />
       <Button
         className="w-fit ml-auto"
         color="primary"
@@ -151,14 +150,13 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     <>
       <strong className="mt-4">Vídeo 5</strong>
       <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/hUkzh_5_lOw?si=xF7-VrpHXuIyFLvH&amp;controls=0&autoplay=1"
+        className="w-[100%] aspect-video"
+        src="https://www.youtube.com/embed/hUkzh_5_lOw?si=xF7-VrpHXuIyFLvH&amp;controls=1&autoplay=1"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-      ></iframe>
+      />
       <Button
         className="w-fit ml-auto"
         color="primary"
@@ -219,14 +217,13 @@ const CombinatedTest = ({ onFinishTest }: CombinatedTestProps) => {
     />,
     <>
       <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/ZgZccxuj2RY?si=7RPV0Fa0C8mbOx_b?si=T0yPNQeA6ugqt06t&amp;controls=0&autoplay=1"
+        className="w-[100%] aspect-video"
+        src="https://www.youtube.com/embed/ZgZccxuj2RY?si=7RPV0Fa0C8mbOx_b?si=T0yPNQeA6ugqt06t&amp;controls=1&autoplay=1"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-      ></iframe>
+      />
       <Button
         className="w-fit ml-auto"
         color="primary"
